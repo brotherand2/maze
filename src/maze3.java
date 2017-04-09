@@ -14,27 +14,27 @@ import java.awt.event.*;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 /*
-  ¹æ¶¨0±íÊ¾ÓÒ·½Ïò£¬1±íÊ¾ÏÂ£¬2±íÊ¾×ó£¬3±íÊ¾ÉÏ
+  è§„å®š0è¡¨ç¤ºå³æ–¹å‘ï¼Œ1è¡¨ç¤ºä¸‹ï¼Œ2è¡¨ç¤ºå·¦ï¼Œ3è¡¨ç¤ºä¸Š
 */
-class stopwatch implements Runnable //Ãë±í
+class stopwatch implements Runnable //ç§’è¡¨
 {
-	int second=-1;//¼ÇÂ¼¾­¹ıµÄÃëÊı£¬³õÊ¼»¯Îª-1
-	migong mg;//ÃÕ¹¬Àà
+	int second=-1;//è®°å½•ç»è¿‡çš„ç§’æ•°ï¼Œåˆå§‹åŒ–ä¸º-1
+	migong mg;//è°œå®«ç±»
 	public stopwatch(migong mg)
 	{
-		this.mg=mg;//´ÓÃÕ¹¬Àà´«À´µÄµØÖ·À´¿ØÖÆÃÕ¹¬Àà
+		this.mg=mg;//ä»è°œå®«ç±»ä¼ æ¥çš„åœ°å€æ¥æ§åˆ¶è°œå®«ç±»
 	}
 	public void run()
 	{
-		while((!mg.find&&mg.type==2)||(mg.type==3&&!mg.finish)||(mg.type==1&&!mg.find1))//ÔÚÈıÖÖÄ£Ê½ÏÂ²¢ÇÒ»¹Î´×ßÍêÃÕ¹¬»òÎ´´´½¨ÍêÃÕ¹¬Ê±ÏÔÊ¾¾­¹ıµÄÊ±¼ä
+		while((!mg.find&&mg.type==2)||(mg.type==3&&!mg.finish)||(mg.type==1&&!mg.find1))//åœ¨ä¸‰ç§æ¨¡å¼ä¸‹å¹¶ä¸”è¿˜æœªèµ°å®Œè°œå®«æˆ–æœªåˆ›å»ºå®Œè°œå®«æ—¶æ˜¾ç¤ºç»è¿‡çš„æ—¶é—´
 		{
-			if(!mg.isPause)//°´ÏÂ¿ªÊ¼£¬¼ÆÊ±
+			if(!mg.isPause)//æŒ‰ä¸‹å¼€å§‹ï¼Œè®¡æ—¶
 			{
 				try
 				{
-			    	second++;//ÃëÊı¼Ó1
-					mg.cost="ÓÃÊ±:"+Integer.toString(second)+"Ãë";//Ê±¼ä¾­¹ıµÄÃëÊıÉèÖÃÎª×Ö·û´®¸ñÊ½
-					Thread.sleep(1000);//Ã¿1Ãë¼ÇÂ¼1´Î
+			    	second++;//ç§’æ•°åŠ 1
+					mg.cost="ç”¨æ—¶:"+Integer.toString(second)+"ç§’";//æ—¶é—´ç»è¿‡çš„ç§’æ•°è®¾ç½®ä¸ºå­—ç¬¦ä¸²æ ¼å¼
+					Thread.sleep(1000);//æ¯1ç§’è®°å½•1æ¬¡
 				}
 				catch (Exception e)
 				{
@@ -43,27 +43,27 @@ class stopwatch implements Runnable //Ãë±í
 		}
 	}
 }
-class MyTime extends Thread//ÎÒµÄÊ±¼äÏß³Ì
+class MyTime extends Thread//æˆ‘çš„æ—¶é—´çº¿ç¨‹
 {
-	String  time=null;//Ê±¼ä
-	migong mg;//ÃÕ¹¬Àà
+	String  time=null;//æ—¶é—´
+	migong mg;//è°œå®«ç±»
 	public MyTime(migong mg)
 	{
 		this.mg=mg;
 	}
-	public void run()//ÖØĞ´run·½·¨
+	public void run()//é‡å†™runæ–¹æ³•
 	{
 		while(true)
 		{
 			try
 			{
-				Thread.sleep(1000);//Ã¿¸ô1000ºÁÃë£¬¼´1ÃëÏÔÊ¾
-			    SimpleDateFormat format=new SimpleDateFormat("Ê±¼ä:HH:mm:ss");//Éè¶¨Ê±¼ä¸ñÊ½
-	            Date date=new Date();//ÈÕÆÚÀà
-                time=format.format(date);//½«ÈÕÆÚÊ±¼ä°´×Ô¼ºÒªÇóµÄ¸ñÊ½×ª»»³É×Ö·û´®
-				mg.time=time;//ÉèÖÃĞÂÊ±¼ä
+				Thread.sleep(1000);//æ¯éš”1000æ¯«ç§’ï¼Œå³1ç§’æ˜¾ç¤º
+			    SimpleDateFormat format=new SimpleDateFormat("æ—¶é—´:HH:mm:ss");//è®¾å®šæ—¶é—´æ ¼å¼
+	            Date date=new Date();//æ—¥æœŸç±»
+                time=format.format(date);//å°†æ—¥æœŸæ—¶é—´æŒ‰è‡ªå·±è¦æ±‚çš„æ ¼å¼è½¬æ¢æˆå­—ç¬¦ä¸²
+				mg.time=time;//è®¾ç½®æ–°æ—¶é—´
 				mg.isRepaint3=false;
-				mg.repaint();//Ë¢ĞÂ»­Ãæ£¬ÏÔÊ¾ĞÂÊ±¼ä
+				mg.repaint();//åˆ·æ–°ç”»é¢ï¼Œæ˜¾ç¤ºæ–°æ—¶é—´
 			}
 			catch (Exception e)
 			{
@@ -72,60 +72,60 @@ class MyTime extends Thread//ÎÒµÄÊ±¼äÏß³Ì
 	}
 }
 class puzzle  extends JFrame implements ActionListener
-{//ÃÕ¹¬´°ÌåÀà
-	JMenuBar bar=new JMenuBar();//²Ëµ¥Ìõ
-	JMenuItem item[]=new JMenuItem[11];//ÏÂÀ­²Ëµ¥
-	JMenu menu[]=new JMenu[3];//²Ëµ¥Ïî
-	JColorChooser colorSelect=new JColorChooser();//JColorChooser Ìá¹©Ò»¸öÓÃÓÚÔÊĞíÓÃ»§²Ù×÷ºÍÑ¡ÔñÑÕÉ«µÄ¿ØÖÆÆ÷´°¸ñ
-	int second;//ÒÆ¶¯µÄËÙ¶È£¬¶àÉÙºÁÃëÒÆÒ»´Î
-	int pixel;//·¿¼äÏñËØ£¬
+{//è°œå®«çª—ä½“ç±»
+	JMenuBar bar=new JMenuBar();//èœå•æ¡
+	JMenuItem item[]=new JMenuItem[11];//ä¸‹æ‹‰èœå•
+	JMenu menu[]=new JMenu[3];//èœå•é¡¹
+	JColorChooser colorSelect=new JColorChooser();//JColorChooser æä¾›ä¸€ä¸ªç”¨äºå…è®¸ç”¨æˆ·æ“ä½œå’Œé€‰æ‹©é¢œè‰²çš„æ§åˆ¶å™¨çª—æ ¼
+	int second;//ç§»åŠ¨çš„é€Ÿåº¦ï¼Œå¤šå°‘æ¯«ç§’ç§»ä¸€æ¬¡
+	int pixel;//æˆ¿é—´åƒç´ ï¼Œ
 	migong mg=new migong();
 	public puzzle()
 	{
-		super("ÓÃÕ»¹¹ÔìµÄÃÕ¹¬");
-		menu[0]=new JMenu("ÎÄ¼ş");//ÊµÀı»¯²¢³õÊ¼»¯²Ëµ¥
-		menu[1]=new JMenu("°ïÖú");
-		menu[2]=new JMenu("ÉèÖÃ");
-		item[0]=new JMenuItem("ÍË³ö");
-		item[1]=new JMenuItem("°ïÖúÖ÷Ìâ");
-		item[2]=new JMenuItem("¹ØÓÚ°æÈ¨...");
-		item[3]=new JMenuItem("ÉèÖÃËÙ¶ÈÏñËØÄ£Ê½");
-		item[4]=new JMenuItem("ÉèÖÃÃÕ¹¬±³¾°ÑÕÉ«");
-		item[5]=new JMenuItem("ÉèÖÃÇ½±ÚÑÕÉ«");
-		item[6]=new JMenuItem("ÉèÖÃ×ÖÌåÑÕÉ«");
-		item[7]=new JMenuItem("ÉèÖÃ×ÖÌå±³¾°ÑÕÉ«");
-		item[8]=new JMenuItem("ÉèÖÃÂ·ÏßÑÕÉ«");
-		item[9]=new JMenuItem("ÉèÖÃ¿ªÊ¼·¿¼äÑÕÉ«");
-		item[10]=new JMenuItem("ÉèÖÃ½áÊø·¿¼äÑÕÉ«");	
+		super("ç”¨æ ˆæ„é€ çš„è°œå®«");
+		menu[0]=new JMenu("æ–‡ä»¶");//å®ä¾‹åŒ–å¹¶åˆå§‹åŒ–èœå•
+		menu[1]=new JMenu("å¸®åŠ©");
+		menu[2]=new JMenu("è®¾ç½®");
+		item[0]=new JMenuItem("é€€å‡º");
+		item[1]=new JMenuItem("å¸®åŠ©ä¸»é¢˜");
+		item[2]=new JMenuItem("å…³äºç‰ˆæƒ...");
+		item[3]=new JMenuItem("è®¾ç½®é€Ÿåº¦åƒç´ æ¨¡å¼");
+		item[4]=new JMenuItem("è®¾ç½®è°œå®«èƒŒæ™¯é¢œè‰²");
+		item[5]=new JMenuItem("è®¾ç½®å¢™å£é¢œè‰²");
+		item[6]=new JMenuItem("è®¾ç½®å­—ä½“é¢œè‰²");
+		item[7]=new JMenuItem("è®¾ç½®å­—ä½“èƒŒæ™¯é¢œè‰²");
+		item[8]=new JMenuItem("è®¾ç½®è·¯çº¿é¢œè‰²");
+		item[9]=new JMenuItem("è®¾ç½®å¼€å§‹æˆ¿é—´é¢œè‰²");
+		item[10]=new JMenuItem("è®¾ç½®ç»“æŸæˆ¿é—´é¢œè‰²");	
 		menu[0].add(menu[2]);
-		menu[0].add(item[0]);//ÊµÀı»¯²¢³õÊ¼»¯ÏÂÀ­²Ëµ¥ÏîÄ¿
+		menu[0].add(item[0]);//å®ä¾‹åŒ–å¹¶åˆå§‹åŒ–ä¸‹æ‹‰èœå•é¡¹ç›®
 		menu[1].add(item[1]);
 		menu[1].add(item[2]);
 		menu[2].add(item[3]);
 		menu[2].add(item[4]);
 		menu[2].add(item[5]);
-		menu[2].addSeparator();//½«ĞÂ·Ö¸ô·û×·¼Óµ½²Ëµ¥µÄÄ©Î²¡£	
+		menu[2].addSeparator();//å°†æ–°åˆ†éš”ç¬¦è¿½åŠ åˆ°èœå•çš„æœ«å°¾ã€‚	
 		menu[2].add(item[6]);
 		menu[2].add(item[7]);
 		menu[2].add(item[8]);
-		menu[2].addSeparator();//½«ĞÂ·Ö¸ô·û×·¼Óµ½²Ëµ¥µÄÄ©Î²¡£
+		menu[2].addSeparator();//å°†æ–°åˆ†éš”ç¬¦è¿½åŠ åˆ°èœå•çš„æœ«å°¾ã€‚
 		menu[2].add(item[9]);
 		menu[2].add(item[10]);
-		item[0].addActionListener(this);//¼ÓÈë¼àÌıÆ÷
-		item[1].addActionListener(this);//¼ÓÈë¼àÌıÆ÷
-		item[2].addActionListener(this);//¼ÓÈë¼àÌıÆ÷
-		item[3].addActionListener(this);//¼ÓÈë¼àÌıÆ÷
-		item[4].addActionListener(this);//¼ÓÈë¼àÌıÆ÷
-		item[5].addActionListener(this);//¼ÓÈë¼àÌıÆ÷
-		item[6].addActionListener(this);//¼ÓÈë¼àÌıÆ÷
-		item[7].addActionListener(this);//¼ÓÈë¼àÌıÆ÷
-		item[8].addActionListener(this);//¼ÓÈë¼àÌıÆ÷
-		item[9].addActionListener(this);//¼ÓÈë¼àÌıÆ÷
-		item[10].addActionListener(this);//¼ÓÈë¼àÌıÆ÷
-		bar.add(menu[0]);//½«²Ëµ¥·Åµ½²Ëµ¥ÌõÉÏ
+		item[0].addActionListener(this);//åŠ å…¥ç›‘å¬å™¨
+		item[1].addActionListener(this);//åŠ å…¥ç›‘å¬å™¨
+		item[2].addActionListener(this);//åŠ å…¥ç›‘å¬å™¨
+		item[3].addActionListener(this);//åŠ å…¥ç›‘å¬å™¨
+		item[4].addActionListener(this);//åŠ å…¥ç›‘å¬å™¨
+		item[5].addActionListener(this);//åŠ å…¥ç›‘å¬å™¨
+		item[6].addActionListener(this);//åŠ å…¥ç›‘å¬å™¨
+		item[7].addActionListener(this);//åŠ å…¥ç›‘å¬å™¨
+		item[8].addActionListener(this);//åŠ å…¥ç›‘å¬å™¨
+		item[9].addActionListener(this);//åŠ å…¥ç›‘å¬å™¨
+		item[10].addActionListener(this);//åŠ å…¥ç›‘å¬å™¨
+		bar.add(menu[0]);//å°†èœå•æ”¾åˆ°èœå•æ¡ä¸Š
 		bar.add(menu[1]);
-        addKeyListener(new KeyAdapter(){//¼ÓÈë¼üÅÌ¼àÌıÆ÷
-		public void keyTyped(KeyEvent e)//µ±¼üÅÌ°´¼üËÉ¿ªÊ±
+        addKeyListener(new KeyAdapter(){//åŠ å…¥é”®ç›˜ç›‘å¬å™¨
+		public void keyTyped(KeyEvent e)//å½“é”®ç›˜æŒ‰é”®æ¾å¼€æ—¶
 			{
                if(e.getKeyChar()==' ')
 				{
@@ -133,12 +133,12 @@ class puzzle  extends JFrame implements ActionListener
 					{					
 						if(mg.isPause)
 						{
-							mg.str="°´¿Õ¸ñÔİÍ£";
+							mg.str="æŒ‰ç©ºæ ¼æš‚åœ";
 							mg.isPause=false;
 						}
 						else
 						{
-							mg.str="°´¿Õ¸ñ¿ªÊ¼";
+							mg.str="æŒ‰ç©ºæ ¼å¼€å§‹";
 							mg.isPause=true;
 						}
 					}
@@ -153,166 +153,166 @@ class puzzle  extends JFrame implements ActionListener
 			{
 				if(mg.isStart&&mg.type==1)
 				{
-					if(e.getKeyCode()==KeyEvent.VK_RIGHT)//°´ÏòÓÒ
+					if(e.getKeyCode()==KeyEvent.VK_RIGHT)//æŒ‰å‘å³
 					{
 					   mg.flag=0;
-					   mg.peopleFind();//ÏòÓÒÒÆ¶¯
+					   mg.peopleFind();//å‘å³ç§»åŠ¨
 					}
-					if(e.getKeyCode()==KeyEvent.VK_DOWN)//°´ÏòÏÂ
+					if(e.getKeyCode()==KeyEvent.VK_DOWN)//æŒ‰å‘ä¸‹
 					{
 						mg.flag=1;
-					    mg.peopleFind();//ÏòÏÂÒÆ¶¯
+					    mg.peopleFind();//å‘ä¸‹ç§»åŠ¨
 					}
-					if(e.getKeyCode()==KeyEvent.VK_LEFT)//°´Ïò×ó
+					if(e.getKeyCode()==KeyEvent.VK_LEFT)//æŒ‰å‘å·¦
 					{
 						mg.flag=2;
-					    mg.peopleFind();//Ïò×óÒÆ¶¯
+					    mg.peopleFind();//å‘å·¦ç§»åŠ¨
 					}
-					if(e.getKeyCode()==KeyEvent.VK_UP)//°´ÏòÉÏ
+					if(e.getKeyCode()==KeyEvent.VK_UP)//æŒ‰å‘ä¸Š
 					{
 						mg.flag=3;
-					   mg.peopleFind();//ÏòÉÏÒÆ¶¯
+					   mg.peopleFind();//å‘ä¸Šç§»åŠ¨
 					}
 				}
 			}
 		});
-		setJMenuBar(bar);//ÉèÖÃ²Ëµ¥Ìõ
-		setSize(1300,730);//ÉèÖÃ´óĞ¡
-        setResizable(false);//ÉèÖÃ²»¿É¼û
-		add(mg);//¼ÓÈëÃæ°å£¬Ãæ°åÉÏ»­×ÅÃÕ¹¬
-		setVisible(true);//ÏÔÊ¾´°¿Ú
-		new SET(mg);//ÊµÀı»¯ÉèÖÃÀà,ÔÚ³ÌĞòÒ»¿ªÊ¼µ¯³ö´°¿ÚÈÃÓÃ»§ÉèÖÃ
+		setJMenuBar(bar);//è®¾ç½®èœå•æ¡
+		setSize(1300,730);//è®¾ç½®å¤§å°
+        setResizable(false);//è®¾ç½®ä¸å¯è§
+		add(mg);//åŠ å…¥é¢æ¿ï¼Œé¢æ¿ä¸Šç”»ç€è°œå®«
+		setVisible(true);//æ˜¾ç¤ºçª—å£
+		new SET(mg);//å®ä¾‹åŒ–è®¾ç½®ç±»,åœ¨ç¨‹åºä¸€å¼€å§‹å¼¹å‡ºçª—å£è®©ç”¨æˆ·è®¾ç½®
 		new MyTime(mg).start();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//ÉèÖÃÍË³öÓ¦ÓÃ³ÌĞòºóµÄÄ¬ÈÏ´°¿Ú¹Ø±Õ²Ù×÷
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//è®¾ç½®é€€å‡ºåº”ç”¨ç¨‹åºåçš„é»˜è®¤çª—å£å…³é—­æ“ä½œ
 	}
-	public boolean ifColorChange(Color a,Color b)//ÑÕÉ«ÊÇ·ñ¸Ä±ä,a,b·Ö±ğÊÇ¸Ä±äÇ°ºÍ¸Ä±äºóµÄÑÕÉ«£¬ÅĞ¶ÏÊÇ·ñ²»Í¬
+	public boolean ifColorChange(Color a,Color b)//é¢œè‰²æ˜¯å¦æ”¹å˜,a,båˆ†åˆ«æ˜¯æ”¹å˜å‰å’Œæ”¹å˜åçš„é¢œè‰²ï¼Œåˆ¤æ–­æ˜¯å¦ä¸åŒ
 	{
-		mg.isColorChange=(a==b)?false:true;//ÑÕÉ«ÏàÍ¬£¬·µ»ØÑÕÉ«²»±ä£¬·ñÔò£¬·µ»ØÑÕÉ«¸Ä±ä
+		mg.isColorChange=(a==b)?false:true;//é¢œè‰²ç›¸åŒï¼Œè¿”å›é¢œè‰²ä¸å˜ï¼Œå¦åˆ™ï¼Œè¿”å›é¢œè‰²æ”¹å˜
         return mg.isColorChange; 
 	}
 	public void actionPerformed(ActionEvent e)
 	{
         if(e.getSource()==item[0])
 		{
-			System.exit(0);//ÍË³ö
+			System.exit(0);//é€€å‡º
 		}
-        if(e.getSource()==item[1])//°ïÖú
+        if(e.getSource()==item[1])//å¸®åŠ©
 		{
 		}
-        if(e.getSource()==item[2])//¹ØÓÚ°æÈ¨
+        if(e.getSource()==item[2])//å…³äºç‰ˆæƒ
 		{
 		}
-        if(e.getSource()==item[3])//ÉèÖÃËÙ¶È£¬Ê±¼ä£¬Ä£Ê½
+        if(e.getSource()==item[3])//è®¾ç½®é€Ÿåº¦ï¼Œæ—¶é—´ï¼Œæ¨¡å¼
 		{
 			mg.setPause(true);
 			new SET(mg);
 		}
-        if(e.getSource()==item[4])//ÉèÖÃÃÕ¹¬±³¾°ÑÕÉ«
+        if(e.getSource()==item[4])//è®¾ç½®è°œå®«èƒŒæ™¯é¢œè‰²
 		{
-  		  Color color=JColorChooser.showDialog(this,"Ñ¡ÔñÃÕ¹¬±³¾°ÑÕÉ«",Color.black);//Ê¾ÀıÑÕÉ«ÎªÄ¬ÈÏ±³¾°ÑÕÉ«ºÚÉ«
-		  if(color!=null)//Èç¹ûÑ¡ÔñÁËÆäÖĞÒ»ÖÖÑÕÉ«
+  		  Color color=JColorChooser.showDialog(this,"é€‰æ‹©è°œå®«èƒŒæ™¯é¢œè‰²",Color.black);//ç¤ºä¾‹é¢œè‰²ä¸ºé»˜è®¤èƒŒæ™¯é¢œè‰²é»‘è‰²
+		  if(color!=null)//å¦‚æœé€‰æ‹©äº†å…¶ä¸­ä¸€ç§é¢œè‰²
 		  {
 			  mg.isColorChange=ifColorChange(mg.mazeBackGroundColor,color);
-			  mg.mazeBackGroundColor=color;//ÉèÖÃÃÕ¹¬±³¾°ÑÕÉ«ÎªËùÑ¡ÔñµÄÑÕÉ«
-			  if(mg.isColorChange)//ÑÕÉ«¸Ä±ä
-				  mg.setNewColorBufferImage();//ÔÚÑÕÉ«¸Ä±äºó£¬ÉèÖÃĞÂÑÕÉ«µÄ»º³åÍ¼£¬ÃÕ¹¬²»¸Ä±ä
-			  mg.repaint();//Ë¢ĞÂ»­ÃæÒÔÏÔÊ¾ĞÂÑÕÉ«
+			  mg.mazeBackGroundColor=color;//è®¾ç½®è°œå®«èƒŒæ™¯é¢œè‰²ä¸ºæ‰€é€‰æ‹©çš„é¢œè‰²
+			  if(mg.isColorChange)//é¢œè‰²æ”¹å˜
+				  mg.setNewColorBufferImage();//åœ¨é¢œè‰²æ”¹å˜åï¼Œè®¾ç½®æ–°é¢œè‰²çš„ç¼“å†²å›¾ï¼Œè°œå®«ä¸æ”¹å˜
+			  mg.repaint();//åˆ·æ–°ç”»é¢ä»¥æ˜¾ç¤ºæ–°é¢œè‰²
 		  }
 		}
-        if(e.getSource()==item[5])//ÉèÖÃÇ½±ÚÑÕÉ«
+        if(e.getSource()==item[5])//è®¾ç½®å¢™å£é¢œè‰²
 		{
-        	  Color color=JColorChooser.showDialog(this,"Ñ¡ÔñÃÕ¹¬Ç½±ÚÑÕÉ«",Color.green);//Ê¾ÀıÑÕÉ«ÎªÄ¬ÈÏÇ½±ÚÑÕÉ«ÂÌÉ«
-    		  if(color!=null)//Èç¹ûÑ¡ÔñÁËÆäÖĞÒ»ÖÖÑÕÉ«
+        	  Color color=JColorChooser.showDialog(this,"é€‰æ‹©è°œå®«å¢™å£é¢œè‰²",Color.green);//ç¤ºä¾‹é¢œè‰²ä¸ºé»˜è®¤å¢™å£é¢œè‰²ç»¿è‰²
+    		  if(color!=null)//å¦‚æœé€‰æ‹©äº†å…¶ä¸­ä¸€ç§é¢œè‰²
     		  {
     			  mg.isColorChange=ifColorChange(mg.wallColor,color);    			  
-    			  mg.wallColor=color;//ÉèÖÃÃÕ¹¬Ç½±ÚÑÕÉ«ÎªËùÑ¡ÔñµÄÑÕÉ«
-    			  if(mg.isColorChange)//ÑÕÉ«¸Ä±ä
-    				  mg.setNewColorBufferImage();//ÔÚÑÕÉ«¸Ä±äºó£¬ÉèÖÃĞÂÑÕÉ«µÄ»º³åÍ¼£¬ÃÕ¹¬²»¸Ä±ä    			  
-    			  mg.repaint();//Ë¢ĞÂ»­ÃæÒÔÏÔÊ¾ĞÂÑÕÉ«
+    			  mg.wallColor=color;//è®¾ç½®è°œå®«å¢™å£é¢œè‰²ä¸ºæ‰€é€‰æ‹©çš„é¢œè‰²
+    			  if(mg.isColorChange)//é¢œè‰²æ”¹å˜
+    				  mg.setNewColorBufferImage();//åœ¨é¢œè‰²æ”¹å˜åï¼Œè®¾ç½®æ–°é¢œè‰²çš„ç¼“å†²å›¾ï¼Œè°œå®«ä¸æ”¹å˜    			  
+    			  mg.repaint();//åˆ·æ–°ç”»é¢ä»¥æ˜¾ç¤ºæ–°é¢œè‰²
     		  }
 		}
-        if(e.getSource()==item[6])//ÉèÖÃ×ÖÌåÑÕÉ«£¬²»ÓÃÔÙsetNewColorBufferImage()ÒòÎª×ÖÌåÑÕÉ«ËæÊ±¼äÏß³ÌÃ¿1ÃëÖØ»­1´Î£¬¶øÇ½±Ú¡¢Â·ÏßÖ»ÓĞÔÚ×ßµÄÊ±ºò²Å¸üĞÂ
+        if(e.getSource()==item[6])//è®¾ç½®å­—ä½“é¢œè‰²ï¼Œä¸ç”¨å†setNewColorBufferImage()å› ä¸ºå­—ä½“é¢œè‰²éšæ—¶é—´çº¿ç¨‹æ¯1ç§’é‡ç”»1æ¬¡ï¼Œè€Œå¢™å£ã€è·¯çº¿åªæœ‰åœ¨èµ°çš„æ—¶å€™æ‰æ›´æ–°
 		{
-        	  Color color=JColorChooser.showDialog(this,"Ñ¡Ôñ×ÖÌåÑÕÉ«",Color.black);//Ê¾ÀıÑÕÉ«ÎªÄ¬ÈÏ×ÖÌåÑÕÉ«ºÚÉ«
-    		  if(color!=null)//Èç¹ûÑ¡ÔñÁËÆäÖĞÒ»ÖÖÑÕÉ«
+        	  Color color=JColorChooser.showDialog(this,"é€‰æ‹©å­—ä½“é¢œè‰²",Color.black);//ç¤ºä¾‹é¢œè‰²ä¸ºé»˜è®¤å­—ä½“é¢œè‰²é»‘è‰²
+    		  if(color!=null)//å¦‚æœé€‰æ‹©äº†å…¶ä¸­ä¸€ç§é¢œè‰²
     		  {
     			  mg.isColorChange=ifColorChange(mg.fontColor,color);   			  
-    			  mg.fontColor=color;//ÉèÖÃ×ÖÌåÑÕÉ«ÎªËùÑ¡ÔñµÄÑÕÉ«
-    			  mg.repaint();//Ë¢ĞÂ»­ÃæÒÔÏÔÊ¾ĞÂÑÕÉ«
+    			  mg.fontColor=color;//è®¾ç½®å­—ä½“é¢œè‰²ä¸ºæ‰€é€‰æ‹©çš„é¢œè‰²
+    			  mg.repaint();//åˆ·æ–°ç”»é¢ä»¥æ˜¾ç¤ºæ–°é¢œè‰²
     		  }
 		}
-        if(e.getSource()==item[7])//ÉèÖÃ×ÖÌå±³¾°ÑÕÉ«£¬²»ÓÃÔÙsetNewColorBufferImage()ÒòÎª×ÖÌå±³¾°ÑÕÉ«ËæÊ±¼äÏß³ÌÃ¿1ÃëÖØ»­1´Î£¬¶øÇ½±Ú¡¢Â·ÏßÖ»ÓĞÔÚ×ßµÄÊ±ºò²Å¸üĞÂ
+        if(e.getSource()==item[7])//è®¾ç½®å­—ä½“èƒŒæ™¯é¢œè‰²ï¼Œä¸ç”¨å†setNewColorBufferImage()å› ä¸ºå­—ä½“èƒŒæ™¯é¢œè‰²éšæ—¶é—´çº¿ç¨‹æ¯1ç§’é‡ç”»1æ¬¡ï¼Œè€Œå¢™å£ã€è·¯çº¿åªæœ‰åœ¨èµ°çš„æ—¶å€™æ‰æ›´æ–°
 		{
-        	  Color color=JColorChooser.showDialog(this,"Ñ¡Ôñ×ÖÌå±³¾°ÑÕÉ«",Color.white);//Ê¾ÀıÑÕÉ«ÎªÄ¬ÈÏ×ÖÌå±³¾°ÑÕÉ«°×É«
-    		  if(color!=null)//Èç¹ûÑ¡ÔñÁËÆäÖĞÒ»ÖÖÑÕÉ«
+        	  Color color=JColorChooser.showDialog(this,"é€‰æ‹©å­—ä½“èƒŒæ™¯é¢œè‰²",Color.white);//ç¤ºä¾‹é¢œè‰²ä¸ºé»˜è®¤å­—ä½“èƒŒæ™¯é¢œè‰²ç™½è‰²
+    		  if(color!=null)//å¦‚æœé€‰æ‹©äº†å…¶ä¸­ä¸€ç§é¢œè‰²
     		  {
     			  mg.isColorChange=ifColorChange(mg.fontBackGroundColor,color);    			  
-    			  mg.fontBackGroundColor=color;//ÉèÖÃ×ÖÌå±³¾°ÑÕÉ«ÎªËùÑ¡ÔñµÄÑÕÉ«
-    			  mg.repaint();//Ë¢ĞÂ»­ÃæÒÔÏÔÊ¾ĞÂÑÕÉ«
+    			  mg.fontBackGroundColor=color;//è®¾ç½®å­—ä½“èƒŒæ™¯é¢œè‰²ä¸ºæ‰€é€‰æ‹©çš„é¢œè‰²
+    			  mg.repaint();//åˆ·æ–°ç”»é¢ä»¥æ˜¾ç¤ºæ–°é¢œè‰²
     		  }
 		}
-        if(e.getSource()==item[8])//ÉèÖÃÂ·ÏßÑÕÉ«
+        if(e.getSource()==item[8])//è®¾ç½®è·¯çº¿é¢œè‰²
 		{
-        	  Color color=JColorChooser.showDialog(this,"Ñ¡ÔñÂ·ÏßÑÕÉ«",Color.red);//Ê¾ÀıÑÕÉ«ÎªÄ¬ÈÏÂ·ÏßÑÕÉ«ºìÉ«
-    		  if(color!=null)//Èç¹ûÑ¡ÔñÁËÆäÖĞÒ»ÖÖÑÕÉ«
+        	  Color color=JColorChooser.showDialog(this,"é€‰æ‹©è·¯çº¿é¢œè‰²",Color.red);//ç¤ºä¾‹é¢œè‰²ä¸ºé»˜è®¤è·¯çº¿é¢œè‰²çº¢è‰²
+    		  if(color!=null)//å¦‚æœé€‰æ‹©äº†å…¶ä¸­ä¸€ç§é¢œè‰²
     		  {
     			  mg.isColorChange=ifColorChange(mg.routeColor,color);   			  
-    			  mg.routeColor=color;//ÉèÖÃÃÕ¹¬Â·ÏßÑÕÉ«ÎªËùÑ¡ÔñµÄÑÕÉ«
-    			  if(mg.isColorChange&&mg.type!=1)//ÑÕÉ«¸Ä±ä²¢ÇÒÊÇµÚ2£¬3ÖÖÄ£Ê½
-    				  mg.setNewColorBufferImage();//ÔÚÑÕÉ«¸Ä±äºó£¬ÉèÖÃĞÂÑÕÉ«µÄ»º³åÍ¼£¬ÃÕ¹¬²»¸Ä±ä
-    			  mg.repaint();//Ë¢ĞÂ»­ÃæÒÔÏÔÊ¾ĞÂÑÕÉ«
+    			  mg.routeColor=color;//è®¾ç½®è°œå®«è·¯çº¿é¢œè‰²ä¸ºæ‰€é€‰æ‹©çš„é¢œè‰²
+    			  if(mg.isColorChange&&mg.type!=1)//é¢œè‰²æ”¹å˜å¹¶ä¸”æ˜¯ç¬¬2ï¼Œ3ç§æ¨¡å¼
+    				  mg.setNewColorBufferImage();//åœ¨é¢œè‰²æ”¹å˜åï¼Œè®¾ç½®æ–°é¢œè‰²çš„ç¼“å†²å›¾ï¼Œè°œå®«ä¸æ”¹å˜
+    			  mg.repaint();//åˆ·æ–°ç”»é¢ä»¥æ˜¾ç¤ºæ–°é¢œè‰²
     		  }
 		}
-        if(e.getSource()==item[9])//ÉèÖÃ¿ªÊ¼·¿¼äÑÕÉ«
+        if(e.getSource()==item[9])//è®¾ç½®å¼€å§‹æˆ¿é—´é¢œè‰²
 		{
-        	  Color color=JColorChooser.showDialog(this,"Ñ¡Ôñ¿ªÊ¼·¿¼äÑÕÉ«",Color.white);//Ê¾ÀıÑÕÉ«ÎªÄ¬ÈÏ¿ªÊ¼·¿¼äÑÕÉ«°×É«
-    		  if(color!=null)//Èç¹ûÑ¡ÔñÁËÆäÖĞÒ»ÖÖÑÕÉ«
+        	  Color color=JColorChooser.showDialog(this,"é€‰æ‹©å¼€å§‹æˆ¿é—´é¢œè‰²",Color.white);//ç¤ºä¾‹é¢œè‰²ä¸ºé»˜è®¤å¼€å§‹æˆ¿é—´é¢œè‰²ç™½è‰²
+    		  if(color!=null)//å¦‚æœé€‰æ‹©äº†å…¶ä¸­ä¸€ç§é¢œè‰²
     		  {
     			  mg.isColorChange=ifColorChange(mg.startColor,color);    			  
-    			  mg.startColor=color;//ÉèÖÃÃÕ¹¬¿ªÊ¼·¿¼äÑÕÉ«ÎªËùÑ¡ÔñµÄÑÕÉ«
-    			  if(mg.isColorChange&&mg.pixel<60)//ÑÕÉ«¸Ä±ä,ÇÒÏñËØĞ¡ÓÚ60
-    				  mg.setNewColorBufferImage();//ÔÚÑÕÉ«¸Ä±äºó£¬ÉèÖÃĞÂÑÕÉ«µÄ»º³åÍ¼£¬ÃÕ¹¬²»¸Ä±ä
-    			  mg.repaint();//Ë¢ĞÂ»­ÃæÒÔÏÔÊ¾ĞÂÑÕÉ«
+    			  mg.startColor=color;//è®¾ç½®è°œå®«å¼€å§‹æˆ¿é—´é¢œè‰²ä¸ºæ‰€é€‰æ‹©çš„é¢œè‰²
+    			  if(mg.isColorChange&&mg.pixel<60)//é¢œè‰²æ”¹å˜,ä¸”åƒç´ å°äº60
+    				  mg.setNewColorBufferImage();//åœ¨é¢œè‰²æ”¹å˜åï¼Œè®¾ç½®æ–°é¢œè‰²çš„ç¼“å†²å›¾ï¼Œè°œå®«ä¸æ”¹å˜
+    			  mg.repaint();//åˆ·æ–°ç”»é¢ä»¥æ˜¾ç¤ºæ–°é¢œè‰²
     		  }
 		}
-        if(e.getSource()==item[10])//ÉèÖÃ½áÊø·¿¼äÑÕÉ«
+        if(e.getSource()==item[10])//è®¾ç½®ç»“æŸæˆ¿é—´é¢œè‰²
 		{
-        	  Color color=JColorChooser.showDialog(this,"Ñ¡ÔñÃÕ¹¬½áÊø·¿¼äÑÕÉ«",Color.red);//Ê¾ÀıÑÕÉ«ÎªÄ¬ÈÏ½áÊø·¿¼äÑÕÉ«ºìÉ«
-    		  if(color!=null)//Èç¹ûÑ¡ÔñÁËÆäÖĞÒ»ÖÖÑÕÉ«
+        	  Color color=JColorChooser.showDialog(this,"é€‰æ‹©è°œå®«ç»“æŸæˆ¿é—´é¢œè‰²",Color.red);//ç¤ºä¾‹é¢œè‰²ä¸ºé»˜è®¤ç»“æŸæˆ¿é—´é¢œè‰²çº¢è‰²
+    		  if(color!=null)//å¦‚æœé€‰æ‹©äº†å…¶ä¸­ä¸€ç§é¢œè‰²
     		  {
     			  mg.isColorChange=ifColorChange(mg.endColor,color);    			  
-    			  mg.endColor=color;//ÉèÖÃ½áÊø·¿¼äÑÕÉ«ÎªËùÑ¡ÔñµÄÑÕÉ«
-    			  if(mg.isColorChange&&mg.pixel<60&&mg.type!=3)//ÑÕÉ«¸Ä±ä,ÇÒÏñËØĞ¡ÓÚ60ÇÒ²»ÊÇµÚ3ÖÖÄ£Ê½£¬ÒòÎªµÚ3ÖÖÄ£Ê½ÎŞÖÕµã
-    				  mg.setNewColorBufferImage();//ÔÚÑÕÉ«¸Ä±äºó£¬ÉèÖÃĞÂÑÕÉ«µÄ»º³åÍ¼£¬ÃÕ¹¬²»¸Ä±ä   			 
-    			  mg.repaint();//Ë¢ĞÂ»­ÃæÒÔÏÔÊ¾ĞÂÑÕÉ«
+    			  mg.endColor=color;//è®¾ç½®ç»“æŸæˆ¿é—´é¢œè‰²ä¸ºæ‰€é€‰æ‹©çš„é¢œè‰²
+    			  if(mg.isColorChange&&mg.pixel<60&&mg.type!=3)//é¢œè‰²æ”¹å˜,ä¸”åƒç´ å°äº60ä¸”ä¸æ˜¯ç¬¬3ç§æ¨¡å¼ï¼Œå› ä¸ºç¬¬3ç§æ¨¡å¼æ— ç»ˆç‚¹
+    				  mg.setNewColorBufferImage();//åœ¨é¢œè‰²æ”¹å˜åï¼Œè®¾ç½®æ–°é¢œè‰²çš„ç¼“å†²å›¾ï¼Œè°œå®«ä¸æ”¹å˜   			 
+    			  mg.repaint();//åˆ·æ–°ç”»é¢ä»¥æ˜¾ç¤ºæ–°é¢œè‰²
     		  }
 		}
 	}
 }
-class SET extends JDialog implements ActionListener ,ItemListener//ÉèÖÃÀà£¬ÉèÖÃÊ±¼ä£¬ËÙ¶È,Íø¸ñµÈÊôĞÔ
+class SET extends JDialog implements ActionListener ,ItemListener//è®¾ç½®ç±»ï¼Œè®¾ç½®æ—¶é—´ï¼Œé€Ÿåº¦,ç½‘æ ¼ç­‰å±æ€§
 {
-	JLabel lab1=new JLabel("Íø ¸ñ ÏñËØ");
-	JLabel lab2=new JLabel("ËÙ¶È (ºÁÃë)");
-	JButton but1=new JButton("È·¶¨");
-	JButton but2=new JButton("ÍË³ö");
-	JTextField field1=new JTextField();//ÌîĞ´Íø ¸ñ ÏñËØ
-	JTextField field2=new JTextField();//ÌîĞ´ËÙ¶È
-	int second;//ÒÆ¶¯µÄËÙ¶È£¬¶àÉÙºÁÃëÒÆÒ»´Î
-	int pixel;//·¿¼äÏñËØ
-	int type;//ÓÎÏ·ÀàĞÍ
-	JPanel pan=new JPanel();//·ÅÑ¡ÔñÈË¹¤Ì½Ë÷»¹ÊÇµçÄÔÌ½Ë÷µÄÃæ°å
-    JRadioButton rbut1=new JRadioButton("¼ÆÊ±±ÈÈü");
-    JRadioButton rbut2=new JRadioButton("µçÄÔÑİÊ¾");//Ä¬ÈÏÑ¡ÔñµçÄÔ×Ô¶¯Ñ°Â·¾¶
-    JRadioButton rbut3=new JRadioButton("´´½¨ÃÕ¹¬ÑİÊ¾");
+	JLabel lab1=new JLabel("ç½‘ æ ¼ åƒç´ ");
+	JLabel lab2=new JLabel("é€Ÿåº¦ (æ¯«ç§’)");
+	JButton but1=new JButton("ç¡®å®š");
+	JButton but2=new JButton("é€€å‡º");
+	JTextField field1=new JTextField();//å¡«å†™ç½‘ æ ¼ åƒç´ 
+	JTextField field2=new JTextField();//å¡«å†™é€Ÿåº¦
+	int second;//ç§»åŠ¨çš„é€Ÿåº¦ï¼Œå¤šå°‘æ¯«ç§’ç§»ä¸€æ¬¡
+	int pixel;//æˆ¿é—´åƒç´ 
+	int type;//æ¸¸æˆç±»å‹
+	JPanel pan=new JPanel();//æ”¾é€‰æ‹©äººå·¥æ¢ç´¢è¿˜æ˜¯ç”µè„‘æ¢ç´¢çš„é¢æ¿
+    JRadioButton rbut1=new JRadioButton("è®¡æ—¶æ¯”èµ›");
+    JRadioButton rbut2=new JRadioButton("ç”µè„‘æ¼”ç¤º");//é»˜è®¤é€‰æ‹©ç”µè„‘è‡ªåŠ¨å¯»è·¯å¾„
+    JRadioButton rbut3=new JRadioButton("åˆ›å»ºè°œå®«æ¼”ç¤º");
     migong mg;
-    ButtonGroup group=new ButtonGroup();//µ¥Ñ¡°´Å¥×é,Ö»ÓĞ¼Óµ½×éÀï²ÅÄÜÊµÏÖµ¥Ñ¡£¬»òÔòÊÇ¶àÑ¡
+    ButtonGroup group=new ButtonGroup();//å•é€‰æŒ‰é’®ç»„,åªæœ‰åŠ åˆ°ç»„é‡Œæ‰èƒ½å®ç°å•é€‰ï¼Œæˆ–åˆ™æ˜¯å¤šé€‰
     public SET(migong mg)
 	{
-		this.mg=mg;//½«ÃÕ¹¬Í¼µØÖ·(mg)½«ÃÕ¹¬´«¹ıÀ´
-        this.type=mg.type;//ÉèÖÃ¸÷ÖÖÊôĞÔÀàĞÍ¡¢ÏñËØ¡¢Ë¯ÃßÊ±¼ä
+		this.mg=mg;//å°†è°œå®«å›¾åœ°å€(mg)å°†è°œå®«ä¼ è¿‡æ¥
+        this.type=mg.type;//è®¾ç½®å„ç§å±æ€§ç±»å‹ã€åƒç´ ã€ç¡çœ æ—¶é—´
 		this.pixel=mg.pixel;
 		this.second=mg.second;
-		switch(mg.type)//ÔÚµ¥Ñ¡°´Å¥ÉÏÔÚÑ¡ÔñÃÕ¹¬µ±Ç°Ä£Ê½
+		switch(mg.type)//åœ¨å•é€‰æŒ‰é’®ä¸Šåœ¨é€‰æ‹©è°œå®«å½“å‰æ¨¡å¼
 		{
             case 1:
 				rbut1.setSelected(true);
@@ -327,21 +327,21 @@ class SET extends JDialog implements ActionListener ,ItemListener//ÉèÖÃÀà£¬ÉèÖÃÊ
 				rbut2.setSelected(true);
             break;
 		}
-		setLayout(null);//È¡ÏûÄ¬ÈÏµÄ²¼¾Ö¹ÜÀíÆ÷
-        setTitle("ÉèÖÃ");//ÉèÖÃ±êÌâ
+		setLayout(null);//å–æ¶ˆé»˜è®¤çš„å¸ƒå±€ç®¡ç†å™¨
+        setTitle("è®¾ç½®");//è®¾ç½®æ ‡é¢˜
         lab1.setBounds(20,20,80,20);
 		lab2.setBounds(20,50,80,20);
         field1.setBounds(100,20,60,20);
 		field2.setBounds(100,50,60,20);
         pan.setBounds(20,80,290,60);
 		pan.setLayout(new FlowLayout());
-		pan.setBorder(BorderFactory.createTitledBorder("ÓÎÏ·Ä£Ê½"));//ÔÙ´´½¨Ò»¸öÓĞ±êÌâµÄ±ß¿ò
+		pan.setBorder(BorderFactory.createTitledBorder("æ¸¸æˆæ¨¡å¼"));//å†åˆ›å»ºä¸€ä¸ªæœ‰æ ‡é¢˜çš„è¾¹æ¡†
 		but1.setBounds(40,150,60,20);
 		but2.setBounds(120,150,60,20);
         but1.addActionListener(this);
         but2.addActionListener(this);
-        field1.setText(""+pixel);//ÏÔÊ¾·¿¼äÏñËØ
-		field2.setText(""+second);//ÏÔÊ¾ËÙ¶È
+        field1.setText(""+pixel);//æ˜¾ç¤ºæˆ¿é—´åƒç´ 
+		field2.setText(""+second);//æ˜¾ç¤ºé€Ÿåº¦
 		add(lab1);
 		add(lab2);
 		add(but1);
@@ -364,192 +364,192 @@ class SET extends JDialog implements ActionListener ,ItemListener//ÉèÖÃÀà£¬ÉèÖÃÊ
 		setVisible(true);
 	}
 	public void itemStateChanged(ItemEvent e) 
-         // ÔÚÓÃ»§ÒÑÑ¡¶¨»òÈ¡ÏûÑ¡¶¨Ä³ÏîÊ±µ÷ÓÃ¡£
+         // åœ¨ç”¨æˆ·å·²é€‰å®šæˆ–å–æ¶ˆé€‰å®šæŸé¡¹æ—¶è°ƒç”¨ã€‚
 	{
 		if(e.getSource()==rbut1)
 		{
-			type=1;//ÉèÖÃÀàĞÍÎªÈË¹¤Ì½Ë÷
+			type=1;//è®¾ç½®ç±»å‹ä¸ºäººå·¥æ¢ç´¢
 		}
 		if(e.getSource()==rbut2)
 		{
-			type=2;//ÉèÖÃÀàĞÍÎªµçÄÔÌ½Ë÷
+			type=2;//è®¾ç½®ç±»å‹ä¸ºç”µè„‘æ¢ç´¢
 		}
 		if(e.getSource()==rbut3)
 		{
-			type=3;//ÉèÖÃÀàĞÍÎª¹Û¿´ÃÕ¹¬Éú³É¹ı³Ì
+			type=3;//è®¾ç½®ç±»å‹ä¸ºè§‚çœ‹è°œå®«ç”Ÿæˆè¿‡ç¨‹
 		}
 
 	}
-	public void actionPerformed(ActionEvent e)//·¢Éú²Ù×÷Ê±µ÷ÓÃ
+	public void actionPerformed(ActionEvent e)//å‘ç”Ÿæ“ä½œæ—¶è°ƒç”¨
 	{
-		if(e.getSource()==but1)//È·¶¨
+		if(e.getSource()==but1)//ç¡®å®š
 		{
-			String str=field1.getText();//µÃµ½Ã¿¸ö·¿¼äµÄÏñËØÊı
-			String str1=field2.getText();//µÃµ½ËÙ¶È£¬ºÁÃë
+			String str=field1.getText();//å¾—åˆ°æ¯ä¸ªæˆ¿é—´çš„åƒç´ æ•°
+			String str1=field2.getText();//å¾—åˆ°é€Ÿåº¦ï¼Œæ¯«ç§’
 			try
 			{
-  			     pixel=Integer.parseInt(str);//×ª»»³É×Ö·û´®
-				 second=Integer.parseInt(str1);//×ª»»³É×Ö·û´®
-				if(pixel<2||pixel>540)//ĞĞÊı³¬¹ı·¶Î§
+  			     pixel=Integer.parseInt(str);//è½¬æ¢æˆå­—ç¬¦ä¸²
+				 second=Integer.parseInt(str1);//è½¬æ¢æˆå­—ç¬¦ä¸²
+				if(pixel<2||pixel>540)//è¡Œæ•°è¶…è¿‡èŒƒå›´
 				{
-                   JOptionPane.showMessageDialog(null,"Õû¸öÃÕ¹¬×î´óÏñËØÎª540£¬×îĞ¡ÏñËØ²»µÃµÍÓÚ3ÏñËØ³¬³ö·¶Î§¡£","ÌáÊ¾...",JOptionPane.WARNING_MESSAGE);
+                   JOptionPane.showMessageDialog(null,"æ•´ä¸ªè°œå®«æœ€å¤§åƒç´ ä¸º540ï¼Œæœ€å°åƒç´ ä¸å¾—ä½äº3åƒç´ è¶…å‡ºèŒƒå›´ã€‚","æç¤º...",JOptionPane.WARNING_MESSAGE);
 					return ;
 				}
-				if(second<10)//ÃëÊıÌ«µÍ£¬²»¹»Ê±¼äĞŞ¸Ä
+				if(second<10)//ç§’æ•°å¤ªä½ï¼Œä¸å¤Ÿæ—¶é—´ä¿®æ”¹
 				{
-                   JOptionPane.showMessageDialog(null,"×î¿ìÊ±¼ä²»µÃµÍÓÚ10ºÁÃëË¢ĞÂÒ»´Î£¬ÒòÎªµÍÓÚ10ºÁÃë²»¹»Ê±¼äĞŞ¸Ä±ä»¯£¬½¨ÒéÉèÖÃ´óÓÚ10ºÁÃëµÄËÙ¶È\nÈÃµçÄÔÓĞ×ã¹»ĞŞ¸Ä±ä»¯£¬Èô³öÏÖ³ö·¢µã³öÏÖ¶à¸ö£¬¼´ÊÇÒòÎª²»¹»Ê±¼äĞŞ¸Ä±ä»¯£¬»¹Ã»Ïû³ıµôÉÏÒ»´ÎºÛ¼£ÓÖ½øĞĞÏÂÒ»ÂÖĞŞ¸Ä","ÌáÊ¾...",JOptionPane.WARNING_MESSAGE);
+                   JOptionPane.showMessageDialog(null,"æœ€å¿«æ—¶é—´ä¸å¾—ä½äº10æ¯«ç§’åˆ·æ–°ä¸€æ¬¡ï¼Œå› ä¸ºä½äº10æ¯«ç§’ä¸å¤Ÿæ—¶é—´ä¿®æ”¹å˜åŒ–ï¼Œå»ºè®®è®¾ç½®å¤§äº10æ¯«ç§’çš„é€Ÿåº¦\nè®©ç”µè„‘æœ‰è¶³å¤Ÿä¿®æ”¹å˜åŒ–ï¼Œè‹¥å‡ºç°å‡ºå‘ç‚¹å‡ºç°å¤šä¸ªï¼Œå³æ˜¯å› ä¸ºä¸å¤Ÿæ—¶é—´ä¿®æ”¹å˜åŒ–ï¼Œè¿˜æ²¡æ¶ˆé™¤æ‰ä¸Šä¸€æ¬¡ç—•è¿¹åˆè¿›è¡Œä¸‹ä¸€è½®ä¿®æ”¹","æç¤º...",JOptionPane.WARNING_MESSAGE);
 				   return ;
 				}			
 			}
 			catch (NumberFormatException e1)
 			{
-                JOptionPane.showMessageDialog(null,"Ö»ÄÜÊäÈëÊı×Ö£¬²»ÄÜÊäÈëÊı×ÖÒÔÍâµÄ×ÖÄ¸£¬·ûºÅµÈ¡£","ÌáÊ¾...",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null,"åªèƒ½è¾“å…¥æ•°å­—ï¼Œä¸èƒ½è¾“å…¥æ•°å­—ä»¥å¤–çš„å­—æ¯ï¼Œç¬¦å·ç­‰ã€‚","æç¤º...",JOptionPane.WARNING_MESSAGE);
 			    return;
 			}			
-			mg.isTypeChange=false;//³õÊ¼»¯ÎªÀàĞÍÎ´¸Ä±ä
-			if(mg.type!=type)//ÃÕ¹¬µ±Ç°ÀàĞÍÓëÑ¡ÔñµÄÀàĞÍ²»Í¬
-				mg.isTypeChange=true;//ÉèÖÃÀàĞÍ¸Ä±äÎªÕæ			
-			mg.column=(int)(1080/pixel);//¸ù¾İĞÂÏñËØÉèÖÃĞÂµÄÁĞÊı¡¢ĞĞÊı
-			mg.row=(int)((mg.column*10)/18);//ÒòÎª³õÊ¼»¯Îª18ÁĞ10ĞĞ£¬ËùÒÔÉèÖÃĞÂµÄÁĞÊı£¬ºÍĞĞÊı£¬Ò²±£³Ö18£º10
+			mg.isTypeChange=false;//åˆå§‹åŒ–ä¸ºç±»å‹æœªæ”¹å˜
+			if(mg.type!=type)//è°œå®«å½“å‰ç±»å‹ä¸é€‰æ‹©çš„ç±»å‹ä¸åŒ
+				mg.isTypeChange=true;//è®¾ç½®ç±»å‹æ”¹å˜ä¸ºçœŸ			
+			mg.column=(int)(1080/pixel);//æ ¹æ®æ–°åƒç´ è®¾ç½®æ–°çš„åˆ—æ•°ã€è¡Œæ•°
+			mg.row=(int)((mg.column*10)/18);//å› ä¸ºåˆå§‹åŒ–ä¸º18åˆ—10è¡Œï¼Œæ‰€ä»¥è®¾ç½®æ–°çš„åˆ—æ•°ï¼Œå’Œè¡Œæ•°ï¼Œä¹Ÿä¿æŒ18ï¼š10
 			System.out.printf("row=%d\n", mg.row);
-			mg.isPixelChange=false;//³õÊ¼»¯ÎªÏñËØÎ´¸Ä±ä
-			if(pixel!=mg.pixel)//ÏñËØ¸Ä±ä
+			mg.isPixelChange=false;//åˆå§‹åŒ–ä¸ºåƒç´ æœªæ”¹å˜
+			if(pixel!=mg.pixel)//åƒç´ æ”¹å˜
 			{
 				mg.setPixel(pixel);
-				mg.isPixelChange=true;//½«ÏñËØÉèÎªÒÑ¸Ä±ä
-				mg.finish=true;//ÉèÖÃ½¨³ÉÒÔÍË³ö½¨ÃÕ¹¬(Ä£Ê½3)
-				mg.find=true;//ÉèÖÃÕÒµ½ÒÔÍË³öÑ°ÕÒ(Ä£Ê½2£©
-				mg.find1=true;//ÉèÖÃÕÒµ½ÒÔÍË³öÑ°ÕÒ£¨Ä£Ê½1)
+				mg.isPixelChange=true;//å°†åƒç´ è®¾ä¸ºå·²æ”¹å˜
+				mg.finish=true;//è®¾ç½®å»ºæˆä»¥é€€å‡ºå»ºè°œå®«(æ¨¡å¼3)
+				mg.find=true;//è®¾ç½®æ‰¾åˆ°ä»¥é€€å‡ºå¯»æ‰¾(æ¨¡å¼2ï¼‰
+				mg.find1=true;//è®¾ç½®æ‰¾åˆ°ä»¥é€€å‡ºå¯»æ‰¾ï¼ˆæ¨¡å¼1)
 			}
-			mg.setPause(true);//ÉèÖÃÓÎÏ·Ì½Ë÷ÔİÍ£
-			mg.str="°´¿Õ¸ñ¿ªÊ¼";//ÉèÖÃÓÎÏ·ÔİÍ£ºóÌáÊ¾°´¿Õ¸ñ¿ªÊ¼
-			if(type==3)//´´½¨ÃÕ¹¬Ä£Ê½
+			mg.setPause(true);//è®¾ç½®æ¸¸æˆæ¢ç´¢æš‚åœ
+			mg.str="æŒ‰ç©ºæ ¼å¼€å§‹";//è®¾ç½®æ¸¸æˆæš‚åœåæç¤ºæŒ‰ç©ºæ ¼å¼€å§‹
+			if(type==3)//åˆ›å»ºè°œå®«æ¨¡å¼
 			{
-				mg.model="Ä£Ê½¡¾´´½¨ÃÕ¹¬ÑİÊ¾¡¿";
+				mg.model="æ¨¡å¼ã€åˆ›å»ºè°œå®«æ¼”ç¤ºã€‘";
 			}
 			if(type==2)
 			{
-				mg.model="Ä£Ê½¡¾µçÄÔÌ½Ë÷ÃÕ¹¬¡¿";
-				if(mg.finish&&(!mg.isPixelChange)&&mg.isTypeChange)//Èç¹ûÃÕ¹¬ÃÕ¹¬Íê³ÉÓĞ2ÖÖÇé¿ö£¬1ÖÖÊÇÕæµÄ´´½¨Íê³É£¬Áí1ÖÖÊÇÒòÎªÏñËØ¸Ä±ä£¬ÎªÁËÍË³ö¸ÃÖÖÄ£Ê½µÄËÀÑ­»·£¬ÉèÎªÍê³ÉÒÔÍË³öÑ­»·
-				{//ËùÒÔÏñËØÎ´±ä£¬ÇÒfinish=trueÊÇÕæµÄ´´½¨Íê³ÉÃÕ¹¬,²¢ÇÒÈç¹ûÀàĞÍ¸Ä±äÁË£¬¼´´ÓÆäËüÄ£Ê½×ª±ä¶øÀ´£¬ÔòµØÍ¼²»±ä£¬½«Æğµã»Øµ½Ô­µã£¬Ïû³ıÂ·Ïß
-					mg.createBufferImage();//ÒòÎªµÚ3ÖÖÄ£Ê½ÏÂµÄÓĞÂ·Ïß£¬ÎªÁËÏû³ıÂ·Ïß£¬¸ù¾İÃÕ¹¬Êı×éĞÅÏ¢(mg[][])ÖØĞÂ´´½¨»º³åÍ¼
-					mg.pullDownWall();//²ğÇ½
-					mg.drawStartAndEnd();//»­¿ªÊ¼µãºÍ½áÊøµãÍ¼
-					mg.find1=false;//·ÀÖ¹ÔÙ´ÎÔÚÏñËØ²»±äÇé¿öÏÂ»Øµ½Ä£Ê½1µÄÊ±ºò·¢ÉúÖØ½¨ÃÕ¹¬
+				mg.model="æ¨¡å¼ã€ç”µè„‘æ¢ç´¢è°œå®«ã€‘";
+				if(mg.finish&&(!mg.isPixelChange)&&mg.isTypeChange)//å¦‚æœè°œå®«è°œå®«å®Œæˆæœ‰2ç§æƒ…å†µï¼Œ1ç§æ˜¯çœŸçš„åˆ›å»ºå®Œæˆï¼Œå¦1ç§æ˜¯å› ä¸ºåƒç´ æ”¹å˜ï¼Œä¸ºäº†é€€å‡ºè¯¥ç§æ¨¡å¼çš„æ­»å¾ªç¯ï¼Œè®¾ä¸ºå®Œæˆä»¥é€€å‡ºå¾ªç¯
+				{//æ‰€ä»¥åƒç´ æœªå˜ï¼Œä¸”finish=trueæ˜¯çœŸçš„åˆ›å»ºå®Œæˆè°œå®«,å¹¶ä¸”å¦‚æœç±»å‹æ”¹å˜äº†ï¼Œå³ä»å…¶å®ƒæ¨¡å¼è½¬å˜è€Œæ¥ï¼Œåˆ™åœ°å›¾ä¸å˜ï¼Œå°†èµ·ç‚¹å›åˆ°åŸç‚¹ï¼Œæ¶ˆé™¤è·¯çº¿
+					mg.createBufferImage();//å› ä¸ºç¬¬3ç§æ¨¡å¼ä¸‹çš„æœ‰è·¯çº¿ï¼Œä¸ºäº†æ¶ˆé™¤è·¯çº¿ï¼Œæ ¹æ®è°œå®«æ•°ç»„ä¿¡æ¯(mg[][])é‡æ–°åˆ›å»ºç¼“å†²å›¾
+					mg.pullDownWall();//æ‹†å¢™
+					mg.drawStartAndEnd();//ç”»å¼€å§‹ç‚¹å’Œç»“æŸç‚¹å›¾
+					mg.find1=false;//é˜²æ­¢å†æ¬¡åœ¨åƒç´ ä¸å˜æƒ…å†µä¸‹å›åˆ°æ¨¡å¼1çš„æ—¶å€™å‘ç”Ÿé‡å»ºè°œå®«
 				}			
 			}
 			if(type==1)
 			{
-				mg.model="Ä£Ê½¡¾ÈË¹¤¿ØË÷ÃÕ¹¬¡¿";	
-				if(mg.finish&&(!mg.isPixelChange)&&mg.isTypeChange)//Èç¹ûÃÕ¹¬ÃÕ¹¬Íê³ÉÓĞ2ÖÖÇé¿ö£¬1ÖÖÊÇÕæµÄ´´½¨Íê³É£¬Áí1ÖÖÊÇÒòÎªÏñËØ¸Ä±ä£¬ÎªÁËÍË³ö¸ÃÖÖÄ£Ê½(µÚ3ÖÖÄ£Ê½)µÄËÀÑ­»·£¬ÉèÎªÍê³ÉÒÔÍË³öÑ­»·
-				{//ËùÒÔÏñËØÎ´±ä£¬ÇÒfinish=trueÊÇÕæµÄ´´½¨Íê³ÉÃÕ¹¬,²¢ÇÒÈç¹ûÀàĞÍ¸Ä±äÁË£¬¼´´ÓÆäËüÄ£Ê½×ª±ä¶øÀ´£¬ÔòµØÍ¼²»±ä£¬½«Æğµã»Øµ½Ô­µã£¬Ïû³ıÂ·Ïß
-					mg.createBufferImage();//ÒòÎªµÚ3ÖÖÄ£Ê½ÏÂµÄÓĞÂ·Ïß£¬ÎªÁËÏû³ıÂ·Ïß£¬¸ù¾İÃÕ¹¬Êı×éĞÅÏ¢(mg[][])ÖØĞÂ´´½¨»º³åÍ¼
-					mg.pullDownWall();//²ğÇ½
-					mg.drawStartAndEnd();//»­¿ªÊ¼µãºÍ½áÊøµãÍ¼
-					mg.find=false;//·ÀÖ¹ÔÙ´ÎÔÚÏñËØ²»±äÇé¿öÏÂ»Øµ½Ä£Ê½2µÄÊ±ºò·¢ÉúÖØ½¨ÃÕ¹¬					
+				mg.model="æ¨¡å¼ã€äººå·¥æ§ç´¢è°œå®«ã€‘";	
+				if(mg.finish&&(!mg.isPixelChange)&&mg.isTypeChange)//å¦‚æœè°œå®«è°œå®«å®Œæˆæœ‰2ç§æƒ…å†µï¼Œ1ç§æ˜¯çœŸçš„åˆ›å»ºå®Œæˆï¼Œå¦1ç§æ˜¯å› ä¸ºåƒç´ æ”¹å˜ï¼Œä¸ºäº†é€€å‡ºè¯¥ç§æ¨¡å¼(ç¬¬3ç§æ¨¡å¼)çš„æ­»å¾ªç¯ï¼Œè®¾ä¸ºå®Œæˆä»¥é€€å‡ºå¾ªç¯
+				{//æ‰€ä»¥åƒç´ æœªå˜ï¼Œä¸”finish=trueæ˜¯çœŸçš„åˆ›å»ºå®Œæˆè°œå®«,å¹¶ä¸”å¦‚æœç±»å‹æ”¹å˜äº†ï¼Œå³ä»å…¶å®ƒæ¨¡å¼è½¬å˜è€Œæ¥ï¼Œåˆ™åœ°å›¾ä¸å˜ï¼Œå°†èµ·ç‚¹å›åˆ°åŸç‚¹ï¼Œæ¶ˆé™¤è·¯çº¿
+					mg.createBufferImage();//å› ä¸ºç¬¬3ç§æ¨¡å¼ä¸‹çš„æœ‰è·¯çº¿ï¼Œä¸ºäº†æ¶ˆé™¤è·¯çº¿ï¼Œæ ¹æ®è°œå®«æ•°ç»„ä¿¡æ¯(mg[][])é‡æ–°åˆ›å»ºç¼“å†²å›¾
+					mg.pullDownWall();//æ‹†å¢™
+					mg.drawStartAndEnd();//ç”»å¼€å§‹ç‚¹å’Œç»“æŸç‚¹å›¾
+					mg.find=false;//é˜²æ­¢å†æ¬¡åœ¨åƒç´ ä¸å˜æƒ…å†µä¸‹å›åˆ°æ¨¡å¼2çš„æ—¶å€™å‘ç”Ÿé‡å»ºè°œå®«					
 				}	
 			}
-		    mg.setType(type);//ÉèÖÃÀàĞÍ  £¬Òª·ÅÔÚsetPixelºóÃæ£¬ÒòÎªmazeÖĞÓĞ¸öÏß³Ì1Ö±Ñ­»·£¬ÈôÏÈÉèÖÃÀàĞÍºóÉèÖÃÏñËØ£¬ÉèÖÃÀàĞÍºóËüÁ¢¼´ÔÚÑ­»·ÖĞÌøµ½ÏàÓ¦ÀàĞÍ£¬¶øÕâÊ±ÏñËØ»¹Ã»À´µÃ¼°¸Ä±ä£¬ÓÃÀÏÏñËØ´´½¨¡¢·ÃÎÊ¾Í»á³öÏÖÊı×éÏÂ±ê³¬³öÒì³£
-		    mg.setSecond(second);//ÉèÖÃÊ±¼ä¼°ÏñËØ
-			mg.isStart=true;//ÉèÖÃÓÎÏ·¿ªÊ¼£¬±ØĞë·ÅÔÚºóÃæ£¬Èô·ÅÔÚmg.find,find1,finish=trueÇ°£¬ÄÇÃ´ÔÚrunº¯Êı¼ì²âµ½ÕâĞ©Îªtrue£¬ÓÖ»á½«isStartÉèÖÃ³Éfalse£¬ËùÒÔÒªÔÚÉèÖÃÕâĞ©×´Ì¬Ö®ºóÉèÖÃisStart			
-			setVisible(false);//È·¶¨ºó¶Ô»°¿òÏûÊ§
+		    mg.setType(type);//è®¾ç½®ç±»å‹  ï¼Œè¦æ”¾åœ¨setPixelåé¢ï¼Œå› ä¸ºmazeä¸­æœ‰ä¸ªçº¿ç¨‹1ç›´å¾ªç¯ï¼Œè‹¥å…ˆè®¾ç½®ç±»å‹åè®¾ç½®åƒç´ ï¼Œè®¾ç½®ç±»å‹åå®ƒç«‹å³åœ¨å¾ªç¯ä¸­è·³åˆ°ç›¸åº”ç±»å‹ï¼Œè€Œè¿™æ—¶åƒç´ è¿˜æ²¡æ¥å¾—åŠæ”¹å˜ï¼Œç”¨è€åƒç´ åˆ›å»ºã€è®¿é—®å°±ä¼šå‡ºç°æ•°ç»„ä¸‹æ ‡è¶…å‡ºå¼‚å¸¸
+		    mg.setSecond(second);//è®¾ç½®æ—¶é—´åŠåƒç´ 
+			mg.isStart=true;//è®¾ç½®æ¸¸æˆå¼€å§‹ï¼Œå¿…é¡»æ”¾åœ¨åé¢ï¼Œè‹¥æ”¾åœ¨mg.find,find1,finish=trueå‰ï¼Œé‚£ä¹ˆåœ¨runå‡½æ•°æ£€æµ‹åˆ°è¿™äº›ä¸ºtrueï¼Œåˆä¼šå°†isStartè®¾ç½®æˆfalseï¼Œæ‰€ä»¥è¦åœ¨è®¾ç½®è¿™äº›çŠ¶æ€ä¹‹åè®¾ç½®isStart			
+			setVisible(false);//ç¡®å®šåå¯¹è¯æ¡†æ¶ˆå¤±
 		}
-		if(e.getSource()==but2)//ÍË³ö
+		if(e.getSource()==but2)//é€€å‡º
 		{
-			setVisible(false);//×ªµ½¶Ô»°¿òÏûÊ§
+			setVisible(false);//è½¬åˆ°å¯¹è¯æ¡†æ¶ˆå¤±
 		}
 	}
 }
-class Box//Õ»Àà£¬Õâ¸öÀàÓÃ×÷Õ»ÔªËØ
+class Box//æ ˆç±»ï¼Œè¿™ä¸ªç±»ç”¨ä½œæ ˆå…ƒç´ 
 {
-	int i;//µÚ¼¸ĞĞ
-	int j;//µÚ¼¸ÁĞ
-	int next;//ÍùÏÂÒ»¸ö·¿¼äµÄ·½Ïò
-	int count;//×ß¹ıµÄ·½ÏòÊıÄ¿
-	int canGo;//×ßÍ¨µÄ·½ÏòÊıÄ¿
-	int visit[]=new int[4];//ËÄ¸ö·½Ïò·ÃÎÊ±êÖ¾£¬0±íÊ¾¸Ã·½ÏòÎ´×ß¹ı£¬1±íÊ¾×ß¹ı
+	int i;//ç¬¬å‡ è¡Œ
+	int j;//ç¬¬å‡ åˆ—
+	int next;//å¾€ä¸‹ä¸€ä¸ªæˆ¿é—´çš„æ–¹å‘
+	int count;//èµ°è¿‡çš„æ–¹å‘æ•°ç›®
+	int canGo;//èµ°é€šçš„æ–¹å‘æ•°ç›®
+	int visit[]=new int[4];//å››ä¸ªæ–¹å‘è®¿é—®æ ‡å¿—ï¼Œ0è¡¨ç¤ºè¯¥æ–¹å‘æœªèµ°è¿‡ï¼Œ1è¡¨ç¤ºèµ°è¿‡
 }
-class room//·¿¼äÀà
+class room//æˆ¿é—´ç±»
 {
-	int property;//·¿¼äÊôĞÔ£¬1±íÊ¾Õû¸ö·¿¼äÊÇÊµĞÄµÄ£¬²»ÄÜÍ¨¹ı¡¢²ğÇ½£¬0±íÊ¾¿ÕĞÄµÄ·¿¼ä£¬ÀïÃæµÄ·¿¼ä¿ÉÍ¨¹ı²ğÇ½´òÍ¨
-	//-1±íÊ¾¸Ã·¿¼äÒÑ²ğÇ½´òÍ¨£¬×ß¹ıµ«ÊÇËÀÂ·£¬2±íÊ¾·¿¼äÒÑ²ğÇ½´òÍ¨²»ÊÇËÀÂ·
-    int left;//·¿¼ä×óÇ½±ÚÊÇ·ñ´òÍ¨£¬0±íÊ¾Î´´òÍ¨£¬1±íÊ¾´òÍ¨¿ÉÍ¨¹ı
-	int right;//·¿¼äÓÒÇ½±ÚÊÇ·ñ´òÍ¨£¬0±íÊ¾Î´´òÍ¨£¬1±íÊ¾´òÍ¨¿ÉÍ¨¹ı
-	int up;//·¿¼äÇ°Ç½±ÚÊÇ·ñ´òÍ¨£¬0±íÊ¾Î´´òÍ¨£¬1±íÊ¾´òÍ¨¿ÉÍ¨¹ı
-	int down;//·¿¼äºóÇ½±ÚÊÇ·ñ´òÍ¨£¬0±íÊ¾Î´´òÍ¨£¬1±íÊ¾´òÍ¨¿ÉÍ¨¹ı
-	//propertyÎª1µÄ·¿¼äÊÇÊµĞÄµÄ£¬²»ÄÜ½øĞĞ´òÍ¨£¬ËÄÃæÎ§Ç½¾ÍÊÇÓÉÖÚ¶àÊµĞÄ·¿×ÓÎ§³ÉµÄ
+	int property;//æˆ¿é—´å±æ€§ï¼Œ1è¡¨ç¤ºæ•´ä¸ªæˆ¿é—´æ˜¯å®å¿ƒçš„ï¼Œä¸èƒ½é€šè¿‡ã€æ‹†å¢™ï¼Œ0è¡¨ç¤ºç©ºå¿ƒçš„æˆ¿é—´ï¼Œé‡Œé¢çš„æˆ¿é—´å¯é€šè¿‡æ‹†å¢™æ‰“é€š
+	//-1è¡¨ç¤ºè¯¥æˆ¿é—´å·²æ‹†å¢™æ‰“é€šï¼Œèµ°è¿‡ä½†æ˜¯æ­»è·¯ï¼Œ2è¡¨ç¤ºæˆ¿é—´å·²æ‹†å¢™æ‰“é€šä¸æ˜¯æ­»è·¯
+    int left;//æˆ¿é—´å·¦å¢™å£æ˜¯å¦æ‰“é€šï¼Œ0è¡¨ç¤ºæœªæ‰“é€šï¼Œ1è¡¨ç¤ºæ‰“é€šå¯é€šè¿‡
+	int right;//æˆ¿é—´å³å¢™å£æ˜¯å¦æ‰“é€šï¼Œ0è¡¨ç¤ºæœªæ‰“é€šï¼Œ1è¡¨ç¤ºæ‰“é€šå¯é€šè¿‡
+	int up;//æˆ¿é—´å‰å¢™å£æ˜¯å¦æ‰“é€šï¼Œ0è¡¨ç¤ºæœªæ‰“é€šï¼Œ1è¡¨ç¤ºæ‰“é€šå¯é€šè¿‡
+	int down;//æˆ¿é—´åå¢™å£æ˜¯å¦æ‰“é€šï¼Œ0è¡¨ç¤ºæœªæ‰“é€šï¼Œ1è¡¨ç¤ºæ‰“é€šå¯é€šè¿‡
+	//propertyä¸º1çš„æˆ¿é—´æ˜¯å®å¿ƒçš„ï¼Œä¸èƒ½è¿›è¡Œæ‰“é€šï¼Œå››é¢å›´å¢™å°±æ˜¯ç”±ä¼—å¤šå®å¿ƒæˆ¿å­å›´æˆçš„
 }
 class migong  extends JPanel implements Runnable 
 {
-	int second=1000;//ÒÆ¶¯µÄËÙ¶È£¬¶àÉÙºÁÃëÒÆÒ»´Î£¬³õÊ¼»¯Îª1Ãë
-	int pixel=60;//·¿¼äÏñËØ£¬³õÊ¼»¯Îª60ÏñËØ
-	int i,j;//ÏÂÒ»¸ö·¿¼äµÄ×ø±ê
+	int second=1000;//ç§»åŠ¨çš„é€Ÿåº¦ï¼Œå¤šå°‘æ¯«ç§’ç§»ä¸€æ¬¡ï¼Œåˆå§‹åŒ–ä¸º1ç§’
+	int pixel=60;//æˆ¿é—´åƒç´ ï¼Œåˆå§‹åŒ–ä¸º60åƒç´ 
+	int i,j;//ä¸‹ä¸€ä¸ªæˆ¿é—´çš„åæ ‡
 	int k;
-	int row=10;//ĞĞÊı,³õÊ¼»¯Îª10ĞĞ18ÁĞ
-	int column=18;//ÁĞÊı
-	int count;//ÓÃÓÚ¼Æ×ß¹ıµÄ²½Êı
-	int entryX,entryY;//Èë¿ÚµÄºá¡¢×İ×ø±ê
-	int exitX,exitY;//³ö¿ÚµÄºá¡¢×İ×ø±ê
-	int currentX,currentY;//µ±Ç°·¿¼äµÄºá¡¢×İ×ø±ê
-    int frontNext;//ÍËÕ»Ç°µÄ·¿¼äÍ¨ÍùÏÂÒ»¸ö·¿¼äµÄ·½Ïò
-    int type=2;//Ä£Ê½£¬1Îª¼ÆÊ±±ÈÈü£¬ÈË¹¤Ì½Ë÷£¬2ÎªµçÄÔÌ½Ë÷£¬3Îª´´½¨ĞÂÃÕ¹¬
-	int top=-1;//Õ»¶¥
-	int pathTop;//ËùÓĞÂ·¾¶£¨°üÀ¨×ß¹ıµÄËÀÂ·£©Õ»¶¥
-	int top1=-1;//Õ»¶¥
-	int direct;//µ±Ç°µÄ·¿¼äÍùÏÂÒ»·¿¼äµÄ·½Ïò±êÖ¾
-	int entrydirect;//Èë¿Ú·½Ïò±êÖ¾
-	int flag=-1;//ÈË¹¤Ì½Ë÷ÒÆ¶¯µÄ·½Ïò,³õÊ¼»¯Î´ÏòÈÎºÎ·½ÏòÒÆ¶¯
-	String str="°´¿Õ¸ñ¿ªÊ¼";//¿ªÊ¼¡¢ÔİÍ£ÌáÊ¾×Ö·û´®
-	String time="Ê±¼ä:";//Ê±¼ä
-	String model="Ä£Ê½¡¾¿ØË÷ÃÕ¹¬ÑİÊ¾¡¿";//Ä£Ê½
-	String cost;//ÓÃÊ±
-	String step="²½Êı";//²½Êı
-	stopwatch watch;//Ãë±íÀà
-	Thread t1;//Ïß³ÌÓÃÀ´¼ÆÊ±
-	room mg[][];//·¿¼äÊı×é
-    Box stack[];//Õ»
-	Box path[];//ÓÃÓÚ±£´æËùÒÔ×ß¹ıµÄÂ·¾¶ÏÂÒ»¸ö·¿¼äµÄ·½Ïò£¬°üÀ¨ËÀÂ·
-	Box temp;//µ±Ç°µÄ·¿¼ä
-	Box multiDirect[];//±£´æ¶à¸ö·½ÏòµÄ·¿¼ä
-	BufferedImage image1=new BufferedImage(1300,730,BufferedImage.TYPE_3BYTE_BGR); //3ÕÅ»º³åÍ¼£¬·Ö±ğ´æ·ÅÈıÖÖÄ£Ê½ÏÂµÄÍ¼£¬image1ÊÇÈË¹¤Ì½Ë÷»º³åÍ¼
-	BufferedImage image2=new BufferedImage(1300,730,BufferedImage.TYPE_3BYTE_BGR); //µçÄÔÌ½Ë÷Â·¾¶»º³åÍ¼
-	BufferedImage image3=new BufferedImage(1300,730,BufferedImage.TYPE_3BYTE_BGR); //´´½¨ÃÕ¹¬»º³åÍ¼
-   	BufferedImage imageStart=null;//¿ªÊ¼µÄÍ¼Æ¬
-	BufferedImage imageEnd=null;//½áÊøµÄÍ¼Æ¬
-	Graphics2D g1[]=new Graphics2D[3];//3ÕÅ»º³åÍ¼¸÷ÓÃÒ»Ö§±Ê
-	Color mazeBackGroundColor=Color.black;//ÃÕ¹¬±³¾°ÑÕÉ«£¬³õÊ¼»¯ÎªºÚÉ«
-	Color wallColor=Color.green;//ÃÕ¹¬Ç½±ÚÑÕÉ«£¬³õÊ¼»¯ÎªÂÌÉ«
-	Color fontColor=Color.black;//ÃÕ¹¬×ÖÌåÑÕÉ«£¬³õÊ¼»¯ÎªºÚÉ«
-	Color fontBackGroundColor=Color.white;//ÃÕ¹¬×ÖÌå±³¾°ÑÕÉ«£¬³õÊ¼»¯Îª°×É«
-	Color routeColor=Color.red;//ÃÕ¹¬Â·ÏßÑÕÉ«£¬³õÊ¼»¯ÎªºìÉ«
-	Color startColor=Color.white;//ÃÕ¹¬¿ªÊ¼µãÑÕÉ«£¬³õÊ¼»¯Îª°×É«£¬½öÔÚÏñËØĞ¡ÓÚ60Çé¿öÏÂ²ÅÓĞĞ§
-	Color endColor=Color.red;//ÃÕ¹¬½áÊøµãÑÕÉ«£¬³õÊ¼»¯ÎªºìÉ«£¬½öÔÚÏñËØĞ¡ÓÚ60Çé¿öÏÂ²ÅÓĞĞ§
+	int row=10;//è¡Œæ•°,åˆå§‹åŒ–ä¸º10è¡Œ18åˆ—
+	int column=18;//åˆ—æ•°
+	int count;//ç”¨äºè®¡èµ°è¿‡çš„æ­¥æ•°
+	int entryX,entryY;//å…¥å£çš„æ¨ªã€çºµåæ ‡
+	int exitX,exitY;//å‡ºå£çš„æ¨ªã€çºµåæ ‡
+	int currentX,currentY;//å½“å‰æˆ¿é—´çš„æ¨ªã€çºµåæ ‡
+    int frontNext;//é€€æ ˆå‰çš„æˆ¿é—´é€šå¾€ä¸‹ä¸€ä¸ªæˆ¿é—´çš„æ–¹å‘
+    int type=2;//æ¨¡å¼ï¼Œ1ä¸ºè®¡æ—¶æ¯”èµ›ï¼Œäººå·¥æ¢ç´¢ï¼Œ2ä¸ºç”µè„‘æ¢ç´¢ï¼Œ3ä¸ºåˆ›å»ºæ–°è°œå®«
+	int top=-1;//æ ˆé¡¶
+	int pathTop;//æ‰€æœ‰è·¯å¾„ï¼ˆåŒ…æ‹¬èµ°è¿‡çš„æ­»è·¯ï¼‰æ ˆé¡¶
+	int top1=-1;//æ ˆé¡¶
+	int direct;//å½“å‰çš„æˆ¿é—´å¾€ä¸‹ä¸€æˆ¿é—´çš„æ–¹å‘æ ‡å¿—
+	int entrydirect;//å…¥å£æ–¹å‘æ ‡å¿—
+	int flag=-1;//äººå·¥æ¢ç´¢ç§»åŠ¨çš„æ–¹å‘,åˆå§‹åŒ–æœªå‘ä»»ä½•æ–¹å‘ç§»åŠ¨
+	String str="æŒ‰ç©ºæ ¼å¼€å§‹";//å¼€å§‹ã€æš‚åœæç¤ºå­—ç¬¦ä¸²
+	String time="æ—¶é—´:";//æ—¶é—´
+	String model="æ¨¡å¼ã€æ§ç´¢è°œå®«æ¼”ç¤ºã€‘";//æ¨¡å¼
+	String cost;//ç”¨æ—¶
+	String step="æ­¥æ•°";//æ­¥æ•°
+	stopwatch watch;//ç§’è¡¨ç±»
+	Thread t1;//çº¿ç¨‹ç”¨æ¥è®¡æ—¶
+	room mg[][];//æˆ¿é—´æ•°ç»„
+    Box stack[];//æ ˆ
+	Box path[];//ç”¨äºä¿å­˜æ‰€ä»¥èµ°è¿‡çš„è·¯å¾„ä¸‹ä¸€ä¸ªæˆ¿é—´çš„æ–¹å‘ï¼ŒåŒ…æ‹¬æ­»è·¯
+	Box temp;//å½“å‰çš„æˆ¿é—´
+	Box multiDirect[];//ä¿å­˜å¤šä¸ªæ–¹å‘çš„æˆ¿é—´
+	BufferedImage image1=new BufferedImage(1300,730,BufferedImage.TYPE_3BYTE_BGR); //3å¼ ç¼“å†²å›¾ï¼Œåˆ†åˆ«å­˜æ”¾ä¸‰ç§æ¨¡å¼ä¸‹çš„å›¾ï¼Œimage1æ˜¯äººå·¥æ¢ç´¢ç¼“å†²å›¾
+	BufferedImage image2=new BufferedImage(1300,730,BufferedImage.TYPE_3BYTE_BGR); //ç”µè„‘æ¢ç´¢è·¯å¾„ç¼“å†²å›¾
+	BufferedImage image3=new BufferedImage(1300,730,BufferedImage.TYPE_3BYTE_BGR); //åˆ›å»ºè°œå®«ç¼“å†²å›¾
+   	BufferedImage imageStart=null;//å¼€å§‹çš„å›¾ç‰‡
+	BufferedImage imageEnd=null;//ç»“æŸçš„å›¾ç‰‡
+	Graphics2D g1[]=new Graphics2D[3];//3å¼ ç¼“å†²å›¾å„ç”¨ä¸€æ”¯ç¬”
+	Color mazeBackGroundColor=Color.black;//è°œå®«èƒŒæ™¯é¢œè‰²ï¼Œåˆå§‹åŒ–ä¸ºé»‘è‰²
+	Color wallColor=Color.green;//è°œå®«å¢™å£é¢œè‰²ï¼Œåˆå§‹åŒ–ä¸ºç»¿è‰²
+	Color fontColor=Color.black;//è°œå®«å­—ä½“é¢œè‰²ï¼Œåˆå§‹åŒ–ä¸ºé»‘è‰²
+	Color fontBackGroundColor=Color.white;//è°œå®«å­—ä½“èƒŒæ™¯é¢œè‰²ï¼Œåˆå§‹åŒ–ä¸ºç™½è‰²
+	Color routeColor=Color.red;//è°œå®«è·¯çº¿é¢œè‰²ï¼Œåˆå§‹åŒ–ä¸ºçº¢è‰²
+	Color startColor=Color.white;//è°œå®«å¼€å§‹ç‚¹é¢œè‰²ï¼Œåˆå§‹åŒ–ä¸ºç™½è‰²ï¼Œä»…åœ¨åƒç´ å°äº60æƒ…å†µä¸‹æ‰æœ‰æ•ˆ
+	Color endColor=Color.red;//è°œå®«ç»“æŸç‚¹é¢œè‰²ï¼Œåˆå§‹åŒ–ä¸ºçº¢è‰²ï¼Œä»…åœ¨åƒç´ å°äº60æƒ…å†µä¸‹æ‰æœ‰æ•ˆ
 	/*
-    BufferedImage¼Ì³ĞImage,ÊÇÍ¼ÏñÊı¾İ»º³åÇø,½«¸÷ÖÖÏßÍ¼¡¢Í¼ĞÎ¡¢Í¼Æ¬µÈ¼Óµ½Õâ¸ö
-	»º³åÇø¹¹³ÉÒ»¸ö×éºÏÍ¼£¬ÔÙ°ÑÕâ¸ö×éºÍÍ¼¼Óµ½Ãæ°åÉÏJFrame»òJPanel...ÖĞ
+    BufferedImageç»§æ‰¿Image,æ˜¯å›¾åƒæ•°æ®ç¼“å†²åŒº,å°†å„ç§çº¿å›¾ã€å›¾å½¢ã€å›¾ç‰‡ç­‰åŠ åˆ°è¿™ä¸ª
+	ç¼“å†²åŒºæ„æˆä¸€ä¸ªç»„åˆå›¾ï¼Œå†æŠŠè¿™ä¸ªç»„å’Œå›¾åŠ åˆ°é¢æ¿ä¸ŠJFrameæˆ–JPanel...ä¸­
 	BufferedImage.TYPE_3BYTE_BGR
-	±íÊ¾Ò»¸ö¾ßÓĞ 8 Î» RGB ÑÕÉ«·ÖÁ¿µÄÍ¼Ïñ£¬¶ÔÓ¦ÓÚ Windows ·ç¸ñµÄ
-	BGR ÑÕÉ«Ä£ĞÍ£¬¾ßÓĞÓÃ 3 ×Ö½Ú´æ´¢µÄ Blue¡¢Green ºÍ Red ÈıÖÖÑÕÉ«¡£
+	è¡¨ç¤ºä¸€ä¸ªå…·æœ‰ 8 ä½ RGB é¢œè‰²åˆ†é‡çš„å›¾åƒï¼Œå¯¹åº”äº Windows é£æ ¼çš„
+	BGR é¢œè‰²æ¨¡å‹ï¼Œå…·æœ‰ç”¨ 3 å­—èŠ‚å­˜å‚¨çš„ Blueã€Green å’Œ Red ä¸‰ç§é¢œè‰²ã€‚
 	*/
-	Thread t=new Thread(this);//ÓÃÏß³ÌË¯ÃßÊ±¼äÀ´Ë¢ĞÂ»­Ãæ
+	Thread t=new Thread(this);//ç”¨çº¿ç¨‹ç¡çœ æ—¶é—´æ¥åˆ·æ–°ç”»é¢
 	URL url=getClass().getResource("jump.wav");//getClss()
-	//·µ»ØÒ»¸ö¶ÔÏóµÄÔËĞĞÊ±Àà,¼´ClassÕâ¸öÀà£¬
-	//getResourceÔÚmgpathÕâ¸öÀàµÄ¹¤×÷Çø¼äÏÂÊÇÔÚ²éÕÒ·µ»Ø´øÓĞ¸ø¶¨Ãû³ÆµÄ×ÊÔ´url£¬¼´Â·¾¶
-	AudioClip audio;	//AudioClip ÊÇÓÃÓÚ²¥·ÅÒôÆµ½Ó¿Ú£¬²»ÄÜnew³öÀ´,AppletÀàÓĞÒ»¸ö·½·¨¿ÉÒÔ´Ó¸ø¶¨ URL ´¦»ñÈ¡ÒôÆµ¼ô¼­½Ó¿ÚµÄÊµÀı»¯
-    boolean isStart=true;//ÊÇ·ñ¿ªÊ¼ÒÆ¶¯£¬³õÊ¼Îª¿ªÊ¼
-	boolean isPause=true;//ÊÇÔİÍ£
-	boolean isBegin;//ÊÇ·ñ¼ÆÊ±¿ªÊ¼
-	boolean isPixelChange;//ÏñËØÊÇ·ñ¸Ä±ä
-	boolean isTypeChange;//ÀàĞÍÊÇ·ñ¸Ä±ä
-	boolean isColorChange;//ÑÕÉ«ÊÇ·ñ¸Ä±ä
-	boolean finish;//ÃÕ¹¬´´½¨Íê³É·ñ
-    boolean find;//µçÄÔÊÇ·ñÕÒµ½ÖÕµã±ê¼Ç
-    boolean find1;//Íæ¼ÒÊÇ·ñÕÒµ½ÖÕµã±ê¼Ç
-    boolean isPull=false;//µÚ3ÖÖÄ£Ê½ÏÂÊÇ·ñ¿É²ğ,³õÊ¼»¯Îª²»¿É²ğ
-	boolean isPush=true;//µ±Ç°·¿¼äÊÇ·ñ½øÕ»µ½ÏÂÒ»¸ö·¿¼ä
-	boolean isPictureExit=true;//Í¼Æ¬ÊÇ·ñ¶ÁÈ¡³É¹¦,³õÊ¼»¯Îª¶ÁÈ¡³É¹¦
-	boolean isRepaint3=false;//½øĞĞË¢ĞÂ»­ÃæµÄÖØ»­£¬ÊÇµÚ3ÖÖÄ£Ê½ÔòÎªtrue£¬µÚ1¡¢2ÖÖÄ£Ê½»òÊ±¼äÏß³Ìµ÷ÓÃrepaintÔòÎªfalse
-	Date now =new Date();//Ê±¼ä
+	//è¿”å›ä¸€ä¸ªå¯¹è±¡çš„è¿è¡Œæ—¶ç±»,å³Classè¿™ä¸ªç±»ï¼Œ
+	//getResourceåœ¨mgpathè¿™ä¸ªç±»çš„å·¥ä½œåŒºé—´ä¸‹æ˜¯åœ¨æŸ¥æ‰¾è¿”å›å¸¦æœ‰ç»™å®šåç§°çš„èµ„æºurlï¼Œå³è·¯å¾„
+	AudioClip audio;	//AudioClip æ˜¯ç”¨äºæ’­æ”¾éŸ³é¢‘æ¥å£ï¼Œä¸èƒ½newå‡ºæ¥,Appletç±»æœ‰ä¸€ä¸ªæ–¹æ³•å¯ä»¥ä»ç»™å®š URL å¤„è·å–éŸ³é¢‘å‰ªè¾‘æ¥å£çš„å®ä¾‹åŒ–
+    boolean isStart=true;//æ˜¯å¦å¼€å§‹ç§»åŠ¨ï¼Œåˆå§‹ä¸ºå¼€å§‹
+	boolean isPause=true;//æ˜¯æš‚åœ
+	boolean isBegin;//æ˜¯å¦è®¡æ—¶å¼€å§‹
+	boolean isPixelChange;//åƒç´ æ˜¯å¦æ”¹å˜
+	boolean isTypeChange;//ç±»å‹æ˜¯å¦æ”¹å˜
+	boolean isColorChange;//é¢œè‰²æ˜¯å¦æ”¹å˜
+	boolean finish;//è°œå®«åˆ›å»ºå®Œæˆå¦
+    boolean find;//ç”µè„‘æ˜¯å¦æ‰¾åˆ°ç»ˆç‚¹æ ‡è®°
+    boolean find1;//ç©å®¶æ˜¯å¦æ‰¾åˆ°ç»ˆç‚¹æ ‡è®°
+    boolean isPull=false;//ç¬¬3ç§æ¨¡å¼ä¸‹æ˜¯å¦å¯æ‹†,åˆå§‹åŒ–ä¸ºä¸å¯æ‹†
+	boolean isPush=true;//å½“å‰æˆ¿é—´æ˜¯å¦è¿›æ ˆåˆ°ä¸‹ä¸€ä¸ªæˆ¿é—´
+	boolean isPictureExit=true;//å›¾ç‰‡æ˜¯å¦è¯»å–æˆåŠŸ,åˆå§‹åŒ–ä¸ºè¯»å–æˆåŠŸ
+	boolean isRepaint3=false;//è¿›è¡Œåˆ·æ–°ç”»é¢çš„é‡ç”»ï¼Œæ˜¯ç¬¬3ç§æ¨¡å¼åˆ™ä¸ºtrueï¼Œç¬¬1ã€2ç§æ¨¡å¼æˆ–æ—¶é—´çº¿ç¨‹è°ƒç”¨repaintåˆ™ä¸ºfalse
+	Date now =new Date();//æ—¶é—´
 	public void run()
 	{
 		while(true)
@@ -559,12 +559,12 @@ class migong  extends JPanel implements Runnable
 				case 3:
 					if(isStart)
 				    {
-	            		 isBegin=false;//³õÊ¼»¯Î´¼ÆÊ±£¬°´ÏÂ¿Õ¸ñºó²Å¼ÆÊ±
-						 str="°´¿Õ¸ñ¿ªÊ¼";			 
-					     createMazePath();//´´½¨ĞÂÃÕ¹¬²¢ÑİÊ¾´´½¨¹ı³Ì
+	            		 isBegin=false;//åˆå§‹åŒ–æœªè®¡æ—¶ï¼ŒæŒ‰ä¸‹ç©ºæ ¼åæ‰è®¡æ—¶
+						 str="æŒ‰ç©ºæ ¼å¼€å§‹";			 
+					     createMazePath();//åˆ›å»ºæ–°è°œå®«å¹¶æ¼”ç¤ºåˆ›å»ºè¿‡ç¨‹
 					     if(finish)
 						 {
-						     setStart(false);//Íê³ÉÒªÇó	
+						     setStart(false);//å®Œæˆè¦æ±‚	
 							 setPause(true);
 						 }
 					}
@@ -574,16 +574,16 @@ class migong  extends JPanel implements Runnable
 					if(isStart)
 					{
             		    isBegin=false;
-            		   	str="°´¿Õ¸ñ¿ªÊ¼"; 
-						if(find||(!finish))//ÕÒµ½ÖÕµãºó»ò´ÓµÚ3ÖÖÄ£Ê½ÏòµÚ2ÖÖÄ£Ê½×ª±ä¹ı³ÌÃÕ¹¬Î´´´½¨Íê³É
+            		   	str="æŒ‰ç©ºæ ¼å¼€å§‹"; 
+						if(find||(!finish))//æ‰¾åˆ°ç»ˆç‚¹åæˆ–ä»ç¬¬3ç§æ¨¡å¼å‘ç¬¬2ç§æ¨¡å¼è½¬å˜è¿‡ç¨‹è°œå®«æœªåˆ›å»ºå®Œæˆ
 						{
-							find=false;//ÕÒÖÕµãºóÒª¼ÌĞøÏÂÒ»ÂÖ£¬ËùÒÔÉèÎª³õÖµÃ»ÕÒµ½
-							finish=true;//ÉèÖÃ½¨³ÉÒÔÍË³ö½¨ÃÕ¹¬(Ä£Ê½3)
-							quickCreateMazePath();//ÖØĞÂ¿ìËÙ´´½¨1¸öĞÂÃÕ¹¬
-						    repaint();//Ë¢ĞÂÒ»ÏÂÏÔÊ¾ĞÂ´´½¨µÄÃÕ¹¬
+							find=false;//æ‰¾ç»ˆç‚¹åè¦ç»§ç»­ä¸‹ä¸€è½®ï¼Œæ‰€ä»¥è®¾ä¸ºåˆå€¼æ²¡æ‰¾åˆ°
+							finish=true;//è®¾ç½®å»ºæˆä»¥é€€å‡ºå»ºè°œå®«(æ¨¡å¼3)
+							quickCreateMazePath();//é‡æ–°å¿«é€Ÿåˆ›å»º1ä¸ªæ–°è°œå®«
+						    repaint();//åˆ·æ–°ä¸€ä¸‹æ˜¾ç¤ºæ–°åˆ›å»ºçš„è°œå®«
 						}
-					    computerFindPath(entryX,entryY,exitX,exitY);//µçÄÔÑ°ÕÒÃÕ¹¬Â·¾¶
-						if(find)//ÕÒµ½ÖÕµãºó
+					    computerFindPath(entryX,entryY,exitX,exitY);//ç”µè„‘å¯»æ‰¾è°œå®«è·¯å¾„
+						if(find)//æ‰¾åˆ°ç»ˆç‚¹å
 						{ 
 							setStart(false);
 							setPause(true);
@@ -594,23 +594,23 @@ class migong  extends JPanel implements Runnable
 				case 1:
 				if(isStart)
 				{
-            		    isBegin=false;//ÕÒÖÕµãºóÒª¼ÌĞøÏÂÒ»ÂÖ£¬ËùÒÔÉèÎª³õÖµÃ»ÕÒµ½
-						str="°´¿Õ¸ñ¿ªÊ¼";		                
-            		    watch=new stopwatch(this);//Õâ¸öĞÂÃë±íÎªÊ²Ã´·ÅÔÚÕâ£¬²»Ïñ1£¬2Ä£Ê½·ÅÔÚº¯ÊıÄÚ£¬ÕâÊÇÒòÎªÄ£Ê½3Ã¿ÒÆ¶¯1´Îµ÷ÓÃÒ»´Îº¯Êı£¬¶ø1£¬2Ä£Ê½Ö»µ÷ÓÃ1´Î
-						if(find1||(!finish))//ÕÒµ½ÖÕµãºó»ò´ÓµÚ3ÖÖÄ£Ê½ÏòµÚ1ÖÖÄ£Ê½×ª±ä¹ı³ÌÃÕ¹¬Î´´´½¨Íê³É
+            		    isBegin=false;//æ‰¾ç»ˆç‚¹åè¦ç»§ç»­ä¸‹ä¸€è½®ï¼Œæ‰€ä»¥è®¾ä¸ºåˆå€¼æ²¡æ‰¾åˆ°
+						str="æŒ‰ç©ºæ ¼å¼€å§‹";		                
+            		    watch=new stopwatch(this);//è¿™ä¸ªæ–°ç§’è¡¨ä¸ºä»€ä¹ˆæ”¾åœ¨è¿™ï¼Œä¸åƒ1ï¼Œ2æ¨¡å¼æ”¾åœ¨å‡½æ•°å†…ï¼Œè¿™æ˜¯å› ä¸ºæ¨¡å¼3æ¯ç§»åŠ¨1æ¬¡è°ƒç”¨ä¸€æ¬¡å‡½æ•°ï¼Œè€Œ1ï¼Œ2æ¨¡å¼åªè°ƒç”¨1æ¬¡
+						if(find1||(!finish))//æ‰¾åˆ°ç»ˆç‚¹åæˆ–ä»ç¬¬3ç§æ¨¡å¼å‘ç¬¬1ç§æ¨¡å¼è½¬å˜è¿‡ç¨‹è°œå®«æœªåˆ›å»ºå®Œæˆ
 						{
-							find1=false;//ÕÒÖÕµãºóÒª¼ÌĞøÏÂÒ»ÂÖ£¬ËùÒÔÉèÎª³õÖµÃ»ÕÒµ½
-							finish=true;//ÉèÖÃ½¨³ÉÒÔÍË³ö½¨ÃÕ¹¬(Ä£Ê½3)
-							quickCreateMazePath();//ÖØĞÂ¿ìËÙ´´½¨1¸öĞÂÃÕ¹¬
+							find1=false;//æ‰¾ç»ˆç‚¹åè¦ç»§ç»­ä¸‹ä¸€è½®ï¼Œæ‰€ä»¥è®¾ä¸ºåˆå€¼æ²¡æ‰¾åˆ°
+							finish=true;//è®¾ç½®å»ºæˆä»¥é€€å‡ºå»ºè°œå®«(æ¨¡å¼3)
+							quickCreateMazePath();//é‡æ–°å¿«é€Ÿåˆ›å»º1ä¸ªæ–°è°œå®«
 							repaint();
 						}
-					    currentX=entryX;//µ±Ç°×ø±êÎª³õÊ¼»¯ÎªÆğÊ¼µã×ø±ê
+					    currentX=entryX;//å½“å‰åæ ‡ä¸ºåˆå§‹åŒ–ä¸ºèµ·å§‹ç‚¹åæ ‡
 						currentY=entryY;
 						count=0;
-                        while(!find1&&type==1)//Ã»ÕÒµ½²¢ÇÒÊÇÀàĞÍ1£¬Ò»Ö±Ñ­»·£¬ÈÃËüÍ£ÔÚÕâÀï²»ÈÃËüÔÚrun()ÖĞÑ­»·
+                        while(!find1&&type==1)//æ²¡æ‰¾åˆ°å¹¶ä¸”æ˜¯ç±»å‹1ï¼Œä¸€ç›´å¾ªç¯ï¼Œè®©å®ƒåœåœ¨è¿™é‡Œä¸è®©å®ƒåœ¨run()ä¸­å¾ªç¯
 					    {
 					    }
-						if(find1)//ÕÒµ½ÖÕµãºó
+						if(find1)//æ‰¾åˆ°ç»ˆç‚¹å
 						{
 							setStart(false);
 							setPause(true);
@@ -619,209 +619,209 @@ class migong  extends JPanel implements Runnable
 			}
 		}
 	}
-	public void setStart(boolean isStart)//¸ü¸Ä×´Ì¬
+	public void setStart(boolean isStart)//æ›´æ”¹çŠ¶æ€
 	{
 		this.isStart=isStart;
 	}
-	public void setPause(boolean isPause)//ÉèÖÃÔİÍ£¿ªÊ¼
+	public void setPause(boolean isPause)//è®¾ç½®æš‚åœå¼€å§‹
 	{
 		this.isPause=isPause;
 	}
-	public void setSecond(int second)//¸ü¸ÄËÙ¶È
+	public void setSecond(int second)//æ›´æ”¹é€Ÿåº¦
 	{
 		this.second=second;
 	}
-	public void setPixel(int pixel)//¸ü¸ÄÏñËØ
+	public void setPixel(int pixel)//æ›´æ”¹åƒç´ 
 	{
 		this.pixel=pixel;
 	}
-	public void setType(int type)//¸ü¸ÄÄ£Ê½
+	public void setType(int type)//æ›´æ”¹æ¨¡å¼
 	{
 		this.type=type;
 	}
 	public migong()
 	{
 		try
-		{ //ImageIOÀà°üº¬Ò»Ğ©ÓÃÀ´²éÕÒ ImageReader ºÍ ImageWriter ÒÔ¼°Ö´ĞĞ¼òµ¥±àÂëºÍ½âÂëµÄ¾²Ì¬±ã½İ·½·¨
-		  //ImageIOÀàÃ»ÓĞ¹¹Ôì·½·¨£¬Ã»·¨new³öÀ´£¬¿É¸ù¾İÒ»¸öÊäÈëÁ÷À´²éÕÒÄ³¸öÍ¼Ïñ£¬²¢·µ»ØÍ¼ÏñÀà£¨ÊµÀı»¯£©
+		{ //ImageIOç±»åŒ…å«ä¸€äº›ç”¨æ¥æŸ¥æ‰¾ ImageReader å’Œ ImageWriter ä»¥åŠæ‰§è¡Œç®€å•ç¼–ç å’Œè§£ç çš„é™æ€ä¾¿æ·æ–¹æ³•
+		  //ImageIOç±»æ²¡æœ‰æ„é€ æ–¹æ³•ï¼Œæ²¡æ³•newå‡ºæ¥ï¼Œå¯æ ¹æ®ä¸€ä¸ªè¾“å…¥æµæ¥æŸ¥æ‰¾æŸä¸ªå›¾åƒï¼Œå¹¶è¿”å›å›¾åƒç±»ï¼ˆå®ä¾‹åŒ–ï¼‰
 		  imageStart=ImageIO.read(getClass().getResource("ad.jpg"));
 		  imageEnd=ImageIO.read(getClass().getResource("final.jpg"));		
-		  audio=Applet.newAudioClip(url);//AudioClip ÊÇÓÃÓÚ²¥·ÅÒôÆµ½Ó¿Ú£¬²»ÄÜnew³öÀ´,AppletÀàÓĞÒ»¸ö·½·¨¿ÉÒÔ´Ó¸ø¶¨ URL ´¦»ñÈ¡ÒôÆµ¼ô¼­½Ó¿ÚµÄÊµÀı»¯
+		  audio=Applet.newAudioClip(url);//AudioClip æ˜¯ç”¨äºæ’­æ”¾éŸ³é¢‘æ¥å£ï¼Œä¸èƒ½newå‡ºæ¥,Appletç±»æœ‰ä¸€ä¸ªæ–¹æ³•å¯ä»¥ä»ç»™å®š URL å¤„è·å–éŸ³é¢‘å‰ªè¾‘æ¥å£çš„å®ä¾‹åŒ–
 		}
 		catch (Exception e)
 		{
-            if(imageStart==null||imageEnd==null)//Ö»ÒªÓĞÒ»·ùÍ¼Æ¬¶ÁÈ¡²»³É¹¦
-            	isPictureExit=false;//ÉèÖÃÍ¼Æ¬¶ÁÈ¡²»³É¹¦
+            if(imageStart==null||imageEnd==null)//åªè¦æœ‰ä¸€å¹…å›¾ç‰‡è¯»å–ä¸æˆåŠŸ
+            	isPictureExit=false;//è®¾ç½®å›¾ç‰‡è¯»å–ä¸æˆåŠŸ
 		}
-		quickCreateMazePath();//´´ÔìËæ»úÃÕ¹¬
+		quickCreateMazePath();//åˆ›é€ éšæœºè°œå®«
 		t.start();
 	}
-	public void initMaze()//Ã¿Ò»´Î½¨Á¢ÃÕ¹¬Ç°Òª½øĞĞ³õÊ¼»¯
+	public void initMaze()//æ¯ä¸€æ¬¡å»ºç«‹è°œå®«å‰è¦è¿›è¡Œåˆå§‹åŒ–
 	{
-		mg=new room[row+2][column+2];//ÓÃÊı×é±£´æÃ¿¸öÀàµÄµØÖ·
+		mg=new room[row+2][column+2];//ç”¨æ•°ç»„ä¿å­˜æ¯ä¸ªç±»çš„åœ°å€
 		stack=new Box[row*column];
 		path=new Box[row*column];
 		multiDirect=new Box[row*column];
 		for(i=0;i<row*column;i++)
 		{
-			stack[i]=new Box();//ÊµÀı»¯Õ»ÖĞÃ¿¸öÔªËØ
-			multiDirect[i]=new Box();//ÊµÀı»¯Õ»ÖĞÃ¿¸öÔªËØ
-			multiDirect[i].count=stack[i].count=0;//×ß¹ıµÄ·½ÏòÊıÄ¿³õÊ¼»¯Îª0
-			multiDirect[i].next=stack[i].next=-1;//ÍùÏÂÒ»¸ö·¿¼äµÄ·½Ïò³õÊ¼»¯ÎªÎŞ£¬ÓÃ-1±íÊ¾
-			stack[i].canGo=0;//³õÊ¼»¯×ßÍ¨µÄ·½ÏòÊıÎª0
+			stack[i]=new Box();//å®ä¾‹åŒ–æ ˆä¸­æ¯ä¸ªå…ƒç´ 
+			multiDirect[i]=new Box();//å®ä¾‹åŒ–æ ˆä¸­æ¯ä¸ªå…ƒç´ 
+			multiDirect[i].count=stack[i].count=0;//èµ°è¿‡çš„æ–¹å‘æ•°ç›®åˆå§‹åŒ–ä¸º0
+			multiDirect[i].next=stack[i].next=-1;//å¾€ä¸‹ä¸€ä¸ªæˆ¿é—´çš„æ–¹å‘åˆå§‹åŒ–ä¸ºæ— ï¼Œç”¨-1è¡¨ç¤º
+			stack[i].canGo=0;//åˆå§‹åŒ–èµ°é€šçš„æ–¹å‘æ•°ä¸º0
 			for(j=0;j<4;j++)
-				stack[i].visit[j]=0;//ËÄ¸ö·½Ïò³õÊ¼»¯ÎªÎ´×ß¹ı
-			path[i]=new Box();////ÊµÀı»¯Õ»ÖĞÃ¿¸öÔªËØ
-			path[i].next=-1;//ÍùÏÂÒ»¸ö·¿¼äµÄ·½Ïò³õÊ¼»¯ÎªÎŞ
+				stack[i].visit[j]=0;//å››ä¸ªæ–¹å‘åˆå§‹åŒ–ä¸ºæœªèµ°è¿‡
+			path[i]=new Box();////å®ä¾‹åŒ–æ ˆä¸­æ¯ä¸ªå…ƒç´ 
+			path[i].next=-1;//å¾€ä¸‹ä¸€ä¸ªæˆ¿é—´çš„æ–¹å‘åˆå§‹åŒ–ä¸ºæ— 
 		}
 		for(i=0;i<row+2;i++)
 		{
 			for(j=0;j<column+2;j++)
 			{
-				mg[i][j]=new room();//ÊµÀı»¯Ã¿¸ö·¿¼ä
-				if(i==0||i==row+1||j==0||j==column+1)//³õÊ¼»¯ÓÉ·¿¼ä×é³ÉµÄËÄÃæÎ§Ç½
+				mg[i][j]=new room();//å®ä¾‹åŒ–æ¯ä¸ªæˆ¿é—´
+				if(i==0||i==row+1||j==0||j==column+1)//åˆå§‹åŒ–ç”±æˆ¿é—´ç»„æˆçš„å››é¢å›´å¢™
 					mg[i][j].property=1;
 				else
-					mg[i][j].property=0;//³õÊ¼¿ÕĞÄ·¿¼ä
-				mg[i][j].up=0;//³õÊ¼»¯Ç°Ç½Î´´òÍ¨
-				mg[i][j].down=0;//³õÊ¼»¯ºóÇ½Î´´òÍ¨
-				mg[i][j].left=0;//³õÊ¼»¯×óÇ½Î´´òÍ¨
-				mg[i][j].right=0;//³õÊ¼»¯ÓÒÇ½Î´´òÍ¨
+					mg[i][j].property=0;//åˆå§‹ç©ºå¿ƒæˆ¿é—´
+				mg[i][j].up=0;//åˆå§‹åŒ–å‰å¢™æœªæ‰“é€š
+				mg[i][j].down=0;//åˆå§‹åŒ–åå¢™æœªæ‰“é€š
+				mg[i][j].left=0;//åˆå§‹åŒ–å·¦å¢™æœªæ‰“é€š
+				mg[i][j].right=0;//åˆå§‹åŒ–å³å¢™æœªæ‰“é€š
 			}
 		}
-		count=0;//²½Êı³õÊ¼»¯Îª0
-		top=-1;//Õ»¶¥³õÊ¼»¯Îª-1
-		cost="ÓÃÊ±:0Ãë";
-		//Èë¿Ú×ø±ê³õÊ¼»¯
-		find=false;//³õÊ¼»¯ÎªÎ´ÕÒµ½
-		find1=false;//³õÊ¼»¯ÎªÎ´ÕÒµ½
-		finish=false;//³õÊ¼»¯ÎªÍê³É
-		entrydirect=(int)(4*Math.random());//£¬Èë¿ÚÔÚ¿¿½üÎ§Ç½ÄÄÃæ
+		count=0;//æ­¥æ•°åˆå§‹åŒ–ä¸º0
+		top=-1;//æ ˆé¡¶åˆå§‹åŒ–ä¸º-1
+		cost="ç”¨æ—¶:0ç§’";
+		//å…¥å£åæ ‡åˆå§‹åŒ–
+		find=false;//åˆå§‹åŒ–ä¸ºæœªæ‰¾åˆ°
+		find1=false;//åˆå§‹åŒ–ä¸ºæœªæ‰¾åˆ°
+		finish=false;//åˆå§‹åŒ–ä¸ºå®Œæˆ
+		entrydirect=(int)(4*Math.random());//ï¼Œå…¥å£åœ¨é è¿‘å›´å¢™å“ªé¢
 		switch(entrydirect)
 		{
-			case 0://½ôÌùÎ§Ç½ÓÒÃæ
+			case 0://ç´§è´´å›´å¢™å³é¢
 				entryX=row;
-			    entryY=(int)(column*Math.random())+1;//Èë¿Úºá×ø±êÎªrow£¬×İ×ø±êÎª1-columnµÄËæ»úÊı
+			    entryY=(int)(column*Math.random())+1;//å…¥å£æ¨ªåæ ‡ä¸ºrowï¼Œçºµåæ ‡ä¸º1-columnçš„éšæœºæ•°
 			break;
-			case 1://½ôÌùÎ§Ç½ÏÂÃæ
-				entryX=(int)(row*Math.random())+1;//Èë¿Ú×İ×ø±êcolumn£¬ºá×ø±êÎªÎª1-rowµÄËæ»úÊı
+			case 1://ç´§è´´å›´å¢™ä¸‹é¢
+				entryX=(int)(row*Math.random())+1;//å…¥å£çºµåæ ‡columnï¼Œæ¨ªåæ ‡ä¸ºä¸º1-rowçš„éšæœºæ•°
 			    entryY=column;
 			break;
-			case 2://½ôÌùÎ§Ç½×óÃæ
+			case 2://ç´§è´´å›´å¢™å·¦é¢
 				entryX=1;
-			    entryY=(int)(column*Math.random())+1;//Èë¿Úºá×ø±êÎª1£¬×İ×ø±êÎª1-columnµÄËæ»úÊı
+			    entryY=(int)(column*Math.random())+1;//å…¥å£æ¨ªåæ ‡ä¸º1ï¼Œçºµåæ ‡ä¸º1-columnçš„éšæœºæ•°
 			break;
-			case 3://½ôÌùÎ§Ç½ÉÏÃæ
-				entryX=(int)(row*Math.random())+1;//Èë¿Úºá×ø±êÎª1-rowµÄËæ»úÊı£¬×İ×ø±êÎª1
+			case 3://ç´§è´´å›´å¢™ä¸Šé¢
+				entryX=(int)(row*Math.random())+1;//å…¥å£æ¨ªåæ ‡ä¸º1-rowçš„éšæœºæ•°ï¼Œçºµåæ ‡ä¸º1
 			    entryY=1;
              break;
 		}
-		//³ö¿Ú×ø±ê³õÊ¼»¯
-		exitX=row-entryX+1;//³ö¿ÚÔÚÈë¿ÚÄÄÃæÎ§Ç½µÄÁíÒ»Ãæ£¬ÈçÈë¿ÚÔÚ×óÎ§Ç½£¬Ôò³ö¿ÚÔÚÓÒÎ§Ç½
+		//å‡ºå£åæ ‡åˆå§‹åŒ–
+		exitX=row-entryX+1;//å‡ºå£åœ¨å…¥å£å“ªé¢å›´å¢™çš„å¦ä¸€é¢ï¼Œå¦‚å…¥å£åœ¨å·¦å›´å¢™ï¼Œåˆ™å‡ºå£åœ¨å³å›´å¢™
 		exitY=column-entryY+1;
-		finish=false;//³õÊ¼»¯ÎªÎ´´´½¨Íê³É
-	    //µ½ÕâÊ±ÎªÖ¹ÊÇ¶ÔÃÕ¹¬·¿¼äµÄ³õÊ¼»¯
-		//¶Ô»º³åÍ¼½øĞĞ³õÊ¼»¯
-		createBufferImage();//´´½¨ÃÕ¹¬µÄÈıÕÅ»º³åÍ¼
+		finish=false;//åˆå§‹åŒ–ä¸ºæœªåˆ›å»ºå®Œæˆ
+	    //åˆ°è¿™æ—¶ä¸ºæ­¢æ˜¯å¯¹è°œå®«æˆ¿é—´çš„åˆå§‹åŒ–
+		//å¯¹ç¼“å†²å›¾è¿›è¡Œåˆå§‹åŒ–
+		createBufferImage();//åˆ›å»ºè°œå®«çš„ä¸‰å¼ ç¼“å†²å›¾
 	}
-	public void createMazePath()//ÏÔÊ¾´´½¨ÃÕ¹¬£¬x,yÊÇÃÕ¹¬µÄ³ö·¢µã£¬xi,È´ÊÇÃÕ¹¬µÄ½áÊø×ø±ê
-	{//×¢Òâx,yÎª¶şÎ¬Êı×éµÄºá×ø±ê¡¢×İ×ø±ê£¬µ«xÈ´ÊÇµÚxÁĞyÊÇµÚyĞĞ
-	    initMaze();//³õÊ¼»¯ÃÕ¹¬Êı¾İ
-		watch=new stopwatch(this);//´´½¨1¸öÃë±í
+	public void createMazePath()//æ˜¾ç¤ºåˆ›å»ºè°œå®«ï¼Œx,yæ˜¯è°œå®«çš„å‡ºå‘ç‚¹ï¼Œxi,å´æ˜¯è°œå®«çš„ç»“æŸåæ ‡
+	{//æ³¨æ„x,yä¸ºäºŒç»´æ•°ç»„çš„æ¨ªåæ ‡ã€çºµåæ ‡ï¼Œä½†xå´æ˜¯ç¬¬xåˆ—yæ˜¯ç¬¬yè¡Œ
+	    initMaze();//åˆå§‹åŒ–è°œå®«æ•°æ®
+		watch=new stopwatch(this);//åˆ›å»º1ä¸ªç§’è¡¨
 		t1=new Thread(watch);
-		top=-1;//Õ»¶¥
+		top=-1;//æ ˆé¡¶
 		top1=-1;
-		pathTop=-1;//Õ»¶¥
-		mg[entryX][entryY].property=2;//±íÊ¾ÒÑ×ß¹ı
-		top++;//½«¿ªÊ¼×ø±ê½øÕ»
-		pathTop++;//½«¿ªÊ¼×ø±ê½øÕ»
+		pathTop=-1;//æ ˆé¡¶
+		mg[entryX][entryY].property=2;//è¡¨ç¤ºå·²èµ°è¿‡
+		top++;//å°†å¼€å§‹åæ ‡è¿›æ ˆ
+		pathTop++;//å°†å¼€å§‹åæ ‡è¿›æ ˆ
 		stack[top].i=entryX;
 		stack[top].j=entryY;
 		path[pathTop].i=entryX;
 		path[pathTop].j=entryY;
         count++;
-		t1.start();//Ê±¼äÏß¶¯£¬µ«»¹Î´¼ÆÊ±
-		while(top>-1&&type==3&&!finish)//»¹ÓĞÂ·Ã»×ßÍê£¬Ò»Ö±µ½ÃÕ¹¬ËùÓĞµÄ¸ñ¶¼×ßÍê
+		t1.start();//æ—¶é—´çº¿åŠ¨ï¼Œä½†è¿˜æœªè®¡æ—¶
+		while(top>-1&&type==3&&!finish)//è¿˜æœ‰è·¯æ²¡èµ°å®Œï¼Œä¸€ç›´åˆ°è°œå®«æ‰€æœ‰çš„æ ¼éƒ½èµ°å®Œ
 		{
 			if(!isPause)
 			{
 				if(count==1)
 				{
-					isBegin=true;//°´¿ªÊ¼ºó£¬¼ÆÊ±
+					isBegin=true;//æŒ‰å¼€å§‹åï¼Œè®¡æ—¶
 				}
-				temp=stack[top];//µ±Ç°·¿¼äÎªÕ»¶¥´æ·ÅµÄ·¿¼ä£¬´ÓÕâ³ö·¢
-				if(temp.count<4)//ËÄ¸ö·½Ïò»¹Ã»×ßÍê
+				temp=stack[top];//å½“å‰æˆ¿é—´ä¸ºæ ˆé¡¶å­˜æ”¾çš„æˆ¿é—´ï¼Œä»è¿™å‡ºå‘
+				if(temp.count<4)//å››ä¸ªæ–¹å‘è¿˜æ²¡èµ°å®Œ
 				{
-					direct=(int)(4*Math.random());//Ëæ»ú²úÉú0-3
-					while(temp.visit[direct]==1)//¸Ã·½ÏòÒÑ×ß¹ı£¬¼ÌĞø²úÉúÃ»×ß¹ıµÄ·½Ïò
-					direct=(int)(4*Math.random());//Ëæ»ú²úÉú0-3
-					temp.count++;//×ß¹ıµÄ·½Ïò¸öÊı¼Ó1£¬°üÀ¨×ß²»Í¨µÄ
-					temp.visit[direct]=1;//¸Ã·½ÏòÃ»×ß¹ı£¬ÏÖÔÚ×ßÁË£¬ÉèÎªÒÑ³¬¹ı
+					direct=(int)(4*Math.random());//éšæœºäº§ç”Ÿ0-3
+					while(temp.visit[direct]==1)//è¯¥æ–¹å‘å·²èµ°è¿‡ï¼Œç»§ç»­äº§ç”Ÿæ²¡èµ°è¿‡çš„æ–¹å‘
+					direct=(int)(4*Math.random());//éšæœºäº§ç”Ÿ0-3
+					temp.count++;//èµ°è¿‡çš„æ–¹å‘ä¸ªæ•°åŠ 1ï¼ŒåŒ…æ‹¬èµ°ä¸é€šçš„
+					temp.visit[direct]=1;//è¯¥æ–¹å‘æ²¡èµ°è¿‡ï¼Œç°åœ¨èµ°äº†ï¼Œè®¾ä¸ºå·²è¶…è¿‡
 					switch(direct)
 					{
-						case 0://¹æ¶¨ÏòÓÒ·½Ïò
+						case 0://è§„å®šå‘å³æ–¹å‘
 							i=temp.i;
-							j=temp.j+1;//ÁĞÊı¼Ó1
+							j=temp.j+1;//åˆ—æ•°åŠ 1
 							break;
-						case 1://¹æ¶¨ÏòÏÂ·½Ïò
+						case 1://è§„å®šå‘ä¸‹æ–¹å‘
 							i=temp.i+1;
-							j=temp.j;//ĞĞÊı¼Ó1
+							j=temp.j;//è¡Œæ•°åŠ 1
 							break;
-						case 2://¹æ¶¨Ïò×ó·½Ïò
+						case 2://è§„å®šå‘å·¦æ–¹å‘
 							i=temp.i;
-							j=temp.j-1;//ÁĞÊı¼õ1
+							j=temp.j-1;//åˆ—æ•°å‡1
 							break;
-						case 3://¹æ¶¨ÏòÉÏ·½Ïò
+						case 3://è§„å®šå‘ä¸Šæ–¹å‘
 							i=temp.i-1;
-							j=temp.j;//ĞĞÊı¼õ1
+							j=temp.j;//è¡Œæ•°å‡1
 							break;
 					}
-					if(mg[i][j].property==0)//¸Ã·¿¼ä¿É½ø
+					if(mg[i][j].property==0)//è¯¥æˆ¿é—´å¯è¿›
 					{
 						switch(direct)
 						{
 						case 0:
-							mg[temp.i][temp.j].right=1;//ÏòÓÒ¿É×ß£¬´òÍ¨ÓÒÇ½
-						    mg[i][j].left=1;//¼´µ±Ç°·¿¼äµÄ×óÇ½´òÍ¨
+							mg[temp.i][temp.j].right=1;//å‘å³å¯èµ°ï¼Œæ‰“é€šå³å¢™
+						    mg[i][j].left=1;//å³å½“å‰æˆ¿é—´çš„å·¦å¢™æ‰“é€š
 						break;
 						case 1:
-							mg[temp.i][temp.j].down=1;//ÏòÏÂ¿É×ß£¬´òÍ¨ºóÇ½
-						    mg[i][j].up=1;//¼´µ±Ç°·¿¼äµÄÇ°Ç½´òÍ¨						
+							mg[temp.i][temp.j].down=1;//å‘ä¸‹å¯èµ°ï¼Œæ‰“é€šåå¢™
+						    mg[i][j].up=1;//å³å½“å‰æˆ¿é—´çš„å‰å¢™æ‰“é€š						
 						break;
 						case 2:
-							mg[temp.i][temp.j].left=1;//Ïò×ó¿É×ß£¬´òÍ¨×óÇ½
-						    mg[i][j].right=1;//¼´µ±Ç°·¿¼äµÄÓÒÇ½´òÍ¨										
+							mg[temp.i][temp.j].left=1;//å‘å·¦å¯èµ°ï¼Œæ‰“é€šå·¦å¢™
+						    mg[i][j].right=1;//å³å½“å‰æˆ¿é—´çš„å³å¢™æ‰“é€š										
 						break;
 						case 3:
-							mg[temp.i][temp.j].up=1;//ÏòÉÏ¿É×ß£¬´òÍ¨Ç°Ç½
-						    mg[i][j].down=1;//¼´µ±Ç°·¿¼äµÄºóÇ½´òÍ¨						
+							mg[temp.i][temp.j].up=1;//å‘ä¸Šå¯èµ°ï¼Œæ‰“é€šå‰å¢™
+						    mg[i][j].down=1;//å³å½“å‰æˆ¿é—´çš„åå¢™æ‰“é€š						
 						break;
 						}
-						mg[i][j].property=2;//±íÊ¾ÒÑ×ß¹ı
-						count++;//×ßµÄ²½Êı¼Ó1
-						isPush=true;//ÔÙ½øÕ»
-						step="²½Êı:"+count;
-					    path[pathTop].next=direct;//±£´æÕâ¸ö·¿¼äÍ¨ÍùÏÂÒ»¸ö·¿¼äµÄ·½Ïò
-						pathTop++;//×ß¹ıµÄ·¿¼äÊı¼Ó1						
-						if(stack[top].canGo>0)//ÒÑ×ßÍ¨¹ı1´Î
+						mg[i][j].property=2;//è¡¨ç¤ºå·²èµ°è¿‡
+						count++;//èµ°çš„æ­¥æ•°åŠ 1
+						isPush=true;//å†è¿›æ ˆ
+						step="æ­¥æ•°:"+count;
+					    path[pathTop].next=direct;//ä¿å­˜è¿™ä¸ªæˆ¿é—´é€šå¾€ä¸‹ä¸€ä¸ªæˆ¿é—´çš„æ–¹å‘
+						pathTop++;//èµ°è¿‡çš„æˆ¿é—´æ•°åŠ 1						
+						if(stack[top].canGo>0)//å·²èµ°é€šè¿‡1æ¬¡
 						{
-							top1++;//½øÕ»£¬±£ÁôÕâ¸ö·¿¼äµÚ1´Î×ßÍ¨µÄĞÅÏ¢
+							top1++;//è¿›æ ˆï¼Œä¿ç•™è¿™ä¸ªæˆ¿é—´ç¬¬1æ¬¡èµ°é€šçš„ä¿¡æ¯
 							multiDirect[top1].next=temp.next;
 							multiDirect[top1].i=temp.i;
 							multiDirect[top1].j=temp.j;
 						}
-						stack[top].next=direct;//±£´æÕâ¸ö·¿¼äÍ¨ÍùÏÂÒ»¸ö·¿¼äµÄ·½Ïò
-	                    stack[top].canGo++;//×ßÍ¨µÄ·½Ïò¼Ó1	        
-						top++;//´òÍ¨Ç½ºó£¬½øÕ»£¬±£´æÂ·¾¶
+						stack[top].next=direct;//ä¿å­˜è¿™ä¸ªæˆ¿é—´é€šå¾€ä¸‹ä¸€ä¸ªæˆ¿é—´çš„æ–¹å‘
+	                    stack[top].canGo++;//èµ°é€šçš„æ–¹å‘åŠ 1	        
+						top++;//æ‰“é€šå¢™åï¼Œè¿›æ ˆï¼Œä¿å­˜è·¯å¾„
 						stack[top].i=i;
 						stack[top].j=j;
 						path[pathTop].i=i;
 						path[pathTop].j=j;
 						try
 						{
-						 repaint();	//ÖØ»­Í¼Ïñ£¬¼´¶Ô¸ü¸ÄºóµÄÍ¼ÏñË¢ĞÂ		
-						 if(audio!=null)//Èç¹û¶ÁÈ¡µ½ÁËÒôÆµÎÄ¼ş
-						 audio.play();//²¥·Å²ğÇ½µÄÉùÒô
+						 repaint();	//é‡ç”»å›¾åƒï¼Œå³å¯¹æ›´æ”¹åçš„å›¾åƒåˆ·æ–°		
+						 if(audio!=null)//å¦‚æœè¯»å–åˆ°äº†éŸ³é¢‘æ–‡ä»¶
+						 audio.play();//æ’­æ”¾æ‹†å¢™çš„å£°éŸ³
 						 Thread.sleep(second);
 						}
 						catch (Exception e)
@@ -829,34 +829,34 @@ class migong  extends JPanel implements Runnable
 						}											
 					}
 				}
-				else//ËÄ¸ö·½Ïò¶¼²»¿É×ß
+				else//å››ä¸ªæ–¹å‘éƒ½ä¸å¯èµ°
 				{
-					mg[temp.i][temp.j].property=-1;//¸Ã·¿ÉèÎªÒÑ×ß¹ı£¬µ«²»Í¨
-					top--;//¸Ã·½Ïò²»¿É×ßÍËÕ»£¬·µ¼ÓÉÏÒ»¸ö·¿¼ä	
-					//»ØÍËºó°Ñµ±Ç°·¿¼äµÄ×ø±ê¼ÓÈëpathÂ·¾¶
-					isPush=false;//ÔÙÍËÕ»				
-					frontNext=temp.next;//±£ÁôÍËÕ»Ç°µÄ·½Ïò
-					temp.count=0;//ÏÂÒ»·¿¼ä»¹±£Áô±»Ô­ÏÈµÄÊı¾İ£¬Òª½øĞĞ³õÊ¼»¯£¬ËùÒÔ·½Ïò¸öÊıÖÃÎª0
+					mg[temp.i][temp.j].property=-1;//è¯¥æˆ¿è®¾ä¸ºå·²èµ°è¿‡ï¼Œä½†ä¸é€š
+					top--;//è¯¥æ–¹å‘ä¸å¯èµ°é€€æ ˆï¼Œè¿”åŠ ä¸Šä¸€ä¸ªæˆ¿é—´	
+					//å›é€€åæŠŠå½“å‰æˆ¿é—´çš„åæ ‡åŠ å…¥pathè·¯å¾„
+					isPush=false;//å†é€€æ ˆ				
+					frontNext=temp.next;//ä¿ç•™é€€æ ˆå‰çš„æ–¹å‘
+					temp.count=0;//ä¸‹ä¸€æˆ¿é—´è¿˜ä¿ç•™è¢«åŸå…ˆçš„æ•°æ®ï¼Œè¦è¿›è¡Œåˆå§‹åŒ–ï¼Œæ‰€ä»¥æ–¹å‘ä¸ªæ•°ç½®ä¸º0
 					for(i=0;i<4;i++)
-					temp.visit[i]=0;//ËÄ¸ö·½ÏòÖÃÎªÎ´×ß¹ı
+					temp.visit[i]=0;//å››ä¸ªæ–¹å‘ç½®ä¸ºæœªèµ°è¿‡
 					temp.next=-1;
 					count++;
-					step="²½Êı:"+count;
-					if(top==0)//ÍËÕ»µ½ÁËÆğµãµÄÊ±ºò£¬ËùÓĞÂ·¾¶×ßÍê
+					step="æ­¥æ•°:"+count;
+					if(top==0)//é€€æ ˆåˆ°äº†èµ·ç‚¹çš„æ—¶å€™ï¼Œæ‰€æœ‰è·¯å¾„èµ°å®Œ
 					{
 					  finish=true;
 					}
-					else//ÍË»Øµ½ÖÕµãÇ°
-					{//»ØÍËºó°Ñµ±Ç°·¿¼äµÄ×ø±ê¼ÓÈëpathÂ·¾¶
+					else//é€€å›åˆ°ç»ˆç‚¹å‰
+					{//å›é€€åæŠŠå½“å‰æˆ¿é—´çš„åæ ‡åŠ å…¥pathè·¯å¾„
 						path[pathTop].i=stack[top].i;
 						path[pathTop].j=stack[top].j;
 					}
 					try
 					{
 					 isRepaint3=true;
-					 repaint();	//ÍËÕ»ºóÁ¢¿ÌÖØ»­Í¼Ïñ£¬¼´¶Ô¸ü¸ÄºóµÄÍ¼ÏñË¢ĞÂ,Èç¹ûË¯ÃßºóÔÙË¢ĞÂ£¬ÕâÊ±Ë¯ÃßºóÒÑ½øĞĞÁËÏÂÒ»²½Ì½Ë÷£¬Ïû³ıµÄ¾Í²»ÊÇÔ­±¾ÄÇ´Î£¬Ô­±¾ÄÇ´Î»¹Î´Ïû³ı	
-					 if(audio!=null)//Èç¹û¶ÁÈ¡µ½ÁËÒôÆµÎÄ¼ş
-					 audio.play();//²¥·Å¼ÓÍËµÄÉùÒô
+					 repaint();	//é€€æ ˆåç«‹åˆ»é‡ç”»å›¾åƒï¼Œå³å¯¹æ›´æ”¹åçš„å›¾åƒåˆ·æ–°,å¦‚æœç¡çœ åå†åˆ·æ–°ï¼Œè¿™æ—¶ç¡çœ åå·²è¿›è¡Œäº†ä¸‹ä¸€æ­¥æ¢ç´¢ï¼Œæ¶ˆé™¤çš„å°±ä¸æ˜¯åŸæœ¬é‚£æ¬¡ï¼ŒåŸæœ¬é‚£æ¬¡è¿˜æœªæ¶ˆé™¤	
+					 if(audio!=null)//å¦‚æœè¯»å–åˆ°äº†éŸ³é¢‘æ–‡ä»¶
+					 audio.play();//æ’­æ”¾åŠ é€€çš„å£°éŸ³
 					 Thread.sleep(second);
 					}
 					catch (Exception e)
@@ -866,178 +866,178 @@ class migong  extends JPanel implements Runnable
 			}
 		}
 	}
-	public void quickCreateMazePath()//¿ìËÙ´´½¨ÃÕ¹¬£¬x,yÊÇÃÕ¹¬µÄ³ö·¢µã£¬xi,È´ÊÇÃÕ¹¬µÄ½áÊø×ø±ê
-	{//×¢Òâx,yÎª¶şÎ¬Êı×éµÄºá×ø±ê¡¢×İ×ø±ê£¬µ«xÈ´ÊÇµÚxÁĞyÊÇµÚyĞĞ
-	    initMaze();//³õÊ¼»¯ÃÕ¹¬Êı¾İ
-		top=-1;//Õ»¶¥
-		mg[entryX][entryY].property=2;//±íÊ¾ÒÑ×ß¹ı
-		top++;//½«¿ªÊ¼×ø±ê½øÕ»
+	public void quickCreateMazePath()//å¿«é€Ÿåˆ›å»ºè°œå®«ï¼Œx,yæ˜¯è°œå®«çš„å‡ºå‘ç‚¹ï¼Œxi,å´æ˜¯è°œå®«çš„ç»“æŸåæ ‡
+	{//æ³¨æ„x,yä¸ºäºŒç»´æ•°ç»„çš„æ¨ªåæ ‡ã€çºµåæ ‡ï¼Œä½†xå´æ˜¯ç¬¬xåˆ—yæ˜¯ç¬¬yè¡Œ
+	    initMaze();//åˆå§‹åŒ–è°œå®«æ•°æ®
+		top=-1;//æ ˆé¡¶
+		mg[entryX][entryY].property=2;//è¡¨ç¤ºå·²èµ°è¿‡
+		top++;//å°†å¼€å§‹åæ ‡è¿›æ ˆ
 		stack[top].i=entryX;
 		stack[top].j=entryY;
-		while(top>-1)//»¹ÓĞÂ·Ã»×ßÍê£¬Ò»Ö±µ½ÃÕ¹¬ËùÓĞµÄ¸ñ¶¼×ßÍê
+		while(top>-1)//è¿˜æœ‰è·¯æ²¡èµ°å®Œï¼Œä¸€ç›´åˆ°è°œå®«æ‰€æœ‰çš„æ ¼éƒ½èµ°å®Œ
 		{
-			temp=stack[top];//µ±Ç°·¿¼äÎªÕ»¶¥´æ·ÅµÄ·¿¼ä£¬´ÓÕâ³ö·¢
-			if(temp.count<4)//ËÄ¸ö·½Ïò»¹Ã»×ßÍê
+			temp=stack[top];//å½“å‰æˆ¿é—´ä¸ºæ ˆé¡¶å­˜æ”¾çš„æˆ¿é—´ï¼Œä»è¿™å‡ºå‘
+			if(temp.count<4)//å››ä¸ªæ–¹å‘è¿˜æ²¡èµ°å®Œ
 			{
-				direct=(int)(4*Math.random());//Ëæ»ú²úÉú0-3
-				while(temp.visit[direct]==1)//¸Ã·½ÏòÒÑ×ß¹ı£¬¼ÌĞø²úÉúÃ»×ß¹ıµÄ·½Ïò
-				direct=(int)(4*Math.random());//Ëæ»ú²úÉú0-3
-                temp.count++;//×ß¹ıµÄ·½Ïò¸öÊı¼Ó1
-				temp.visit[direct]=1;//¸Ã·½ÏòÃ»×ß¹ı£¬ÏÖÔÚ×ßÁË£¬ÉèÎªÒÑ³¬¹ı
+				direct=(int)(4*Math.random());//éšæœºäº§ç”Ÿ0-3
+				while(temp.visit[direct]==1)//è¯¥æ–¹å‘å·²èµ°è¿‡ï¼Œç»§ç»­äº§ç”Ÿæ²¡èµ°è¿‡çš„æ–¹å‘
+				direct=(int)(4*Math.random());//éšæœºäº§ç”Ÿ0-3
+                temp.count++;//èµ°è¿‡çš„æ–¹å‘ä¸ªæ•°åŠ 1
+				temp.visit[direct]=1;//è¯¥æ–¹å‘æ²¡èµ°è¿‡ï¼Œç°åœ¨èµ°äº†ï¼Œè®¾ä¸ºå·²è¶…è¿‡
 				switch(direct)
 				{
-					case 0://¹æ¶¨ÏòÓÒ·½Ïò
+					case 0://è§„å®šå‘å³æ–¹å‘
 						i=temp.i;
-						j=temp.j+1;//ÁĞÊı¼Ó1
+						j=temp.j+1;//åˆ—æ•°åŠ 1
 						break;
-					case 1://¹æ¶¨ÏòÏÂ·½Ïò
+					case 1://è§„å®šå‘ä¸‹æ–¹å‘
 						i=temp.i+1;
-						j=temp.j;//ĞĞÊı¼Ó1
+						j=temp.j;//è¡Œæ•°åŠ 1
 						break;
-					case 2://¹æ¶¨Ïò×ó·½Ïò
+					case 2://è§„å®šå‘å·¦æ–¹å‘
 						i=temp.i;
-						j=temp.j-1;//ÁĞÊı¼õ1
+						j=temp.j-1;//åˆ—æ•°å‡1
 						break;
-					case 3://¹æ¶¨ÏòÉÏ·½Ïò
+					case 3://è§„å®šå‘ä¸Šæ–¹å‘
 						i=temp.i-1;
-						j=temp.j;//ĞĞÊı¼õ1
+						j=temp.j;//è¡Œæ•°å‡1
 						break;
 				}
-				if(mg[i][j].property==0)//¸Ã·¿¼ä¿É½ø
+				if(mg[i][j].property==0)//è¯¥æˆ¿é—´å¯è¿›
 				{
 					switch(direct)
 					{
 						case 0:
-							mg[temp.i][temp.j].right=1;//ÏòÓÒ¿É×ß£¬´òÍ¨ÓÒÇ½
-						    mg[i][j].left=1;//¼´µ±Ç°·¿¼äµÄ×óÇ½´òÍ¨
+							mg[temp.i][temp.j].right=1;//å‘å³å¯èµ°ï¼Œæ‰“é€šå³å¢™
+						    mg[i][j].left=1;//å³å½“å‰æˆ¿é—´çš„å·¦å¢™æ‰“é€š
 						break;
 						case 1:
-							mg[temp.i][temp.j].down=1;//ÏòÏÂ¿É×ß£¬´òÍ¨ºóÇ½
-						    mg[i][j].up=1;//¼´µ±Ç°·¿¼äµÄÇ°Ç½´òÍ¨						
+							mg[temp.i][temp.j].down=1;//å‘ä¸‹å¯èµ°ï¼Œæ‰“é€šåå¢™
+						    mg[i][j].up=1;//å³å½“å‰æˆ¿é—´çš„å‰å¢™æ‰“é€š						
 						break;
 						case 2:
-							mg[temp.i][temp.j].left=1;//Ïò×ó¿É×ß£¬´òÍ¨×óÇ½
-						    mg[i][j].right=1;//¼´µ±Ç°·¿¼äµÄÓÒÇ½´òÍ¨										
+							mg[temp.i][temp.j].left=1;//å‘å·¦å¯èµ°ï¼Œæ‰“é€šå·¦å¢™
+						    mg[i][j].right=1;//å³å½“å‰æˆ¿é—´çš„å³å¢™æ‰“é€š										
 						break;
 						case 3:
-							mg[temp.i][temp.j].up=1;//ÏòÉÏ¿É×ß£¬´òÍ¨Ç°Ç½
-						    mg[i][j].down=1;//¼´µ±Ç°·¿¼äµÄºóÇ½´òÍ¨						
+							mg[temp.i][temp.j].up=1;//å‘ä¸Šå¯èµ°ï¼Œæ‰“é€šå‰å¢™
+						    mg[i][j].down=1;//å³å½“å‰æˆ¿é—´çš„åå¢™æ‰“é€š						
 						break;
 					}
-					mg[i][j].property=2;//±íÊ¾ÒÑ×ß¹ı
-					top++;//´òÍ¨Ç½ºó£¬½øÕ»£¬±£´æÂ·¾¶
+					mg[i][j].property=2;//è¡¨ç¤ºå·²èµ°è¿‡
+					top++;//æ‰“é€šå¢™åï¼Œè¿›æ ˆï¼Œä¿å­˜è·¯å¾„
 					stack[top].i=i;
 					stack[top].j=j;
 				}
 			}
-			else//ËÄ¸ö·½Ïò¶¼²»¿É×ß
+			else//å››ä¸ªæ–¹å‘éƒ½ä¸å¯èµ°
 			{
-				mg[temp.i][temp.j].property=-1;//¸Ã·¿ÉèÎªÒÑ×ß¹ı£¬µ«²»Í¨
-				top--;//¸Ã·½Ïò²»¿É×ßÍËÕ»£¬·µ¼ÓÉÏÒ»¸ö·¿¼ä				
-				temp.count=0;//ÏÂÒ»·¿¼ä»¹±£Áô±»Ô­ÏÈµÄÊı¾İ£¬Òª½øĞĞ³õÊ¼»¯£¬ËùÒÔ·½Ïò¸öÊıÖÃÎª0
+				mg[temp.i][temp.j].property=-1;//è¯¥æˆ¿è®¾ä¸ºå·²èµ°è¿‡ï¼Œä½†ä¸é€š
+				top--;//è¯¥æ–¹å‘ä¸å¯èµ°é€€æ ˆï¼Œè¿”åŠ ä¸Šä¸€ä¸ªæˆ¿é—´				
+				temp.count=0;//ä¸‹ä¸€æˆ¿é—´è¿˜ä¿ç•™è¢«åŸå…ˆçš„æ•°æ®ï¼Œè¦è¿›è¡Œåˆå§‹åŒ–ï¼Œæ‰€ä»¥æ–¹å‘ä¸ªæ•°ç½®ä¸º0
 				for(i=0;i<4;i++)
-					temp.visit[i]=0;//ËÄ¸ö·½ÏòÖÃÎªÎ´×ß¹ı
+					temp.visit[i]=0;//å››ä¸ªæ–¹å‘ç½®ä¸ºæœªèµ°è¿‡
 			}
 		}
 		finish=true;
-		pullDownWall();//´´½¨Íê³Éºó²ğÇ½
-		drawStartAndEnd();//»­¿ªÊ¼µãºÍ½áÊøµãÍ¼
+		pullDownWall();//åˆ›å»ºå®Œæˆåæ‹†å¢™
+		drawStartAndEnd();//ç”»å¼€å§‹ç‚¹å’Œç»“æŸç‚¹å›¾
 	}
-	public void computerFindPath(int x,int y,int xi,int yi)//µçÄÔ×Ô¶¯Ñ°ÕÒÂ·¾¶£¬x,yÊÇÃÕ¹¬µÄ³ö·¢µã£¬xi,È´ÊÇÃÕ¹¬µÄ½áÊø×ø±ê
-	{//×¢Òâx,yÎª¶şÎ¬Êı×éµÄºá×ø±ê¡¢×İ×ø±ê£¬µ«xÈ´ÊÇµÚxÁĞyÊÇµÚyĞĞ
-		 int next;//ÏÂÒ»¸ö·½Ïò
-		 count=0;//²½Êı³õÊ¼»¯
-		 boolean canIn;//¿É²»¿ÉÒÔ½øÈë·¿¼äµÄ±ê¼Ç
-		 cost="ÓÃÊ±:0Ãë";
-		 top=-1;//Õ»¶¥³õÊ¼»¯
+	public void computerFindPath(int x,int y,int xi,int yi)//ç”µè„‘è‡ªåŠ¨å¯»æ‰¾è·¯å¾„ï¼Œx,yæ˜¯è°œå®«çš„å‡ºå‘ç‚¹ï¼Œxi,å´æ˜¯è°œå®«çš„ç»“æŸåæ ‡
+	{//æ³¨æ„x,yä¸ºäºŒç»´æ•°ç»„çš„æ¨ªåæ ‡ã€çºµåæ ‡ï¼Œä½†xå´æ˜¯ç¬¬xåˆ—yæ˜¯ç¬¬yè¡Œ
+		 int next;//ä¸‹ä¸€ä¸ªæ–¹å‘
+		 count=0;//æ­¥æ•°åˆå§‹åŒ–
+		 boolean canIn;//å¯ä¸å¯ä»¥è¿›å…¥æˆ¿é—´çš„æ ‡è®°
+		 cost="ç”¨æ—¶:0ç§’";
+		 top=-1;//æ ˆé¡¶åˆå§‹åŒ–
 		 isBegin=false;
 		 watch=new stopwatch(this);
 		 t1=new Thread(watch);
-		for(i=0;i<row*column;i++)//Ïû³ı´´½¨ÃÕ¹¬Ê±Õ»µÄÊı¾İ£¬½øĞĞ³õÊ¼»¯£¬ÔÙ´ÎÓÃĞÂµÄ¿ÕÕ»
+		for(i=0;i<row*column;i++)//æ¶ˆé™¤åˆ›å»ºè°œå®«æ—¶æ ˆçš„æ•°æ®ï¼Œè¿›è¡Œåˆå§‹åŒ–ï¼Œå†æ¬¡ç”¨æ–°çš„ç©ºæ ˆ
 		{
-			stack[i].count=0;//×ß¹ıµÄ·½ÏòÊıÄ¿³õÊ¼»¯Îª0
-			stack[i].next=-1;//ÍùÏÂÒ»¸ö·¿¼äµÄ·½Ïò³õÊ¼»¯ÎªÎŞ£¬ÓÃ-1±íÊ¾
+			stack[i].count=0;//èµ°è¿‡çš„æ–¹å‘æ•°ç›®åˆå§‹åŒ–ä¸º0
+			stack[i].next=-1;//å¾€ä¸‹ä¸€ä¸ªæˆ¿é—´çš„æ–¹å‘åˆå§‹åŒ–ä¸ºæ— ï¼Œç”¨-1è¡¨ç¤º
 			for(j=0;j<4;j++)
-				stack[i].visit[j]=0;//ËÄ¸ö·½Ïò³õÊ¼»¯ÎªÎ´×ß¹ı
+				stack[i].visit[j]=0;//å››ä¸ªæ–¹å‘åˆå§‹åŒ–ä¸ºæœªèµ°è¿‡
 		}
-		for(i=1;i<=row;i++)//Ïû³ı´´½¨ÃÕ¹¬Ê±µÄÂ·¾¶
-		{//±£ÁôÃ¿¸ö·¿¼äËÄÃæÇ½ÊÇ·ñ±»²ğµÄĞÅÏ¢
+		for(i=1;i<=row;i++)//æ¶ˆé™¤åˆ›å»ºè°œå®«æ—¶çš„è·¯å¾„
+		{//ä¿ç•™æ¯ä¸ªæˆ¿é—´å››é¢å¢™æ˜¯å¦è¢«æ‹†çš„ä¿¡æ¯
 			for(j=1;j<=column;j++)
 			{
-				mg[i][j].property=0;//³õÊ¼¿ÕĞÄ·¿¼ä
+				mg[i][j].property=0;//åˆå§‹ç©ºå¿ƒæˆ¿é—´
 			}
 		}
-		mg[x][y].property=2;//±íÊ¾ÒÑ×ß¹ı
-		top++;//½«¿ªÊ¼×ø±ê½øÕ»
+		mg[x][y].property=2;//è¡¨ç¤ºå·²èµ°è¿‡
+		top++;//å°†å¼€å§‹åæ ‡è¿›æ ˆ
 		count++;
 		stack[top].i=x;
 		stack[top].j=y;
 		t1.start();
-		while(top>-1&&!find&&type==2)//»¹ÓĞÂ·Ã»×ßÍê£¬Ò»Ö±µ½ÃÕ¹¬ËùÓĞµÄ¸ñ¶¼×ßÍê»ò×ßµ½ÖÕµã
+		while(top>-1&&!find&&type==2)//è¿˜æœ‰è·¯æ²¡èµ°å®Œï¼Œä¸€ç›´åˆ°è°œå®«æ‰€æœ‰çš„æ ¼éƒ½èµ°å®Œæˆ–èµ°åˆ°ç»ˆç‚¹
 		{
-			if(!isPause)//¿ªÊ¼Ì½Ë÷
+			if(!isPause)//å¼€å§‹æ¢ç´¢
 			{
 					if(count==1)
 					{
 						isBegin=true;
 					}
-					canIn=false;//³õÊ¼»¯Îª²»¿É½ø
-					temp=stack[top];//µ±Ç°·¿¼äÎªÕ»¶¥´æ·ÅµÄ·¿¼ä£¬´ÓÕâ³ö·¢
-					if(temp.i==xi&&temp.j==yi)//µ½´ïÁËÖÕµãÎ»ÖÃ,Êä³öÃÕ¹¬
+					canIn=false;//åˆå§‹åŒ–ä¸ºä¸å¯è¿›
+					temp=stack[top];//å½“å‰æˆ¿é—´ä¸ºæ ˆé¡¶å­˜æ”¾çš„æˆ¿é—´ï¼Œä»è¿™å‡ºå‘
+					if(temp.i==xi&&temp.j==yi)//åˆ°è¾¾äº†ç»ˆç‚¹ä½ç½®,è¾“å‡ºè°œå®«
 					{
 						find=true;
-						repaint();//Ë¢ĞÂÒ»ÏÂÏÔÊ¾¡°°´¿ªÊ¼½øĞĞĞÂÓÎÏ·¡±
-						break;//ÕÒµ½ÖÕµã£¬ÍË³öÑ­»·
+						repaint();//åˆ·æ–°ä¸€ä¸‹æ˜¾ç¤ºâ€œæŒ‰å¼€å§‹è¿›è¡Œæ–°æ¸¸æˆâ€
+						break;//æ‰¾åˆ°ç»ˆç‚¹ï¼Œé€€å‡ºå¾ªç¯
 					}
-					if(temp.count<4)//ËÄ¸ö·½Ïò»¹Ã»×ßÍê
+					if(temp.count<4)//å››ä¸ªæ–¹å‘è¿˜æ²¡èµ°å®Œ
 					{
-						next=temp.next;//È¡³ö¸Ã·¿¼äÒÑ×ß¹ıµÄ·½Ïò
-						next++;//ÍùÏÂÒ»¸ö·¿¼äµÄ·½Ïò×ß
-						temp.next=next;//±£´æµ±Ç°·¿¼ä¸Õ¸Õ×ßµÄÏÂÒ»¸ö·½Ïò
-						temp.count++;//×ß¹ıµÄ·½Ïò¸öÊı¼Ó1
+						next=temp.next;//å–å‡ºè¯¥æˆ¿é—´å·²èµ°è¿‡çš„æ–¹å‘
+						next++;//å¾€ä¸‹ä¸€ä¸ªæˆ¿é—´çš„æ–¹å‘èµ°
+						temp.next=next;//ä¿å­˜å½“å‰æˆ¿é—´åˆšåˆšèµ°çš„ä¸‹ä¸€ä¸ªæ–¹å‘
+						temp.count++;//èµ°è¿‡çš„æ–¹å‘ä¸ªæ•°åŠ 1
 						switch(next)
 						{
 
-							case 0://¹æ¶¨ÏòÓÒ·½Ïò
+							case 0://è§„å®šå‘å³æ–¹å‘
 								i=temp.i;
-								j=temp.j+1;//ÁĞÊı¼Ó1
-								if(mg[temp.i][temp.j].right==1&&mg[i][j].property==0)//ÓÒÇ½±Ú±»²ğÁË£¬ÇÒÏÂÒ»¸ö·¿¼ä¿É×ß
+								j=temp.j+1;//åˆ—æ•°åŠ 1
+								if(mg[temp.i][temp.j].right==1&&mg[i][j].property==0)//å³å¢™å£è¢«æ‹†äº†ï¼Œä¸”ä¸‹ä¸€ä¸ªæˆ¿é—´å¯èµ°
 								canIn=true;
 								break;
-							case 1://¹æ¶¨ÏòÏÂ·½Ïò
+							case 1://è§„å®šå‘ä¸‹æ–¹å‘
 								i=temp.i+1;
-								j=temp.j;//ĞĞÊı¼Ó1
-								if(mg[temp.i][temp.j].down==1&&mg[i][j].property==0)//ÏÂÇ½±Ú±»²ğÁË£¬ÇÒÏÂÒ»¸ö·¿¼ä¿É×ß
+								j=temp.j;//è¡Œæ•°åŠ 1
+								if(mg[temp.i][temp.j].down==1&&mg[i][j].property==0)//ä¸‹å¢™å£è¢«æ‹†äº†ï¼Œä¸”ä¸‹ä¸€ä¸ªæˆ¿é—´å¯èµ°
 								canIn=true;
 								break;
-							case 2://¹æ¶¨Ïò×ó·½Ïò
+							case 2://è§„å®šå‘å·¦æ–¹å‘
 								i=temp.i;
-								j=temp.j-1;//ÁĞÊı¼õ1
-								if(mg[temp.i][temp.j].left==1&&mg[i][j].property==0)//×óÇ½±Ú±»²ğÁË£¬ÇÒÏÂÒ»¸ö·¿¼ä¿É×ß
+								j=temp.j-1;//åˆ—æ•°å‡1
+								if(mg[temp.i][temp.j].left==1&&mg[i][j].property==0)//å·¦å¢™å£è¢«æ‹†äº†ï¼Œä¸”ä¸‹ä¸€ä¸ªæˆ¿é—´å¯èµ°
 								canIn=true;
 								break;
-							case 3://¹æ¶¨ÏòÉÏ·½Ïò
+							case 3://è§„å®šå‘ä¸Šæ–¹å‘
 								i=temp.i-1;
-								j=temp.j;//ĞĞÊı¼õ1
-								if(mg[temp.i][temp.j].up==1&&mg[i][j].property==0)//Ç°Ç½±Ú±»²ğÁË£¬ÇÒÏÂÒ»¸ö·¿¼ä¿É×ß
+								j=temp.j;//è¡Œæ•°å‡1
+								if(mg[temp.i][temp.j].up==1&&mg[i][j].property==0)//å‰å¢™å£è¢«æ‹†äº†ï¼Œä¸”ä¸‹ä¸€ä¸ªæˆ¿é—´å¯èµ°
 								canIn=true;
 								break;
 
 						}
-						if(canIn)//¸Ã·¿¼ä¿É½ø
+						if(canIn)//è¯¥æˆ¿é—´å¯è¿›
 						{
-							mg[i][j].property=2;//ÏÂÒ»¸ö·¿¼äÍ¨¹ı£¬±íÊ¾ÒÑ×ß¹ı
-							top++;//´òÍ¨Ç½ºó£¬½øÕ»£¬±£´æÂ·¾¶
+							mg[i][j].property=2;//ä¸‹ä¸€ä¸ªæˆ¿é—´é€šè¿‡ï¼Œè¡¨ç¤ºå·²èµ°è¿‡
+							top++;//æ‰“é€šå¢™åï¼Œè¿›æ ˆï¼Œä¿å­˜è·¯å¾„
 							count++;
-							isPush=true;//½øÕ»
-						    step="²½Êı:"+count;
+							isPush=true;//è¿›æ ˆ
+						    step="æ­¥æ•°:"+count;
 							stack[top].i=i;
 							stack[top].j=j;
 							try
 							{
-							 repaint();	//ÖØ»­Í¼Ïñ£¬¼´¶Ô¸ü¸ÄºóµÄÍ¼ÏñË¢ĞÂ		
-							 if(audio!=null)//Èç¹û¶ÁÈ¡µ½ÁËÒôÆµÎÄ¼ş
-							 audio.play();//²¥·ÅÒÆ¶¯µÄÉùÒô
+							 repaint();	//é‡ç”»å›¾åƒï¼Œå³å¯¹æ›´æ”¹åçš„å›¾åƒåˆ·æ–°		
+							 if(audio!=null)//å¦‚æœè¯»å–åˆ°äº†éŸ³é¢‘æ–‡ä»¶
+							 audio.play();//æ’­æ”¾ç§»åŠ¨çš„å£°éŸ³
 							 Thread.sleep(second);
 							}
 							catch (Exception e)
@@ -1045,22 +1045,22 @@ class migong  extends JPanel implements Runnable
 							}					
 						}
 					}
-					else//ËÄ¸ö·½Ïò¶¼²»¿É×ß
+					else//å››ä¸ªæ–¹å‘éƒ½ä¸å¯èµ°
 					{
-						mg[temp.i][temp.j].property=-1;//¸Ã·¿ÉèÎªÒÑ×ß¹ı£¬µ«²»Í¨
-						top--;//¸Ã·½Ïò²»¿É×ßÍËÕ»£¬·µ¼ÓÉÏÒ»¸ö·¿¼ä				
-						temp.count=0;//ÏÂÒ»·¿¼ä»¹±£Áô±»Ô­ÏÈµÄÊı¾İ£¬Òª½øĞĞ³õÊ¼»¯£¬ËùÒÔ·½Ïò¸öÊıÖÃÎª0
+						mg[temp.i][temp.j].property=-1;//è¯¥æˆ¿è®¾ä¸ºå·²èµ°è¿‡ï¼Œä½†ä¸é€š
+						top--;//è¯¥æ–¹å‘ä¸å¯èµ°é€€æ ˆï¼Œè¿”åŠ ä¸Šä¸€ä¸ªæˆ¿é—´				
+						temp.count=0;//ä¸‹ä¸€æˆ¿é—´è¿˜ä¿ç•™è¢«åŸå…ˆçš„æ•°æ®ï¼Œè¦è¿›è¡Œåˆå§‹åŒ–ï¼Œæ‰€ä»¥æ–¹å‘ä¸ªæ•°ç½®ä¸º0
 						temp.next=-1;
-						isPush=false;//ÍËÕ»
+						isPush=false;//é€€æ ˆ
 						for(i=0;i<4;i++)
-							temp.visit[i]=0;//ËÄ¸ö·½ÏòÖÃÎªÎ´×ß¹ı
+							temp.visit[i]=0;//å››ä¸ªæ–¹å‘ç½®ä¸ºæœªèµ°è¿‡
 						count++;
-						step="²½Êı:"+count;
+						step="æ­¥æ•°:"+count;
 						try
 						{
-						 repaint();	//ÖØ»­Í¼Ïñ£¬¼´¶Ô¸ü¸ÄºóµÄÍ¼ÏñË¢ĞÂ		
-						 if(audio!=null)//Èç¹û¶ÁÈ¡µ½ÁËÒôÆµÎÄ¼ş
-						 audio.play();//²¥·ÅÒÆ¶¯µÄÉùÒô
+						 repaint();	//é‡ç”»å›¾åƒï¼Œå³å¯¹æ›´æ”¹åçš„å›¾åƒåˆ·æ–°		
+						 if(audio!=null)//å¦‚æœè¯»å–åˆ°äº†éŸ³é¢‘æ–‡ä»¶
+						 audio.play();//æ’­æ”¾ç§»åŠ¨çš„å£°éŸ³
 						 Thread.sleep(second);
 						}
 						catch (Exception e)
@@ -1070,364 +1070,364 @@ class migong  extends JPanel implements Runnable
 				}
 			}
 	}
-    public void peopleFind()//´«¹ıÀ´ÒÆ¶¯µÄ·½Ïò
+    public void peopleFind()//ä¼ è¿‡æ¥ç§»åŠ¨çš„æ–¹å‘
 	{
        if(!isPause)
 		{
-			if(count==0)//countÎª1Ê±
+			if(count==0)//countä¸º1æ—¶
 			{
-				isBegin=true;//±ê¼ÇÒÑ¿ªÊ¼×ßÁË£¬¿ÉÒÔÏÔÊ¾×ßµÄ²½Êı£¬Ê±¼ä
-			    new Thread(watch).start();//¼ÆÊ±Ïß³Ì¿ªÆô
+				isBegin=true;//æ ‡è®°å·²å¼€å§‹èµ°äº†ï¼Œå¯ä»¥æ˜¾ç¤ºèµ°çš„æ­¥æ•°ï¼Œæ—¶é—´
+			    new Thread(watch).start();//è®¡æ—¶çº¿ç¨‹å¼€å¯
 			}
 		   switch(flag)
 			{
 			   case 0:
-				if(mg[currentX][currentY].right==1)//ÓÒÇ½±»²ğ
+				if(mg[currentX][currentY].right==1)//å³å¢™è¢«æ‹†
 				{
-				   returnRoom(0,currentX,currentY);//½«µ±Ç°·¿¼ä²Áµô
-				   currentY++;//ÏòÓÒÒÆ
-				   count++;//²½Êı¼Ó1
-                   step="²½Êı:"+count;
-				   repaint();//Ë¢ĞÂÒÆ¶¯ºó»­Ãæ
-				   if(audio!=null)//Èç¹û¶ÁÈ¡µ½ÁËÒôÆµÎÄ¼ş
-				   audio.play();//²¥·ÅÒÆ¶¯µÄÉùÒô
+				   returnRoom(0,currentX,currentY);//å°†å½“å‰æˆ¿é—´æ“¦æ‰
+				   currentY++;//å‘å³ç§»
+				   count++;//æ­¥æ•°åŠ 1
+                   step="æ­¥æ•°:"+count;
+				   repaint();//åˆ·æ–°ç§»åŠ¨åç”»é¢
+				   if(audio!=null)//å¦‚æœè¯»å–åˆ°äº†éŸ³é¢‘æ–‡ä»¶
+				   audio.play();//æ’­æ”¾ç§»åŠ¨çš„å£°éŸ³
 				}
 				   break;
 			   case 1:
-				if(mg[currentX][currentY].down==1)//ÏÂÇ½±»²ğ
+				if(mg[currentX][currentY].down==1)//ä¸‹å¢™è¢«æ‹†
 				{
-				   returnRoom(0,currentX,currentY);//½«µ±Ç°·¿¼ä²Áµô
-				   currentX++;//ÏòÏÂÒÆ
-				   count++;//²½Êı¼Ó1
-                   step="²½Êı:"+count;
-				   repaint();//Ë¢ĞÂÒÆ¶¯ºó»­Ãæ
-				   if(audio!=null)//Èç¹û¶ÁÈ¡µ½ÁËÒôÆµÎÄ¼ş
-				   audio.play();//²¥·ÅÒÆ¶¯µÄÉùÒô
+				   returnRoom(0,currentX,currentY);//å°†å½“å‰æˆ¿é—´æ“¦æ‰
+				   currentX++;//å‘ä¸‹ç§»
+				   count++;//æ­¥æ•°åŠ 1
+                   step="æ­¥æ•°:"+count;
+				   repaint();//åˆ·æ–°ç§»åŠ¨åç”»é¢
+				   if(audio!=null)//å¦‚æœè¯»å–åˆ°äº†éŸ³é¢‘æ–‡ä»¶
+				   audio.play();//æ’­æ”¾ç§»åŠ¨çš„å£°éŸ³
 				}
 				   break;
 			   case 2:
-				if(mg[currentX][currentY].left==1)//×óÇ½±»²ğ
+				if(mg[currentX][currentY].left==1)//å·¦å¢™è¢«æ‹†
 				{
-				   returnRoom(0,currentX,currentY);//½«µ±Ç°·¿¼ä²Áµô
-				   currentY--;//Ïò×óÒÆ
-				   count++;//²½Êı¼Ó1
-				   step="²½Êı:"+count;
-				   repaint();//Ë¢ĞÂÒÆ¶¯ºó»­Ãæ
-				   if(audio!=null)//Èç¹û¶ÁÈ¡µ½ÁËÒôÆµÎÄ¼ş
-				   audio.play();//²¥·ÅÒÆ¶¯µÄÉùÒô
+				   returnRoom(0,currentX,currentY);//å°†å½“å‰æˆ¿é—´æ“¦æ‰
+				   currentY--;//å‘å·¦ç§»
+				   count++;//æ­¥æ•°åŠ 1
+				   step="æ­¥æ•°:"+count;
+				   repaint();//åˆ·æ–°ç§»åŠ¨åç”»é¢
+				   if(audio!=null)//å¦‚æœè¯»å–åˆ°äº†éŸ³é¢‘æ–‡ä»¶
+				   audio.play();//æ’­æ”¾ç§»åŠ¨çš„å£°éŸ³
 				}
 				   break;
 			   case 3:
-				if(mg[currentX][currentY].up==1)//Ç°Ç½±»²ğ
+				if(mg[currentX][currentY].up==1)//å‰å¢™è¢«æ‹†
 				{
-				   returnRoom(0,currentX,currentY);//½«µ±Ç°·¿¼ä²Áµô
-				   currentX--;//ÏòÇ°ÒÆ
-				   count++;//²½Êı¼Ó1
-				   step="²½Êı:"+count;
-				   repaint();//Ë¢ĞÂÒÆ¶¯ºó»­Ãæ
-				   if(audio!=null)//Èç¹û¶ÁÈ¡µ½ÁËÒôÆµÎÄ¼ş
-				   audio.play();//²¥·ÅÒÆ¶¯µÄÉùÒô
+				   returnRoom(0,currentX,currentY);//å°†å½“å‰æˆ¿é—´æ“¦æ‰
+				   currentX--;//å‘å‰ç§»
+				   count++;//æ­¥æ•°åŠ 1
+				   step="æ­¥æ•°:"+count;
+				   repaint();//åˆ·æ–°ç§»åŠ¨åç”»é¢
+				   if(audio!=null)//å¦‚æœè¯»å–åˆ°äº†éŸ³é¢‘æ–‡ä»¶
+				   audio.play();//æ’­æ”¾ç§»åŠ¨çš„å£°éŸ³
 				}
 				   break;
 			}
 			if(currentX==exitX&&currentY==exitY)
 			{
 				find1=true;
-                JOptionPane.showMessageDialog(null,"¹§Ï²£¬Äãµ½´ïÁËÖÕµã","¹ı¹ØÁË",JOptionPane.OK_CANCEL_OPTION);
+                JOptionPane.showMessageDialog(null,"æ­å–œï¼Œä½ åˆ°è¾¾äº†ç»ˆç‚¹","è¿‡å…³äº†",JOptionPane.OK_CANCEL_OPTION);
 			}
 		}
 	}
-    public void createBufferImage()//´´½¨ÃÕ¹¬µÄÈıÕÅ»º³åÍ¼
+    public void createBufferImage()//åˆ›å»ºè°œå®«çš„ä¸‰å¼ ç¼“å†²å›¾
     {
-    	//¶Ô»º³åÍ¼½øĞĞ³õÊ¼»¯
- 	    g1[0]=image1.createGraphics();//´ÓÕâ¸ö»º³åÍ¼ÖĞ»ñµÃÒ»Ö§»­±Ê
-        g1[1]=image2.createGraphics();//´ÓÕâ¸ö»º³åÍ¼ÖĞ»ñµÃÒ»Ö§»­±Ê
-        g1[2]=image3.createGraphics();//´ÓÕâ¸ö»º³åÍ¼ÖĞ»ñµÃÒ»Ö§»­±Ê
-        for(k=0;k<3;k++)//³õÊ¼»¯ÈıÕÅ»º³åÍ¼
+    	//å¯¹ç¼“å†²å›¾è¿›è¡Œåˆå§‹åŒ–
+ 	    g1[0]=image1.createGraphics();//ä»è¿™ä¸ªç¼“å†²å›¾ä¸­è·å¾—ä¸€æ”¯ç”»ç¬”
+        g1[1]=image2.createGraphics();//ä»è¿™ä¸ªç¼“å†²å›¾ä¸­è·å¾—ä¸€æ”¯ç”»ç¬”
+        g1[2]=image3.createGraphics();//ä»è¿™ä¸ªç¼“å†²å›¾ä¸­è·å¾—ä¸€æ”¯ç”»ç¬”
+        for(k=0;k<3;k++)//åˆå§‹åŒ–ä¸‰å¼ ç¼“å†²å›¾
  		{
-         	g1[k].setColor(mazeBackGroundColor);//ÉèÖÃ»­±ÊÃÕ¹¬±³¾°É«
- 			g1[k].fillRect(0,0,1300,730);//½«Õû¸ö»º³åÍ¼ÉèÖÃÎª±³¾°ºÚÉ«
- 			g1[k].setColor(wallColor);//ÉèÖÃ»­±ÊÇ½±ÚÉ«£¬ÓÃÓÚ»­Ç½±Ú
- 			//»­±ß¿ò£¬¼´ÍâÇ½²»¿É²ğ£¬×óÉÏ¶¥µã20£¬20£¬×óÏÂ¶¥µã20£¬pixel*row+20£¬ÓÒÉÏ¶¥µã
- 			//pixel*column+20£¬20£¬ÓÒÏÂ¶¥µãpixel*column+20£¬20+pixel*row
- 			g1[k].drawLine(20,20,pixel*column+20,20);//ÉÏ±ß¿ò
- 			g1[k].drawLine(20,pixel*row+20,pixel*column+20,20+pixel*row);//ÏÂ±ß¿ò
- 			g1[k].drawLine(20,20,20,pixel*row+20);//×ó±ß¿ò
- 			g1[k].drawLine(pixel*column+20,20,pixel*column+20,pixel*row+20);//ÓÒ±ß¿ò
- 			//»­Íø¸ñÏß,ÄÚÇ½£¬¿É²ğ
- 			//ºáÍø¸ñ
- 			for(i=1;i<row;i++)//×İ×ø±ê
+         	g1[k].setColor(mazeBackGroundColor);//è®¾ç½®ç”»ç¬”è°œå®«èƒŒæ™¯è‰²
+ 			g1[k].fillRect(0,0,1300,730);//å°†æ•´ä¸ªç¼“å†²å›¾è®¾ç½®ä¸ºèƒŒæ™¯é»‘è‰²
+ 			g1[k].setColor(wallColor);//è®¾ç½®ç”»ç¬”å¢™å£è‰²ï¼Œç”¨äºç”»å¢™å£
+ 			//ç”»è¾¹æ¡†ï¼Œå³å¤–å¢™ä¸å¯æ‹†ï¼Œå·¦ä¸Šé¡¶ç‚¹20ï¼Œ20ï¼Œå·¦ä¸‹é¡¶ç‚¹20ï¼Œpixel*row+20ï¼Œå³ä¸Šé¡¶ç‚¹
+ 			//pixel*column+20ï¼Œ20ï¼Œå³ä¸‹é¡¶ç‚¹pixel*column+20ï¼Œ20+pixel*row
+ 			g1[k].drawLine(20,20,pixel*column+20,20);//ä¸Šè¾¹æ¡†
+ 			g1[k].drawLine(20,pixel*row+20,pixel*column+20,20+pixel*row);//ä¸‹è¾¹æ¡†
+ 			g1[k].drawLine(20,20,20,pixel*row+20);//å·¦è¾¹æ¡†
+ 			g1[k].drawLine(pixel*column+20,20,pixel*column+20,pixel*row+20);//å³è¾¹æ¡†
+ 			//ç”»ç½‘æ ¼çº¿,å†…å¢™ï¼Œå¯æ‹†
+ 			//æ¨ªç½‘æ ¼
+ 			for(i=1;i<row;i++)//çºµåæ ‡
  			{
  					g1[k].drawLine(20,i*pixel+20,pixel*column+20,i*pixel+20);
  			}
- 			//×İÍø¸ñ
- 			for(i=1;i<column;i++)//ºá×ø±ê
+ 			//çºµç½‘æ ¼
+ 			for(i=1;i<column;i++)//æ¨ªåæ ‡
  			{
  					g1[k].drawLine(i*pixel+20,20,i*pixel+20,pixel*row+20);
  			}
  		} 
     }
-    public void setNewColorBufferImage()//ÔÚÑÕÉ«¸Ä±äºó£¬ÉèÖÃĞÂÑÕÉ«µÄ»º³åÍ¼£¬ÃÕ¹¬²»¸Ä±ä
+    public void setNewColorBufferImage()//åœ¨é¢œè‰²æ”¹å˜åï¼Œè®¾ç½®æ–°é¢œè‰²çš„ç¼“å†²å›¾ï¼Œè°œå®«ä¸æ”¹å˜
     {
-    	createBufferImage();//´´½¨ÃÕ¹¬µÄÈıÕÅ»º³åÍ¼
-    	if(type==3)//Èç¹ûÊÇµÚ3ÖÖÄ£Ê½£¬ÉèÖÃÎª¿É²ğ
+    	createBufferImage();//åˆ›å»ºè°œå®«çš„ä¸‰å¼ ç¼“å†²å›¾
+    	if(type==3)//å¦‚æœæ˜¯ç¬¬3ç§æ¨¡å¼ï¼Œè®¾ç½®ä¸ºå¯æ‹†
     		isPull=true;
-    	pullDownWall();//²ğÇ½
-    	isPull=false;//²ğÍêºó£¬ÎªÏÂÒ»ÂÖ½øĞĞ´´½¨½øĞĞ³õÊ¼»¯£¬ÉèÖÃÎª²»¿É²ğ
-    	if(type==1)//Ä£Ê½1,ÎŞÂ·Ïß
+    	pullDownWall();//æ‹†å¢™
+    	isPull=false;//æ‹†å®Œåï¼Œä¸ºä¸‹ä¸€è½®è¿›è¡Œåˆ›å»ºè¿›è¡Œåˆå§‹åŒ–ï¼Œè®¾ç½®ä¸ºä¸å¯æ‹†
+    	if(type==1)//æ¨¡å¼1,æ— è·¯çº¿
     	{
-			if(pixel>=60&&isPictureExit)//Èç¹û·¿¼äÏñËØ²»Ğ¡ÓÚ60²¢ÇÒÍ¼Æ¬¶¼´æÔÚ£¬»­Í¼Æ¬
+			if(pixel>=60&&isPictureExit)//å¦‚æœæˆ¿é—´åƒç´ ä¸å°äº60å¹¶ä¸”å›¾ç‰‡éƒ½å­˜åœ¨ï¼Œç”»å›¾ç‰‡
 			{
-				g1[0].drawImage(imageStart,20+(int)((pixel-60)/2)+(currentY-1)*pixel,20+(int)((pixel-60)/2)+(currentX-1)*pixel,this);//»­ÈËÎïÍ¼±ê£¬·ÅÔÚµ±Ç°×ø±ê
-				//»­ÖÕµãÍ¼Æ¬
-				g1[0].drawImage(imageEnd,20+(int)((pixel-60)/2)+(exitY-1)*pixel,20+(int)((pixel-60)/2)+(exitX-1)*pixel,this);//»­½áÊøÍ¼±ê£¬·ÅÔÚ½áÊø×ø±ê
+				g1[0].drawImage(imageStart,20+(int)((pixel-60)/2)+(currentY-1)*pixel,20+(int)((pixel-60)/2)+(currentX-1)*pixel,this);//ç”»äººç‰©å›¾æ ‡ï¼Œæ”¾åœ¨å½“å‰åæ ‡
+				//ç”»ç»ˆç‚¹å›¾ç‰‡
+				g1[0].drawImage(imageEnd,20+(int)((pixel-60)/2)+(exitY-1)*pixel,20+(int)((pixel-60)/2)+(exitX-1)*pixel,this);//ç”»ç»“æŸå›¾æ ‡ï¼Œæ”¾åœ¨ç»“æŸåæ ‡
 			}
-			else//·ñÔò£¬½áÊøµã»­¿ªÊ¼µãÑÕÉ«Õı·½ĞÎ´ú±íµ±Ç°·¿¼äÎ»ÖÃ£¬½áÊøÉ«Õı·½ĞÎ´ú±í½áÊøÎ»ÖÃ
+			else//å¦åˆ™ï¼Œç»“æŸç‚¹ç”»å¼€å§‹ç‚¹é¢œè‰²æ­£æ–¹å½¢ä»£è¡¨å½“å‰æˆ¿é—´ä½ç½®ï¼Œç»“æŸè‰²æ­£æ–¹å½¢ä»£è¡¨ç»“æŸä½ç½®
 			{
-				g1[0].setColor(startColor);//ÉèÖÃ»­±ÊÎª¿ªÊ¼µãÑÕÉ«
+				g1[0].setColor(startColor);//è®¾ç½®ç”»ç¬”ä¸ºå¼€å§‹ç‚¹é¢œè‰²
 				g1[0].fillRect(20+(currentY-1)*pixel,20+(currentX-1)*pixel,pixel,pixel);
-				g1[0].setColor(endColor);//ÉèÖÃ»­±ÊÎª½áÊøµãÑÕÉ«
-				//»­½áÊøµãÑÕÉ«Õı·½ĞÎ¿ª×÷Îª½áÊøµã
+				g1[0].setColor(endColor);//è®¾ç½®ç”»ç¬”ä¸ºç»“æŸç‚¹é¢œè‰²
+				//ç”»ç»“æŸç‚¹é¢œè‰²æ­£æ–¹å½¢å¼€ä½œä¸ºç»“æŸç‚¹
 				g1[0].fillRect(20+(exitY-1)*pixel,20+(exitX-1)*pixel,pixel,pixel);						
 			}
     	}
-    	if(type==2)//Ä£Ê½2,ÏÈ»­Â·Ïß£¬ºó»­µ±Ç°µãºÍ½áÊøµã
+    	if(type==2)//æ¨¡å¼2,å…ˆç”»è·¯çº¿ï¼Œåç”»å½“å‰ç‚¹å’Œç»“æŸç‚¹
     	{
-    		g1[1].setColor(routeColor);//ÉèÖÃ»­±ÊÂ·ÏßÑÕÉ«
-			for( k=0;k<top;k++)//×ß¹ıµÄÂ·Ïß
+    		g1[1].setColor(routeColor);//è®¾ç½®ç”»ç¬”è·¯çº¿é¢œè‰²
+			for( k=0;k<top;k++)//èµ°è¿‡çš„è·¯çº¿
 			{
-				i=stack[k].i;//Â·¾¶ÖĞÈ¡³öµ±Ç°ÏÂ±ê¶ÔÓ¦·¿¼äµÄ×ø±ê
+				i=stack[k].i;//è·¯å¾„ä¸­å–å‡ºå½“å‰ä¸‹æ ‡å¯¹åº”æˆ¿é—´çš„åæ ‡
 				j=stack[k].j;
-				switch(stack[k].next)//·½Ïò   £¨20£¬20£©ÊÇÃÕ¹¬×óÉÏ½ÇµÄ×ø±ê£¬ËùÒÔÃ¿¸öºá×ø±ê¼Ó20£¬×İ×ø±ê¼Ó20£¬i-1,j-1,ÊÇÇ°Ãæi-1¸ö·¿¼äºÍ×ó±ßj-1¸ö·¿¼äµÄ¿í¶È£¬ÔÙ¼ÓÉÏÕâ¸ö·¿¼äÖĞĞÄµÄ¿í¶È(int)(pixel/2)
-				{/*×¢Òâ£ºiĞĞjÁĞµÄ·½¿éÎªmg[j][i],µ«ºá×ø±êÎªi,×İ×ø±êÎªj
-				»­Â·Ïß£¬ÏßÂ·Îª´Óµ±Ç°·¿¼äµÄÖĞĞÄµ½ÏÂÒ»¸ö·¿¼äµÄÖĞĞÄ£¬µ±Ç°·¿¼äÖĞĞÄÎª((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);
-				×ó±ß·¿¼äÖĞĞÄµã×ø±ê((j-2)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20)
-				ÓÒ±ß·¿¼äÖĞĞÄµã×ø±ê(j*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20)
-				Ç°±ß·¿¼äÖĞĞÄµã×ø±ê((j-1)*pixel+(int)(pixel/2)+20,(i-2)*pixel+(int)(pixel/2)+20)
-				ºó±ß·¿¼äÖĞĞÄµã×ø±ê((j-1)*pixel+(int)(pixel/2)+20,i*pixel+(int)(pixel/2)+20)
+				switch(stack[k].next)//æ–¹å‘   ï¼ˆ20ï¼Œ20ï¼‰æ˜¯è°œå®«å·¦ä¸Šè§’çš„åæ ‡ï¼Œæ‰€ä»¥æ¯ä¸ªæ¨ªåæ ‡åŠ 20ï¼Œçºµåæ ‡åŠ 20ï¼Œi-1,j-1,æ˜¯å‰é¢i-1ä¸ªæˆ¿é—´å’Œå·¦è¾¹j-1ä¸ªæˆ¿é—´çš„å®½åº¦ï¼Œå†åŠ ä¸Šè¿™ä¸ªæˆ¿é—´ä¸­å¿ƒçš„å®½åº¦(int)(pixel/2)
+				{/*æ³¨æ„ï¼šiè¡Œjåˆ—çš„æ–¹å—ä¸ºmg[j][i],ä½†æ¨ªåæ ‡ä¸ºi,çºµåæ ‡ä¸ºj
+				ç”»è·¯çº¿ï¼Œçº¿è·¯ä¸ºä»å½“å‰æˆ¿é—´çš„ä¸­å¿ƒåˆ°ä¸‹ä¸€ä¸ªæˆ¿é—´çš„ä¸­å¿ƒï¼Œå½“å‰æˆ¿é—´ä¸­å¿ƒä¸º((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);
+				å·¦è¾¹æˆ¿é—´ä¸­å¿ƒç‚¹åæ ‡((j-2)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20)
+				å³è¾¹æˆ¿é—´ä¸­å¿ƒç‚¹åæ ‡(j*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20)
+				å‰è¾¹æˆ¿é—´ä¸­å¿ƒç‚¹åæ ‡((j-1)*pixel+(int)(pixel/2)+20,(i-2)*pixel+(int)(pixel/2)+20)
+				åè¾¹æˆ¿é—´ä¸­å¿ƒç‚¹åæ ‡((j-1)*pixel+(int)(pixel/2)+20,i*pixel+(int)(pixel/2)+20)
 				*/						
-					case 0:g1[1].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,j*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍùÓÒ·½ÏòÓÒ·¿¼ä
-					case 3:g1[1].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,(i-2)*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍùÉÏ·½ÏòÇ°Ãæ·¿¼ä
-					case 1:g1[1].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,i*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍùÏÂ·½ÏòºóÃæ·¿¼ä
-					case 2:g1[1].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-2)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍù×ó·½Ïò×ó±ß·¿¼ä
+					case 0:g1[1].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,j*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€å³æ–¹å‘å³æˆ¿é—´
+					case 3:g1[1].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,(i-2)*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€ä¸Šæ–¹å‘å‰é¢æˆ¿é—´
+					case 1:g1[1].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,i*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€ä¸‹æ–¹å‘åé¢æˆ¿é—´
+					case 2:g1[1].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-2)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€å·¦æ–¹å‘å·¦è¾¹æˆ¿é—´
 					default:break;
 				}
 			}
-			if(pixel>=60&&isPictureExit)//Èç¹û·¿¼äÏñËØ²»Ğ¡ÓÚ60²¢ÇÒÍ¼Æ¬¶¼´æÔÚ£¬»­Í¼Æ¬ÔÚµ±Ç°Î»ÖÃ»­ÈËÎïÍ¼
+			if(pixel>=60&&isPictureExit)//å¦‚æœæˆ¿é—´åƒç´ ä¸å°äº60å¹¶ä¸”å›¾ç‰‡éƒ½å­˜åœ¨ï¼Œç”»å›¾ç‰‡åœ¨å½“å‰ä½ç½®ç”»äººç‰©å›¾
 			{
 				g1[1].drawImage(imageStart,(stack[top].j-1)*pixel+20+(int)((pixel-60)/2),(stack[top].i-1)*pixel+20+(int)((pixel-60)/2),this);
-				g1[1].drawImage(imageEnd,20+(int)((pixel-60)/2)+(exitY-1)*pixel,20+(int)((pixel-60)/2)+(exitX-1)*pixel,this);//»­½áÊøÍ¼±ê£¬·ÅÔÚ½áÊø×ø±ê			
+				g1[1].drawImage(imageEnd,20+(int)((pixel-60)/2)+(exitY-1)*pixel,20+(int)((pixel-60)/2)+(exitX-1)*pixel,this);//ç”»ç»“æŸå›¾æ ‡ï¼Œæ”¾åœ¨ç»“æŸåæ ‡			
 			}
-			else//·ñÔò£¬½áÊøµã»­¿ªÊ¼µãÑÕÉ«Õı·½ĞÎ´ú±íµ±Ç°·¿¼äÎ»ÖÃ£¬½áÊøÉ«Õı·½ĞÎ´ú±í½áÊøÎ»ÖÃ
+			else//å¦åˆ™ï¼Œç»“æŸç‚¹ç”»å¼€å§‹ç‚¹é¢œè‰²æ­£æ–¹å½¢ä»£è¡¨å½“å‰æˆ¿é—´ä½ç½®ï¼Œç»“æŸè‰²æ­£æ–¹å½¢ä»£è¡¨ç»“æŸä½ç½®
 			{
 				g1[1].setColor(startColor);
 				g1[1].fillRect(20+(stack[top].j-1)*pixel,20+(stack[top].i-1)*pixel,pixel,pixel);
-				g1[1].setColor(endColor);//ÉèÖÃ»­±ÊÎª½áÊøµãÑÕÉ«
-				//»­½áÊøµãÑÕÉ«Õı·½ĞÎ¿ª×÷Îª½áÊøaµã
+				g1[1].setColor(endColor);//è®¾ç½®ç”»ç¬”ä¸ºç»“æŸç‚¹é¢œè‰²
+				//ç”»ç»“æŸç‚¹é¢œè‰²æ­£æ–¹å½¢å¼€ä½œä¸ºç»“æŸaç‚¹
 				g1[1].fillRect(20+(exitY-1)*pixel,20+(exitX-1)*pixel,pixel,pixel);						
 			}	
     	}
-       	if(type==3)//Ä£Ê½3,ÏÈ»­Â·Ïß£¬ºó»­µ±Ç°µãºÍ½áÊøµã
+       	if(type==3)//æ¨¡å¼3,å…ˆç”»è·¯çº¿ï¼Œåç”»å½“å‰ç‚¹å’Œç»“æŸç‚¹
     	{
-       		g1[2].setColor(routeColor);//ÉèÖÃ»­±ÊÂ·ÏßÑÕÉ«
+       		g1[2].setColor(routeColor);//è®¾ç½®ç”»ç¬”è·¯çº¿é¢œè‰²
        		System.out.printf("pathtop=%d\n",pathTop);
-			for( k=0;k<pathTop;k++)//×ß¹ıµÄÂ·Ïß
+			for( k=0;k<pathTop;k++)//èµ°è¿‡çš„è·¯çº¿
 			{
-				i=path[k].i;//Â·¾¶ÖĞÈ¡³öµ±Ç°ÏÂ±ê¶ÔÓ¦·¿¼äµÄ×ø±ê
+				i=path[k].i;//è·¯å¾„ä¸­å–å‡ºå½“å‰ä¸‹æ ‡å¯¹åº”æˆ¿é—´çš„åæ ‡
 				j=path[k].j;
 				System.out.printf("i=%d,j=%d,next=%d\n",i,j,path[k].next);
-				switch(path[k].next)//·½Ïò  
+				switch(path[k].next)//æ–¹å‘  
 				{
-					case 0:g1[2].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,j*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍùÓÒ·½ÏòÓÒ·¿¼ä
-					case 3:g1[2].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,(i-2)*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍùÉÏ·½ÏòÇ°Ãæ·¿¼ä
-					case 1:g1[2].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,i*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍùÏÂ·½ÏòºóÃæ·¿¼ä
-					case 2:g1[2].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-2)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍù×ó·½Ïò×ó±ß·¿¼ä
+					case 0:g1[2].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,j*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€å³æ–¹å‘å³æˆ¿é—´
+					case 3:g1[2].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,(i-2)*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€ä¸Šæ–¹å‘å‰é¢æˆ¿é—´
+					case 1:g1[2].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,i*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€ä¸‹æ–¹å‘åé¢æˆ¿é—´
+					case 2:g1[2].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-2)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€å·¦æ–¹å‘å·¦è¾¹æˆ¿é—´
 					default:break;
 				}
 			}  	
-			if(pixel>=60&&isPictureExit)//Èç¹û·¿¼äÏñËØ²»Ğ¡ÓÚ60²¢ÇÒÍ¼Æ¬¶¼´æÔÚ£¬»­Í¼Æ¬ÔÚµ±Ç°Î»ÖÃ»­ÈËÎïÍ¼
+			if(pixel>=60&&isPictureExit)//å¦‚æœæˆ¿é—´åƒç´ ä¸å°äº60å¹¶ä¸”å›¾ç‰‡éƒ½å­˜åœ¨ï¼Œç”»å›¾ç‰‡åœ¨å½“å‰ä½ç½®ç”»äººç‰©å›¾
 			{
 				g1[2].drawImage(imageStart,(stack[top].j-1)*pixel+20+(int)((pixel-60)/2),(stack[top].i-1)*pixel+20+(int)((pixel-60)/2),this);
 			}
-			else//·ñÔò£¬½áÊøµã»­¿ªÊ¼µãÑÕÉ«Õı·½ĞÎ´ú±íµ±Ç°·¿¼äÎ»ÖÃ
+			else//å¦åˆ™ï¼Œç»“æŸç‚¹ç”»å¼€å§‹ç‚¹é¢œè‰²æ­£æ–¹å½¢ä»£è¡¨å½“å‰æˆ¿é—´ä½ç½®
 			{
 				g1[2].setColor(Color.white);
 				g1[2].fillRect(20+(stack[top].j-1)*pixel,20+(stack[top].i-1)*pixel,pixel,pixel);
 			}	
     	}
     }
-	public void pullDownWall()//²ğÇ½
+	public void pullDownWall()//æ‹†å¢™
 	{
 		for(int k=0;k<3;k++)
 		{
-			if(k<2||isPull)//ÃÕ¹¬´´½¨Íê³ÉºóÇ°2·ù»º³åÍ¼½øĞĞ²ğÇ½£¬µÚ3·ù»º³åÍ¼»¹²»ÄÜ²ğ£¬ÒòÎªÒª°´ÁË¿ªÊ¼ºó²Å½øĞĞÏÔÊ¾²ğµÄ¹ı³Ì,»òÑÕÉ«¸Ä±äÖØ½¨»º³åÍ¼µÄÊ±ºò²Å²ğ
+			if(k<2||isPull)//è°œå®«åˆ›å»ºå®Œæˆåå‰2å¹…ç¼“å†²å›¾è¿›è¡Œæ‹†å¢™ï¼Œç¬¬3å¹…ç¼“å†²å›¾è¿˜ä¸èƒ½æ‹†ï¼Œå› ä¸ºè¦æŒ‰äº†å¼€å§‹åæ‰è¿›è¡Œæ˜¾ç¤ºæ‹†çš„è¿‡ç¨‹,æˆ–é¢œè‰²æ”¹å˜é‡å»ºç¼“å†²å›¾çš„æ—¶å€™æ‰æ‹†
 			{
-				for(i=row;i>=1;i--)//ÎªºÎÒª´Ó×îºóÒ»ĞĞµÄ·¿¼ä²ğÆğ¶ø²»´ÓµÚ1ĞĞ²ğÆğ£¬ÕâÊÇÒòÎª
+				for(i=row;i>=1;i--)//ä¸ºä½•è¦ä»æœ€åä¸€è¡Œçš„æˆ¿é—´æ‹†èµ·è€Œä¸ä»ç¬¬1è¡Œæ‹†èµ·ï¼Œè¿™æ˜¯å› ä¸º
 				{
 				/*
-				  ¾­¹ıÔÚ·Å´ó¾³ÏÂ¹Û²ì·¢ÏÖ£¬Ïß¶ÎÒ²ÓĞ¿í£¬²»ÊÇºÜ´ó£¬¼ÙÉè»­Ò»¸ö60ÏñÕı·½ĞÎºÍ»­Ò»Ìõ60ÏñËØ³¤ÏßÏß¶Î£¬·¢ÏÖÏß¶ÎµÄ³¤¶È
-		         ±ÈÕı·½ĞÎµÄ³¤¶È³¤£¬¶à³öµÄ³¤¶ÈÇ¡ºÃÊÇÏß¶ÎµÄÎ¢Ğ¡¿í¶È£¬´óÔ¼0.5×óÓÒ£¬ËùÒÔÓÃÏß¶ÎÆ´µÄÕı·½ĞÎ(ÂÌÉ«)±ÈÖ±½Ó»­µÄÕı·½ĞÎ(ºÚÉ«)Òª´ó1£¬
-		         Òò´ËÒòºÚÉ«Õı·½ĞÎ½øĞĞ¸²¸ÇÂÌÉ«Õı·½ĞÎÊ±²»ÄÜÍêÈ«¸²¸Ç£¬»¹Ê£ÏÂ2Ìõ¿í¶ÈÎª0.5³¤¶ÈÎª60Îª³¤·½ĞÎÎ´¸²¸Ç£¬Õâ¿í¶È¸úÏß¶Î¿í¶ÈÒ»Ñù
-		         ¿ÉÒÔÕâÃ´Ëµ¼ÙÉè»­1¸öºÚÉ«Õı·½ĞÎ60ÏñËØ£¬»­Í¬ÏñËØµÄÏß¶ÎÈ´ÓĞ60.5ÏñËØ£¬ÒòÎªºÜĞ¡Äê²»³ö²î±ğ£¬Ö»ÄÜÔÚ·Å´ó¾³£¨Î¢ÈíµÄ·Å´ó¾³Èí¼ş£©ÏÂ
-		         ¿´³ö²î±ğ£¨²»Ğ­µ÷£©£¬Èç¹û´ÓµÚ1ĞĞ¿ªÊ¼ÓÃºÚÉ«Õı·½ĞÎ½øĞĞ¸²¸ÇÃ¿¸ö·¿¼ä£¬ÄÄÃ´ÕıÔÚ½øĞĞ¸²¸Ç·¿¼äµÄÄÄÒ»ĞĞ»á°ÑÉÏÒ»ĞĞÒÑ¾­²¹ºÃµÄÇ½£¨ÓÃ60ÏñËØÊµÔòÓĞ60.5ÏñËØ)
-		         ¸²¸Çµô0.5ÏñËØÕâ2ÃæÔöÕâ¼ä¼õÉÙÁË1¸ö0.5ÏñËØµÄÕı·½ĞÎ£¬ĞÎ³É1¸öĞ¡¼ä¸ô£¬¶ø´ÓÏÂµ½ÉÏÔò²»»á£¬ÒòÎªÉÏÒ»ĞĞËü¸²¸Ç²»ÁËÄÏÇ½ºÍÎ÷Ç½£¬Òò´ËÓ°Ïì²»ÁËÏÂÒ»ĞĞÒÑ²¹ºÃµÄÇ½
-		         ¶ø´ÓÉÏµ½ÏÂ£¬Ëü»á¸²¸Ç¶«Ç½ºÍ±±Ç½Òò´Ë»á°ÑÉÏÒ»ĞĞÒÑ²¹ºÃµÄ2ÏàÁÚÇ½Ö®¼ä¸²¸ÇµôÒ»¸ö0.5ÏñËØÕı·½ĞÎ£¬±äµÃÕâ2ÃæÇ½²»ÊÇÖ±½ÓÏàÁ¬²»ºÍĞ­
+				  ç»è¿‡åœ¨æ”¾å¤§å¢ƒä¸‹è§‚å¯Ÿå‘ç°ï¼Œçº¿æ®µä¹Ÿæœ‰å®½ï¼Œä¸æ˜¯å¾ˆå¤§ï¼Œå‡è®¾ç”»ä¸€ä¸ª60åƒæ­£æ–¹å½¢å’Œç”»ä¸€æ¡60åƒç´ é•¿çº¿çº¿æ®µï¼Œå‘ç°çº¿æ®µçš„é•¿åº¦
+		         æ¯”æ­£æ–¹å½¢çš„é•¿åº¦é•¿ï¼Œå¤šå‡ºçš„é•¿åº¦æ°å¥½æ˜¯çº¿æ®µçš„å¾®å°å®½åº¦ï¼Œå¤§çº¦0.5å·¦å³ï¼Œæ‰€ä»¥ç”¨çº¿æ®µæ‹¼çš„æ­£æ–¹å½¢(ç»¿è‰²)æ¯”ç›´æ¥ç”»çš„æ­£æ–¹å½¢(é»‘è‰²)è¦å¤§1ï¼Œ
+		         å› æ­¤å› é»‘è‰²æ­£æ–¹å½¢è¿›è¡Œè¦†ç›–ç»¿è‰²æ­£æ–¹å½¢æ—¶ä¸èƒ½å®Œå…¨è¦†ç›–ï¼Œè¿˜å‰©ä¸‹2æ¡å®½åº¦ä¸º0.5é•¿åº¦ä¸º60ä¸ºé•¿æ–¹å½¢æœªè¦†ç›–ï¼Œè¿™å®½åº¦è·Ÿçº¿æ®µå®½åº¦ä¸€æ ·
+		         å¯ä»¥è¿™ä¹ˆè¯´å‡è®¾ç”»1ä¸ªé»‘è‰²æ­£æ–¹å½¢60åƒç´ ï¼Œç”»åŒåƒç´ çš„çº¿æ®µå´æœ‰60.5åƒç´ ï¼Œå› ä¸ºå¾ˆå°å¹´ä¸å‡ºå·®åˆ«ï¼Œåªèƒ½åœ¨æ”¾å¤§å¢ƒï¼ˆå¾®è½¯çš„æ”¾å¤§å¢ƒè½¯ä»¶ï¼‰ä¸‹
+		         çœ‹å‡ºå·®åˆ«ï¼ˆä¸åè°ƒï¼‰ï¼Œå¦‚æœä»ç¬¬1è¡Œå¼€å§‹ç”¨é»‘è‰²æ­£æ–¹å½¢è¿›è¡Œè¦†ç›–æ¯ä¸ªæˆ¿é—´ï¼Œå“ªä¹ˆæ­£åœ¨è¿›è¡Œè¦†ç›–æˆ¿é—´çš„å“ªä¸€è¡Œä¼šæŠŠä¸Šä¸€è¡Œå·²ç»è¡¥å¥½çš„å¢™ï¼ˆç”¨60åƒç´ å®åˆ™æœ‰60.5åƒç´ )
+		         è¦†ç›–æ‰0.5åƒç´ è¿™2é¢å¢è¿™é—´å‡å°‘äº†1ä¸ª0.5åƒç´ çš„æ­£æ–¹å½¢ï¼Œå½¢æˆ1ä¸ªå°é—´éš”ï¼Œè€Œä»ä¸‹åˆ°ä¸Šåˆ™ä¸ä¼šï¼Œå› ä¸ºä¸Šä¸€è¡Œå®ƒè¦†ç›–ä¸äº†å—å¢™å’Œè¥¿å¢™ï¼Œå› æ­¤å½±å“ä¸äº†ä¸‹ä¸€è¡Œå·²è¡¥å¥½çš„å¢™
+		         è€Œä»ä¸Šåˆ°ä¸‹ï¼Œå®ƒä¼šè¦†ç›–ä¸œå¢™å’ŒåŒ—å¢™å› æ­¤ä¼šæŠŠä¸Šä¸€è¡Œå·²è¡¥å¥½çš„2ç›¸é‚»å¢™ä¹‹é—´è¦†ç›–æ‰ä¸€ä¸ª0.5åƒç´ æ­£æ–¹å½¢ï¼Œå˜å¾—è¿™2é¢å¢™ä¸æ˜¯ç›´æ¥ç›¸è¿ä¸å’Œå
 				*/			
 					for(j=1;j<=column;j++)
 					{
-						returnRoom(k,i,j);//²ğÇ½ÏÈ½«·¿¼äÓÃ±³¾°É«¸²¸Ç£¬ÕâÑùËÄÃæÇ½¶¼µ¹ÁË£¬ÔÙ½«²»ÓÃ²ğµÄÇ½²¹»ØÈ¥
+						returnRoom(k,i,j);//æ‹†å¢™å…ˆå°†æˆ¿é—´ç”¨èƒŒæ™¯è‰²è¦†ç›–ï¼Œè¿™æ ·å››é¢å¢™éƒ½å€’äº†ï¼Œå†å°†ä¸ç”¨æ‹†çš„å¢™è¡¥å›å»
 					}
 				}			
 			}
 	
 		}
 	}
-	public void drawStartAndEnd()//»­¿ªÊ¼µãºÍ½áÊøµã
-	{		//»­ÆğÊ¼ºÍ½áÊøÎ»ÖÃ£¬±ØĞëÔÚ²ğÍêÇ½ºó£¬·ñÔòÆğÊ¼ºÍ½áÊøµÄÍ¼»á±»±³¾°É«¸²¸Ç
-		for(k=0;k<2;k++)//µÚ3ÖÖÄ£Ê½ÏÂÎŞ½áÊøÍ¼
+	public void drawStartAndEnd()//ç”»å¼€å§‹ç‚¹å’Œç»“æŸç‚¹
+	{		//ç”»èµ·å§‹å’Œç»“æŸä½ç½®ï¼Œå¿…é¡»åœ¨æ‹†å®Œå¢™åï¼Œå¦åˆ™èµ·å§‹å’Œç»“æŸçš„å›¾ä¼šè¢«èƒŒæ™¯è‰²è¦†ç›–
+		for(k=0;k<2;k++)//ç¬¬3ç§æ¨¡å¼ä¸‹æ— ç»“æŸå›¾
 		{
-			if(pixel>=60&&isPictureExit)//Èç¹û·¿¼äÏñËØ²»Ğ¡ÓÚ60²¢ÇÒÍ¼Æ¬¶¼´æÔÚ              
-			{//»­Í¼Æ¬ÔÚµ±Ç°Î»ÖÃ»­ÈËÎïÍ¼
-			  g1[k].drawImage(imageStart,20+(int)((pixel-60)/2)+(entryY-1)*pixel,20+(int)((pixel-60)/2)+(entryX-1)*pixel,this);//»­ÈËÎïÍ¼±ê£¬·ÅÔÚ¿ªÊ¼×ø±ê
-				//»­ÖÕµãÍ¼Æ¬
-			  g1[k].drawImage(imageEnd,20+(int)((pixel-60)/2)+(exitY-1)*pixel,20+(int)((pixel-60)/2)+(exitX-1)*pixel,this);//»­½áÊøÍ¼±ê£¬·ÅÔÚ½áÊø×ø±ê
+			if(pixel>=60&&isPictureExit)//å¦‚æœæˆ¿é—´åƒç´ ä¸å°äº60å¹¶ä¸”å›¾ç‰‡éƒ½å­˜åœ¨              
+			{//ç”»å›¾ç‰‡åœ¨å½“å‰ä½ç½®ç”»äººç‰©å›¾
+			  g1[k].drawImage(imageStart,20+(int)((pixel-60)/2)+(entryY-1)*pixel,20+(int)((pixel-60)/2)+(entryX-1)*pixel,this);//ç”»äººç‰©å›¾æ ‡ï¼Œæ”¾åœ¨å¼€å§‹åæ ‡
+				//ç”»ç»ˆç‚¹å›¾ç‰‡
+			  g1[k].drawImage(imageEnd,20+(int)((pixel-60)/2)+(exitY-1)*pixel,20+(int)((pixel-60)/2)+(exitX-1)*pixel,this);//ç”»ç»“æŸå›¾æ ‡ï¼Œæ”¾åœ¨ç»“æŸåæ ‡
 			}			 
-			else//·ñÔò½áÊøµã
+			else//å¦åˆ™ç»“æŸç‚¹
 			{
-				//»­¿ªÊ¼µãÑÕÉ«µÄÕı·½ĞÎ×÷ÎªÆğµã
+				//ç”»å¼€å§‹ç‚¹é¢œè‰²çš„æ­£æ–¹å½¢ä½œä¸ºèµ·ç‚¹
 				g1[k].setColor(startColor);
 				g1[k].fillRect(20+(entryY-1)*pixel,20+(entryX-1)*pixel,pixel,pixel);			
-				g1[k].setColor(endColor);//ÉèÖÃ»­±ÊÎª½áÊøµãÑÕÉ«
-				//»­½áÊøµãÑÕÉ«Õı·½ĞÎ¿ª×÷Îª½áÊøµã
+				g1[k].setColor(endColor);//è®¾ç½®ç”»ç¬”ä¸ºç»“æŸç‚¹é¢œè‰²
+				//ç”»ç»“æŸç‚¹é¢œè‰²æ­£æ–¹å½¢å¼€ä½œä¸ºç»“æŸç‚¹
 				g1[k].fillRect(20+(exitY-1)*pixel,20+(exitX-1)*pixel,pixel,pixel);				
 			}							
 		}
 	}
-	public void returnRoom(int k,int i,int j)//½«Ä³¸ö·¿¼ä»¹Ô­,kÊÇ»º³åÍ¼ÏÂ±ê£¬i,jÊÇ·¿¼äµÄÏÂ±ê
+	public void returnRoom(int k,int i,int j)//å°†æŸä¸ªæˆ¿é—´è¿˜åŸ,kæ˜¯ç¼“å†²å›¾ä¸‹æ ‡ï¼Œi,jæ˜¯æˆ¿é—´çš„ä¸‹æ ‡
 	{
-	    /*¾­¹ıÔÚ·Å´ó¾³ÏÂ¹Û²ì·¢ÏÖ£¬Ïß¶ÎÒ²ÓĞ¿í£¬²»ÊÇºÜ´ó£¬¼ÙÉè»­Ò»¸ö60ÏñÕı·½ĞÎºÍ»­Ò»Ìõ60ÏñËØ³¤ÏßÏß¶Î£¬·¢ÏÖÏß¶ÎµÄ³¤¶È
-	     ±ÈÕı·½ĞÎµÄ³¤¶È³¤£¬¶à³öµÄ³¤¶ÈÇ¡ºÃÊÇÏß¶ÎµÄÎ¢Ğ¡¿í¶È£¬´óÔ¼0.5×óÓÒ£¬ËùÒÔÓÃÏß¶ÎÆ´µÄÕı·½ĞÎ(ÂÌÉ«)±ÈÖ±½Ó»­µÄÕı·½ĞÎ(ºÚÉ«)Òª´ó1£¬
-	     Òò´ËÒòºÚÉ«Õı·½ĞÎ½øĞĞ¸²¸ÇÂÌÉ«Õı·½ĞÎÊ±²»ÄÜÍêÈ«¸²¸Ç£¬»¹Ê£ÏÂ2Ìõ¿í¶ÈÎª0.5³¤¶ÈÎª60Îª³¤·½ĞÎÎ´¸²¸Ç£¬Õâ¿í¶È¸úÏß¶Î¿í¶ÈÒ»Ñù£¬Òò´ËÓĞ
-	     2ÌõÏß¶ÎÎ´¸²¸Ç£¬·Ö±ğÊÇºóÃæÇ½ºÍÓÒÃæÇ½Î´¸²¸Ç£¬ËùÒÔÕâÁ½2ÃæÇ½Ã»²ğ£¬²»ÓÃÔÙ²¹ÉÏ£¬ÄÄÕâ2ÃæÇ½Èô±¾À´Ó¦¸Ã²ğµôÈ´»¹´æÔÚ£¬µ«²ğÇ½ÊÇÃ¿¸ö·¿¼ä¶¼½øĞĞ
-	     µ±ËùÓĞ·¿¼äÒªºÚÉ«±³¾°¸²¸ÇÍêµÄÊ±ºò£¬Õû¸ö´óÃÕ¹¬Ö»ÓĞÎ§Ç½µÄÄÏÃæºÍÎ÷ÄÏÃ»²ğ£¬Î§Ç½ÊÇ²»ÄÜ²ğµÄ£¬Òª²ğµÄÊÇ·¿¼äµÄÇ½£¬¶øÕâÊÇ²»¿¿½ü·¿Î§Ç½µÄËùÓĞ·¿¼äÄÏÃæÇ½
-	     ºÍÎ÷ÃæÇ½¶¼²ğÁË£¨ÔÚ²ğÁÙ½ü·¿¼äµÄÊ±ºò°ÑËü²ğÁË£©£¬Ö»ÓĞ¿¿½üÎ§Ç½µÄ·¿¼äÄÏÇ½ºÍÎ÷Ç½Ã»²ğ£¬Õâ2ÃæÇ½ÊÇÎ§Ç½×é³É²¿·ÖËùÒÔ²»ÄÜ²ğ
+	    /*ç»è¿‡åœ¨æ”¾å¤§å¢ƒä¸‹è§‚å¯Ÿå‘ç°ï¼Œçº¿æ®µä¹Ÿæœ‰å®½ï¼Œä¸æ˜¯å¾ˆå¤§ï¼Œå‡è®¾ç”»ä¸€ä¸ª60åƒæ­£æ–¹å½¢å’Œç”»ä¸€æ¡60åƒç´ é•¿çº¿çº¿æ®µï¼Œå‘ç°çº¿æ®µçš„é•¿åº¦
+	     æ¯”æ­£æ–¹å½¢çš„é•¿åº¦é•¿ï¼Œå¤šå‡ºçš„é•¿åº¦æ°å¥½æ˜¯çº¿æ®µçš„å¾®å°å®½åº¦ï¼Œå¤§çº¦0.5å·¦å³ï¼Œæ‰€ä»¥ç”¨çº¿æ®µæ‹¼çš„æ­£æ–¹å½¢(ç»¿è‰²)æ¯”ç›´æ¥ç”»çš„æ­£æ–¹å½¢(é»‘è‰²)è¦å¤§1ï¼Œ
+	     å› æ­¤å› é»‘è‰²æ­£æ–¹å½¢è¿›è¡Œè¦†ç›–ç»¿è‰²æ­£æ–¹å½¢æ—¶ä¸èƒ½å®Œå…¨è¦†ç›–ï¼Œè¿˜å‰©ä¸‹2æ¡å®½åº¦ä¸º0.5é•¿åº¦ä¸º60ä¸ºé•¿æ–¹å½¢æœªè¦†ç›–ï¼Œè¿™å®½åº¦è·Ÿçº¿æ®µå®½åº¦ä¸€æ ·ï¼Œå› æ­¤æœ‰
+	     2æ¡çº¿æ®µæœªè¦†ç›–ï¼Œåˆ†åˆ«æ˜¯åé¢å¢™å’Œå³é¢å¢™æœªè¦†ç›–ï¼Œæ‰€ä»¥è¿™ä¸¤2é¢å¢™æ²¡æ‹†ï¼Œä¸ç”¨å†è¡¥ä¸Šï¼Œå“ªè¿™2é¢å¢™è‹¥æœ¬æ¥åº”è¯¥æ‹†æ‰å´è¿˜å­˜åœ¨ï¼Œä½†æ‹†å¢™æ˜¯æ¯ä¸ªæˆ¿é—´éƒ½è¿›è¡Œ
+	     å½“æ‰€æœ‰æˆ¿é—´è¦é»‘è‰²èƒŒæ™¯è¦†ç›–å®Œçš„æ—¶å€™ï¼Œæ•´ä¸ªå¤§è°œå®«åªæœ‰å›´å¢™çš„å—é¢å’Œè¥¿å—æ²¡æ‹†ï¼Œå›´å¢™æ˜¯ä¸èƒ½æ‹†çš„ï¼Œè¦æ‹†çš„æ˜¯æˆ¿é—´çš„å¢™ï¼Œè€Œè¿™æ˜¯ä¸é è¿‘æˆ¿å›´å¢™çš„æ‰€æœ‰æˆ¿é—´å—é¢å¢™
+	     å’Œè¥¿é¢å¢™éƒ½æ‹†äº†ï¼ˆåœ¨æ‹†ä¸´è¿‘æˆ¿é—´çš„æ—¶å€™æŠŠå®ƒæ‹†äº†ï¼‰ï¼Œåªæœ‰é è¿‘å›´å¢™çš„æˆ¿é—´å—å¢™å’Œè¥¿å¢™æ²¡æ‹†ï¼Œè¿™2é¢å¢™æ˜¯å›´å¢™ç»„æˆéƒ¨åˆ†æ‰€ä»¥ä¸èƒ½æ‹†
 	    */
-		g1[k].setColor(mazeBackGroundColor);//ÉèÖÃ»­±ÊÎªÃÕ¹¬±³¾°É«
-		g1[k].fillRect(20+(j-1)*pixel,20+(i-1)*pixel,pixel,pixel);//½«Î´ÍËÕ»Ç°µÄ·¿¼ä»­ÉÏºÚÉ«±³¾°
-		g1[k].setColor(wallColor);//ÉèÖÃ»­±ÊÎªÇ½±ÚÑÕÉ«
-		if(mg[i][j].left==0)//×ó±ßÓĞÇ½
+		g1[k].setColor(mazeBackGroundColor);//è®¾ç½®ç”»ç¬”ä¸ºè°œå®«èƒŒæ™¯è‰²
+		g1[k].fillRect(20+(j-1)*pixel,20+(i-1)*pixel,pixel,pixel);//å°†æœªé€€æ ˆå‰çš„æˆ¿é—´ç”»ä¸Šé»‘è‰²èƒŒæ™¯
+		g1[k].setColor(wallColor);//è®¾ç½®ç”»ç¬”ä¸ºå¢™å£é¢œè‰²
+		if(mg[i][j].left==0)//å·¦è¾¹æœ‰å¢™
 		g1[k].drawLine(20+(j-1)*pixel,20+(i-1)*pixel,20+(j-1)*pixel,20+i*pixel);
-		//if(mg[i][j].right==0)//ÓÒ±ßÓĞÇ½    ×¢ÊÍÊÇÒòÎªÕâÁ½2ÃæÇ½Ã»²ğ£¬²»ÓÃÔÙ²¹ÉÏ
+		//if(mg[i][j].right==0)//å³è¾¹æœ‰å¢™    æ³¨é‡Šæ˜¯å› ä¸ºè¿™ä¸¤2é¢å¢™æ²¡æ‹†ï¼Œä¸ç”¨å†è¡¥ä¸Š
 		//g1[k].drawLine(20+j*pixel,20+(i-1)*pixel,20+j*pixel,20+i*pixel);
-		if(mg[i][j].up==0)//Ç°±ßÓĞÇ½
+		if(mg[i][j].up==0)//å‰è¾¹æœ‰å¢™
 		g1[k].drawLine(20+(j-1)*pixel,20+(i-1)*pixel,20+j*pixel,20+(i-1)*pixel);
-		//if(mg[i][j].down==0)//ºó±ßÓĞÇ½    ×¢ÊÍÊÇÒòÎªÕâÁ½2ÃæÇ½Ã»²ğ£¬²»ÓÃÔÙ²¹ÉÏ
+		//if(mg[i][j].down==0)//åè¾¹æœ‰å¢™    æ³¨é‡Šæ˜¯å› ä¸ºè¿™ä¸¤2é¢å¢™æ²¡æ‹†ï¼Œä¸ç”¨å†è¡¥ä¸Š
 		//g1[k].drawLine(20+(j-1)*pixel,20+i*pixel,20+j*pixel,20+i*pixel);
 	}
-	public void returnRoute(int k,int top)//·¿¼ä²Áµô»¹Ô­ºó£¬»¹Ô­³ÉÔ­À´µÄÂ·Ïß£¬kÊÇ»º³åÍ¼ÏÂ±ê,topÊÇÕ»¶¥ÏÂ±ê
-	{//Ã¿¸ö·¿¼äÓĞ2ÌõÂ·Ïß£¬1ÌõÊÇÆäËü·¿¼äÍ¨ÍùÕâ¸ö·¿¼äÂ·Ïß£¬Áí1ÌõÊÇÕâ¸ö·¿¼äÍ¨ÍùÏÂÒ»¸ö·¿¼äÂ·Ïß
-		int m,n;//mÊÇµ±Ç°·¿¼äÏÂ±ê£¬nÊÇµ±Ç°·¿¼ä·½Ïò
-		//»­³ö½øÕ»¹ı³Ì×ßµÄ·½Ïò£¬ÒòÎª½øÕ»¹ı³ÌÖĞ°Ñ½øÕ»Ç°µÄ·¿¼ä¸ø²ÁµôÁË£¬Õâ¸ö·¿¼ä»¹°üÀ¨ÉÏÉÏ¸ö·¿¼äÑÓÉì³öÀ´µÄÒ»²¿·ÖÂ·Ïß£¬Òª»­³öÀ´					
-		//×ÜÖ®Ã¿¸ö·¿¼äÊÇÓĞÁ½ÌõÂ·ÏßµÄ£¬·Ö±ğÊÇÇ°Ò»·¿¼äµ½±¾·¿¼äµÄÂ·Ïß¼°±¾·¿¼äµ½ÏÂÒ»¸ö·¿¼äµÄÂ·Ïß£¬ËùÒÔ²ÁµôÄ³¸ö·¿¼äÒªÖØ»­Õâ2ÌõÂ·Ïß
-		g1[k].setColor(routeColor);//ÉèÖÃ±ÊÎªÏß¼ùÑÕÉ«£¬ÓÃÀ´»­×ß¹ıµÄÂ·Ïß	    	
+	public void returnRoute(int k,int top)//æˆ¿é—´æ“¦æ‰è¿˜åŸåï¼Œè¿˜åŸæˆåŸæ¥çš„è·¯çº¿ï¼Œkæ˜¯ç¼“å†²å›¾ä¸‹æ ‡,topæ˜¯æ ˆé¡¶ä¸‹æ ‡
+	{//æ¯ä¸ªæˆ¿é—´æœ‰2æ¡è·¯çº¿ï¼Œ1æ¡æ˜¯å…¶å®ƒæˆ¿é—´é€šå¾€è¿™ä¸ªæˆ¿é—´è·¯çº¿ï¼Œå¦1æ¡æ˜¯è¿™ä¸ªæˆ¿é—´é€šå¾€ä¸‹ä¸€ä¸ªæˆ¿é—´è·¯çº¿
+		int m,n;//mæ˜¯å½“å‰æˆ¿é—´ä¸‹æ ‡ï¼Œnæ˜¯å½“å‰æˆ¿é—´æ–¹å‘
+		//ç”»å‡ºè¿›æ ˆè¿‡ç¨‹èµ°çš„æ–¹å‘ï¼Œå› ä¸ºè¿›æ ˆè¿‡ç¨‹ä¸­æŠŠè¿›æ ˆå‰çš„æˆ¿é—´ç»™æ“¦æ‰äº†ï¼Œè¿™ä¸ªæˆ¿é—´è¿˜åŒ…æ‹¬ä¸Šä¸Šä¸ªæˆ¿é—´å»¶ä¼¸å‡ºæ¥çš„ä¸€éƒ¨åˆ†è·¯çº¿ï¼Œè¦ç”»å‡ºæ¥					
+		//æ€»ä¹‹æ¯ä¸ªæˆ¿é—´æ˜¯æœ‰ä¸¤æ¡è·¯çº¿çš„ï¼Œåˆ†åˆ«æ˜¯å‰ä¸€æˆ¿é—´åˆ°æœ¬æˆ¿é—´çš„è·¯çº¿åŠæœ¬æˆ¿é—´åˆ°ä¸‹ä¸€ä¸ªæˆ¿é—´çš„è·¯çº¿ï¼Œæ‰€ä»¥æ“¦æ‰æŸä¸ªæˆ¿é—´è¦é‡ç”»è¿™2æ¡è·¯çº¿
+		g1[k].setColor(routeColor);//è®¾ç½®ç¬”ä¸ºçº¿è·µé¢œè‰²ï¼Œç”¨æ¥ç”»èµ°è¿‡çš„è·¯çº¿	    	
 		if(isPush)
-			m=top-2;//ÊÇ½øÕ»µÄ»°£¬²¹ÉÏ½øÕ»Ç°2¸ö·¿¼äµÄÂ·Ïß
+			m=top-2;//æ˜¯è¿›æ ˆçš„è¯ï¼Œè¡¥ä¸Šè¿›æ ˆå‰2ä¸ªæˆ¿é—´çš„è·¯çº¿
 		else
-			m=top;//ÊÇÍËÕ»µÄ»°£¬²¹ÉÏµ±Ç°·¿¼äºÍÍËÕ»Ç°·¿¼äµÄÂ·Ïß
-		for(int a=1;a<=2;m++,a++)//·Ö±ğ»­ÉÏÎ´½øÕ»Ç°2¸ö·¿¼äµÄÂ·Ïß
+			m=top;//æ˜¯é€€æ ˆçš„è¯ï¼Œè¡¥ä¸Šå½“å‰æˆ¿é—´å’Œé€€æ ˆå‰æˆ¿é—´çš„è·¯çº¿
+		for(int a=1;a<=2;m++,a++)//åˆ†åˆ«ç”»ä¸Šæœªè¿›æ ˆå‰2ä¸ªæˆ¿é—´çš„è·¯çº¿
 		{
-			if(m>=0)//ÎªÁË·ÀÖ¹ÏÂ±êÎª-1£¬¼´¸Õ×ßÁË2²½£¬topÎª1£¬ÕâÊ±Ö»Òª²¹Ç°Ò»¸ö·¿¼äÂ·Ïß¾Í¿ÉÒÔ£¬ÒòÎªÃ»ÓĞÇ°2¸ö·¿¼ä
+			if(m>=0)//ä¸ºäº†é˜²æ­¢ä¸‹æ ‡ä¸º-1ï¼Œå³åˆšèµ°äº†2æ­¥ï¼Œtopä¸º1ï¼Œè¿™æ—¶åªè¦è¡¥å‰ä¸€ä¸ªæˆ¿é—´è·¯çº¿å°±å¯ä»¥ï¼Œå› ä¸ºæ²¡æœ‰å‰2ä¸ªæˆ¿é—´
 			{
-				i=stack[m].i;//È¡³öµ±Ç°·¿¼äÏÂ±ê
+				i=stack[m].i;//å–å‡ºå½“å‰æˆ¿é—´ä¸‹æ ‡
 				j=stack[m].j;
 				n=stack[m].next;
-				if(m==top+1)//m=top+1ÒâÃÁ×ÅÊÇÍËÕ»£¬Òª²¹»ØÍËÕ»Ç°Â·Ïß£¬µ«Ã¿ÍËÕ»1´Î¾Í°ÑºÛ¼£Çå³ı£¬stack[top+1]Ã»±£Áôtop+1·¿¼ä·½Ïò£¬ËùÒÔÓÃfrontNext×¨ÃÅ±£ÁôÍËÕ»Ç°µÄ·½Ïò
+				if(m==top+1)//m=top+1æ„æ˜§ç€æ˜¯é€€æ ˆï¼Œè¦è¡¥å›é€€æ ˆå‰è·¯çº¿ï¼Œä½†æ¯é€€æ ˆ1æ¬¡å°±æŠŠç—•è¿¹æ¸…é™¤ï¼Œstack[top+1]æ²¡ä¿ç•™top+1æˆ¿é—´æ–¹å‘ï¼Œæ‰€ä»¥ç”¨frontNextä¸“é—¨ä¿ç•™é€€æ ˆå‰çš„æ–¹å‘
 				   n=frontNext;
-				switch(n)//·½Ïò   £¨20£¬20£©ÊÇÃÕ¹¬×óÉÏ½ÇµÄ×ø±ê£¬ËùÒÔÃ¿¸öºá×ø±ê¼Ó20£¬×İ×ø±ê¼Ó20£¬i-1,j-1,ÊÇÇ°Ãæi-1¸ö·¿¼äºÍ×ó±ßj-1¸ö·¿¼äµÄ¿í¶È£¬ÔÙ¼ÓÉÏÕâ¸ö·¿¼äÖĞĞÄµÄ¿í¶È(int)(pixel/2)
+				switch(n)//æ–¹å‘   ï¼ˆ20ï¼Œ20ï¼‰æ˜¯è°œå®«å·¦ä¸Šè§’çš„åæ ‡ï¼Œæ‰€ä»¥æ¯ä¸ªæ¨ªåæ ‡åŠ 20ï¼Œçºµåæ ‡åŠ 20ï¼Œi-1,j-1,æ˜¯å‰é¢i-1ä¸ªæˆ¿é—´å’Œå·¦è¾¹j-1ä¸ªæˆ¿é—´çš„å®½åº¦ï¼Œå†åŠ ä¸Šè¿™ä¸ªæˆ¿é—´ä¸­å¿ƒçš„å®½åº¦(int)(pixel/2)
 				{				
-					case 0:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,j*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍùÓÒ·½ÏòÓÒ·¿¼ä
-					case 3:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,(i-2)*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍùÉÏ·½ÏòÇ°Ãæ·¿¼ä
-					case 1:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,i*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍùÏÂ·½ÏòºóÃæ·¿¼ä
-					case 2:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-2)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍù×ó·½Ïò×ó±ß·¿¼ä
+					case 0:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,j*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€å³æ–¹å‘å³æˆ¿é—´
+					case 3:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,(i-2)*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€ä¸Šæ–¹å‘å‰é¢æˆ¿é—´
+					case 1:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,i*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€ä¸‹æ–¹å‘åé¢æˆ¿é—´
+					case 2:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-2)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€å·¦æ–¹å‘å·¦è¾¹æˆ¿é—´
 					default:break;
 				}
 			}
 		}
-		if(k==2)//ÔÚµÚ2 ÖÖÄ£Ê½ÏÂ½øĞĞ¹ı½øÕ»ºÍÍËÕ»£¬Õâ¸ö·¿¼ä×ß¹ı2¸ö·½Ïò£¬Ç°ÃæÖ»»¹Ô­ÁË×ßµÄµÚ2¸ö·½Ïò£¬»¹Ã»»¹Ô­µÚ1¸ö·½Ïò
+		if(k==2)//åœ¨ç¬¬2 ç§æ¨¡å¼ä¸‹è¿›è¡Œè¿‡è¿›æ ˆå’Œé€€æ ˆï¼Œè¿™ä¸ªæˆ¿é—´èµ°è¿‡2ä¸ªæ–¹å‘ï¼Œå‰é¢åªè¿˜åŸäº†èµ°çš„ç¬¬2ä¸ªæ–¹å‘ï¼Œè¿˜æ²¡è¿˜åŸç¬¬1ä¸ªæ–¹å‘
 		{
 			if((isPush==true&&stack[top-1].canGo>1)||(isPush==false&&stack[top+1].canGo>1))
-			{//Èç¹ûÊÇ½øÕ»£¬½øÕ»Ç°µÄ·¿¼äÓĞ³¬¹ı2¸ö·½Ïò»òÊÇÍËÕ»£¬ÍËÕ»Ç°µÄ·¿¼äÓĞ³¬¹ı2¸ö·½Ïò
+			{//å¦‚æœæ˜¯è¿›æ ˆï¼Œè¿›æ ˆå‰çš„æˆ¿é—´æœ‰è¶…è¿‡2ä¸ªæ–¹å‘æˆ–æ˜¯é€€æ ˆï¼Œé€€æ ˆå‰çš„æˆ¿é—´æœ‰è¶…è¿‡2ä¸ªæ–¹å‘
 				i=multiDirect[top1].i;
-				j=multiDirect[top1].j;//È¡³ö½øÍËÕ»Ç°µÄ×ø±ê
-	            //multiDirect[top1].next±£Áô×î½üµÄ¶à·½Ïò·¿¼äµÄ·½Ïò
-				switch(multiDirect[top1].next)//·½Ïò   £¨20£¬20£©ÊÇÃÕ¹¬×óÉÏ½ÇµÄ×ø±ê£¬ËùÒÔÃ¿¸öºá×ø±ê¼Ó20£¬×İ×ø±ê¼Ó20£¬i-1,j-1,ÊÇÇ°Ãæi-1¸ö·¿¼äºÍ×ó±ßj-1¸ö·¿¼äµÄ¿í¶È£¬ÔÙ¼ÓÉÏÕâ¸ö·¿¼äÖĞĞÄµÄ¿í¶È(int)(pixel/2)
+				j=multiDirect[top1].j;//å–å‡ºè¿›é€€æ ˆå‰çš„åæ ‡
+	            //multiDirect[top1].nextä¿ç•™æœ€è¿‘çš„å¤šæ–¹å‘æˆ¿é—´çš„æ–¹å‘
+				switch(multiDirect[top1].next)//æ–¹å‘   ï¼ˆ20ï¼Œ20ï¼‰æ˜¯è°œå®«å·¦ä¸Šè§’çš„åæ ‡ï¼Œæ‰€ä»¥æ¯ä¸ªæ¨ªåæ ‡åŠ 20ï¼Œçºµåæ ‡åŠ 20ï¼Œi-1,j-1,æ˜¯å‰é¢i-1ä¸ªæˆ¿é—´å’Œå·¦è¾¹j-1ä¸ªæˆ¿é—´çš„å®½åº¦ï¼Œå†åŠ ä¸Šè¿™ä¸ªæˆ¿é—´ä¸­å¿ƒçš„å®½åº¦(int)(pixel/2)
 				{				
-					case 0:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,j*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍùÓÒ·½ÏòÓÒ·¿¼ä
-					case 3:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,(i-2)*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍùÉÏ·½ÏòÇ°Ãæ·¿¼ä
-					case 1:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,i*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍùÏÂ·½ÏòºóÃæ·¿¼ä
-					case 2:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-2)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//µ±Ç°·¿¼äÍù×ó·½Ïò×ó±ß·¿¼ä
+					case 0:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,j*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€å³æ–¹å‘å³æˆ¿é—´
+					case 3:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,(i-2)*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€ä¸Šæ–¹å‘å‰é¢æˆ¿é—´
+					case 1:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-1)*pixel+(int)(pixel/2)+20,i*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€ä¸‹æ–¹å‘åé¢æˆ¿é—´
+					case 2:g1[k].drawLine((j-1)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20,(j-2)*pixel+(int)(pixel/2)+20,(i-1)*pixel+(int)(pixel/2)+20);break;//å½“å‰æˆ¿é—´å¾€å·¦æ–¹å‘å·¦è¾¹æˆ¿é—´
 					default:break;
 				}
-				if(isPush==false&&isRepaint3)//ÔÚÍËÕ»Çé¿öÏÂ²¢ÇÒÔÚµÚ3ÖÖÄ£Ê½ÏÂË¢ĞÂ£¬²»ÊÇÊ±¼äÏß³ÌµÄË¢ĞÂ
+				if(isPush==false&&isRepaint3)//åœ¨é€€æ ˆæƒ…å†µä¸‹å¹¶ä¸”åœ¨ç¬¬3ç§æ¨¡å¼ä¸‹åˆ·æ–°ï¼Œä¸æ˜¯æ—¶é—´çº¿ç¨‹çš„åˆ·æ–°
 				{
-				   top1--;//½øÕ»Ê±²»¼õ£¬ÒòÎªÍËÕ»Ê±ÔÙ´Î¾­¹ıÕâ¸ö·¿¼äÒªÖØÊá×±´ò°ç»­2¸ö·½ÏòÂ·Ïß£¬¶øÍËÕ»ºó²»ÔÙ×ßÕâ¸ö·¿¼äÂ·Ïß£¬ËùÒÔ¼õ1£¬²¢ÇÒÏû³ıÖ®Ç°top1µÄ·½Ïò
+				   top1--;//è¿›æ ˆæ—¶ä¸å‡ï¼Œå› ä¸ºé€€æ ˆæ—¶å†æ¬¡ç»è¿‡è¿™ä¸ªæˆ¿é—´è¦é‡æ¢³å¦†æ‰“æ‰®ç”»2ä¸ªæ–¹å‘è·¯çº¿ï¼Œè€Œé€€æ ˆåä¸å†èµ°è¿™ä¸ªæˆ¿é—´è·¯çº¿ï¼Œæ‰€ä»¥å‡1ï¼Œå¹¶ä¸”æ¶ˆé™¤ä¹‹å‰top1çš„æ–¹å‘
 				}			
 			}
 		}
 		if(!isPush&&isRepaint3)
 		{
-		  stack[top+1].canGo=0;//ÍËÕ»Ç°½«Õ»¶¥¿É×ßµÄ²½Êı³õÊ¼»¯Îª0£¬¼´Ïû³ıÍËÕ»Ç°·¿¼äµÄĞÅÏ¢£¬ÎªºÎÔÚ´Ë´¦Ïû³ı²»ÔÚ¸ÕÍËµÄÊ±ºòÏû³ı£¬ÒòÎªÇ°Ãæ»¹ÒªÓÃµ½canGo>1Õâ¸ö
-		  //ÅĞ¶ÏÌõ¼ş£¬ÈôÏû³ıÔòÎŞ·¨ÊµÏÖ½«Ä³¸ö·¿¼äµÄ2¸ö·½Ïò»­³ö£¬ËùÒÔ2¸ö·½Ïò»­³öºó£¬ÔÙÏû³ı·½Ïò¸öÊı
+		  stack[top+1].canGo=0;//é€€æ ˆå‰å°†æ ˆé¡¶å¯èµ°çš„æ­¥æ•°åˆå§‹åŒ–ä¸º0ï¼Œå³æ¶ˆé™¤é€€æ ˆå‰æˆ¿é—´çš„ä¿¡æ¯ï¼Œä¸ºä½•åœ¨æ­¤å¤„æ¶ˆé™¤ä¸åœ¨åˆšé€€çš„æ—¶å€™æ¶ˆé™¤ï¼Œå› ä¸ºå‰é¢è¿˜è¦ç”¨åˆ°canGo>1è¿™ä¸ª
+		  //åˆ¤æ–­æ¡ä»¶ï¼Œè‹¥æ¶ˆé™¤åˆ™æ— æ³•å®ç°å°†æŸä¸ªæˆ¿é—´çš„2ä¸ªæ–¹å‘ç”»å‡ºï¼Œæ‰€ä»¥2ä¸ªæ–¹å‘ç”»å‡ºåï¼Œå†æ¶ˆé™¤æ–¹å‘ä¸ªæ•°
 		}
 	}
-	public void drawMessage(int k)//»­³öÃÕ¹¬µÄĞÅÏ¢£¬kÎªÄÄÖÖÄ£Ê½
+	public void drawMessage(int k)//ç”»å‡ºè°œå®«çš„ä¿¡æ¯ï¼Œkä¸ºå“ªç§æ¨¡å¼
 	{
 		if(isBegin)
 		{
-			g1[k].setColor(fontBackGroundColor);//ÉèÖÃ»­±ÊÎª×ÖÌå±³¾°É«
+			g1[k].setColor(fontBackGroundColor);//è®¾ç½®ç”»ç¬”ä¸ºå­—ä½“èƒŒæ™¯è‰²
 			g1[k].fillRect(1130,80,120,20);
 			g1[k].fillRect(1130,110,120,20);
-			g1[k].setColor(fontColor);//ÉèÖÃ»­±ÊÎª×ÖÌåÑÕÉ«
-			g1[k].drawString(cost,1133,92);//»­Ê±¼äĞÅÏ¢
-			g1[k].drawString(step,1133,122);//»­×ßµÄ²½Êı
+			g1[k].setColor(fontColor);//è®¾ç½®ç”»ç¬”ä¸ºå­—ä½“é¢œè‰²
+			g1[k].drawString(cost,1133,92);//ç”»æ—¶é—´ä¿¡æ¯
+			g1[k].drawString(step,1133,122);//ç”»èµ°çš„æ­¥æ•°
 		}
-		g1[k].setColor(fontBackGroundColor);//ÉèÖÃ»­±ÊÎª×ÖÌå±³¾°É«
+		g1[k].setColor(fontBackGroundColor);//è®¾ç½®ç”»ç¬”ä¸ºå­—ä½“èƒŒæ™¯è‰²
 		g1[k].fillRect(550,640,120,20);
 		g1[k].fillRect(1130,20,120,20);
 		g1[k].fillRect(1130,50,120,20);
-		g1[k].setColor(fontColor);//ÉèÖÃ»­±ÊÎª×ÖÌåÑÕÉ«
-        g1[k].drawString(str,553,652);//»­¿ªÊ¼ÔİÍ£µÄ×´Ì¬ĞÅÏ¢
-        g1[k].drawString(time,1133,32);//»­Ê±¼ä ĞÅÏ¢
-        g1[k].drawString(model,1133,62);//»­Ä£Ê½ÀàĞÍĞÅÏ¢
+		g1[k].setColor(fontColor);//è®¾ç½®ç”»ç¬”ä¸ºå­—ä½“é¢œè‰²
+        g1[k].drawString(str,553,652);//ç”»å¼€å§‹æš‚åœçš„çŠ¶æ€ä¿¡æ¯
+        g1[k].drawString(time,1133,32);//ç”»æ—¶é—´ ä¿¡æ¯
+        g1[k].drawString(model,1133,62);//ç”»æ¨¡å¼ç±»å‹ä¿¡æ¯
 	}
 	public void paint(Graphics g)
 	{
-		if(type==2)//ÃÕ¹¬µçÄÔÌ½Ë÷Ä£Ê½
-		{//Í¼Æ¬µÄÏñËØÎª60£¬½«Í¼Æ¬·Å·¿¼äÖĞ¼ä£¬Ôò(int)((pixel-60)/2)ÎªÍ¼Æ¬¾àÀë·¿¼ä×óÇ½ºÍÓÒÇ½µÄ¾àÀë£¬ËùÒÔÍ¼Æ¬×ø±êÎª
-			if(top>0)//ÃÕ¹¬Ì½Ë÷ÒÑ¿ªÊ¼,ÇÒÓĞÂ·¾¶
+		if(type==2)//è°œå®«ç”µè„‘æ¢ç´¢æ¨¡å¼
+		{//å›¾ç‰‡çš„åƒç´ ä¸º60ï¼Œå°†å›¾ç‰‡æ”¾æˆ¿é—´ä¸­é—´ï¼Œåˆ™(int)((pixel-60)/2)ä¸ºå›¾ç‰‡è·ç¦»æˆ¿é—´å·¦å¢™å’Œå³å¢™çš„è·ç¦»ï¼Œæ‰€ä»¥å›¾ç‰‡åæ ‡ä¸º
+			if(top>0)//è°œå®«æ¢ç´¢å·²å¼€å§‹,ä¸”æœ‰è·¯å¾„
 			{
-				//×ß¹ıµÄÂ·Ïß
-				if(isPush)//Èç¹ûÊÇ½øÕ»
+				//èµ°è¿‡çš„è·¯çº¿
+				if(isPush)//å¦‚æœæ˜¯è¿›æ ˆ
 				{
-					i=stack[top-1].i;//È¡³öµ±Ç°¶ÔÏó½øÕ»Ç°ÏÂ±ê¶ÔÓ¦·¿¼äµÄ×ø±ê
+					i=stack[top-1].i;//å–å‡ºå½“å‰å¯¹è±¡è¿›æ ˆå‰ä¸‹æ ‡å¯¹åº”æˆ¿é—´çš„åæ ‡
 					j=stack[top-1].j;
-					returnRoom(1,i,j);//½«½øÕ»Ç°ÏÂ±ê¶ÔÓ¦·¿¼ä»¹Ô­
-					returnRoute(1,top);//·¿¼ä²Áµô»¹Ô­ºó£¬»¹Ô­³ÉÔ­À´µÄÂ·Ïß
+					returnRoom(1,i,j);//å°†è¿›æ ˆå‰ä¸‹æ ‡å¯¹åº”æˆ¿é—´è¿˜åŸ
+					returnRoute(1,top);//æˆ¿é—´æ“¦æ‰è¿˜åŸåï¼Œè¿˜åŸæˆåŸæ¥çš„è·¯çº¿
 				}
-				else//ÍËÕ»µÄ»°Òª½«×ß¹ıµÄºÛ¼£²Áµô£¬»¹Ô­Ô­À´µÄÍ¼Ïó
+				else//é€€æ ˆçš„è¯è¦å°†èµ°è¿‡çš„ç—•è¿¹æ“¦æ‰ï¼Œè¿˜åŸåŸæ¥çš„å›¾è±¡
 				{
-					for(k=top;k<=top+1;k++)//È¡³öµ±Ç°¶ÔÏóÎ´ÍËÕ»Ç°ºÍÍËÕ»ºóµÄÏÂ±ê¶ÔÓ¦·¿¼äµÄ×ø±ê
+					for(k=top;k<=top+1;k++)//å–å‡ºå½“å‰å¯¹è±¡æœªé€€æ ˆå‰å’Œé€€æ ˆåçš„ä¸‹æ ‡å¯¹åº”æˆ¿é—´çš„åæ ‡
 					{
 						i=stack[k].i;
 						j=stack[k].j;
-						returnRoom(1,i,j);//½«Õâ2¸ö·¿¼ä»¹Ô­
+						returnRoom(1,i,j);//å°†è¿™2ä¸ªæˆ¿é—´è¿˜åŸ
 					}
 				}				
-				if(pixel>=60&&isPictureExit)//Èç¹û·¿¼äÏñËØ²»Ğ¡ÓÚ60²¢ÇÒÍ¼Æ¬¶¼´æÔÚ
-				{//»­Í¼Æ¬ÔÚµ±Ç°Î»ÖÃ»­ÈËÎïÍ¼
+				if(pixel>=60&&isPictureExit)//å¦‚æœæˆ¿é—´åƒç´ ä¸å°äº60å¹¶ä¸”å›¾ç‰‡éƒ½å­˜åœ¨
+				{//ç”»å›¾ç‰‡åœ¨å½“å‰ä½ç½®ç”»äººç‰©å›¾
 					g1[1].drawImage(imageStart,(stack[top].j-1)*pixel+20+(int)((pixel-60)/2),(stack[top].i-1)*pixel+20+(int)((pixel-60)/2),this);
 			    }	
-				else//·ñÔò£¬½áÊøµã»­¿ªÊ¼µãÑÕÉ«Õı·½ĞÎ
+				else//å¦åˆ™ï¼Œç»“æŸç‚¹ç”»å¼€å§‹ç‚¹é¢œè‰²æ­£æ–¹å½¢
 				{
 					g1[1].setColor(startColor);
 					g1[1].fillRect(20+(stack[top].j-1)*pixel,20+(stack[top].i-1)*pixel,pixel,pixel);
@@ -1435,39 +1435,39 @@ class migong  extends JPanel implements Runnable
 			}
 			if(find)
 			{
-			    str="°´¿Õ¸ñ¿ªÊ¼ĞÂÓÎÏ·";
+			    str="æŒ‰ç©ºæ ¼å¼€å§‹æ–°æ¸¸æˆ";
 			}
-			drawMessage(1);//»­ÃÕ¹¬ĞÅÏ¢
-            g.drawImage(image2,0,0,this);//½«Õû¸ö»º³å×éºÏÍ¼ÌùÔÚJFrameÉÏ
+			drawMessage(1);//ç”»è°œå®«ä¿¡æ¯
+            g.drawImage(image2,0,0,this);//å°†æ•´ä¸ªç¼“å†²ç»„åˆå›¾è´´åœ¨JFrameä¸Š
 		}
-		if(type==3)//ÃÕ¹¬µçÄÔ´´½¨Ä£Ê½
+		if(type==3)//è°œå®«ç”µè„‘åˆ›å»ºæ¨¡å¼
 		{
-			if(isPush)//½øÕ»
+			if(isPush)//è¿›æ ˆ
 			{
-				if(top>0)//top>0ºó²Å½øĞĞ¸ü¸ÄÍ¼Ïñ£¬<0Ê±top-1Êı×éÏÂ±ê»á³¬³ö
+				if(top>0)//top>0åæ‰è¿›è¡Œæ›´æ”¹å›¾åƒï¼Œ<0æ—¶top-1æ•°ç»„ä¸‹æ ‡ä¼šè¶…å‡º
 				{
-					i=stack[top-1].i;//È¡³öµ±Ç°¶ÔÏó½øÕ»Ç°ÏÂ±ê¶ÔÓ¦·¿¼äµÄ×ø±ê
+					i=stack[top-1].i;//å–å‡ºå½“å‰å¯¹è±¡è¿›æ ˆå‰ä¸‹æ ‡å¯¹åº”æˆ¿é—´çš„åæ ‡
 					j=stack[top-1].j;
-					returnRoom(2,i,j);//½«½øÕ»Ç°ÏÂ±ê¶ÔÓ¦·¿¼ä»¹Ô­
-				    returnRoute(2,top);//·¿¼ä²Áµô»¹Ô­ºó£¬»¹Ô­³ÉÔ­À´µÄÂ·Ïß					
+					returnRoom(2,i,j);//å°†è¿›æ ˆå‰ä¸‹æ ‡å¯¹åº”æˆ¿é—´è¿˜åŸ
+				    returnRoute(2,top);//æˆ¿é—´æ“¦æ‰è¿˜åŸåï¼Œè¿˜åŸæˆåŸæ¥çš„è·¯çº¿					
 				}
 			}
 			else
 			{
-				if(count>1&&isRepaint3==true)//ÃÕ¹¬´´½¨Íê³ÉºóµÄ×îºóÒ»²½ÊÇÍËÕ»£¬Ä¬ÈÏ3Ä£Ê½ÏÂ¼ÌĞø´´½¨£¬ÕâÊ±count=1,Ö»²»¹ı
-					//ÒòÎªÔİÍ£Ö»×ßÁËÒ»²½£¬¶øÊ±¼äÏß³ÌÃ¿1ÃëË¢ĞÂ1´Î»­Ãæ£¬ÕâÊ±»á°Ñtop[1]£¨top[1]ÔÚÍËÕ»Ê±Êı¾İÒÑ¾­ÇåÁã£©·¿¼äÓÃ±³¾°¸²¸Ç
-				{//ËùÒÔÒªÇócount>1,×ßÁË2²½ºó²ÅËãÃÕ¹¬ÕıÊ½¿ªÊ¼´´½¨
-					i=stack[top+1].i;//È¡³öµ±Ç°¶ÔÏóÍËÕ»ÏÂ±ê¶ÔÓ¦·¿¼äµÄ×ø±ê
+				if(count>1&&isRepaint3==true)//è°œå®«åˆ›å»ºå®Œæˆåçš„æœ€åä¸€æ­¥æ˜¯é€€æ ˆï¼Œé»˜è®¤3æ¨¡å¼ä¸‹ç»§ç»­åˆ›å»ºï¼Œè¿™æ—¶count=1,åªä¸è¿‡
+					//å› ä¸ºæš‚åœåªèµ°äº†ä¸€æ­¥ï¼Œè€Œæ—¶é—´çº¿ç¨‹æ¯1ç§’åˆ·æ–°1æ¬¡ç”»é¢ï¼Œè¿™æ—¶ä¼šæŠŠtop[1]ï¼ˆtop[1]åœ¨é€€æ ˆæ—¶æ•°æ®å·²ç»æ¸…é›¶ï¼‰æˆ¿é—´ç”¨èƒŒæ™¯è¦†ç›–
+				{//æ‰€ä»¥è¦æ±‚count>1,èµ°äº†2æ­¥åæ‰ç®—è°œå®«æ­£å¼å¼€å§‹åˆ›å»º
+					i=stack[top+1].i;//å–å‡ºå½“å‰å¯¹è±¡é€€æ ˆä¸‹æ ‡å¯¹åº”æˆ¿é—´çš„åæ ‡
 					j=stack[top+1].j;
-					returnRoom(2,i,j);//½«ÍËÕ»Ç°ÏÂ±ê¶ÔÓ¦·¿¼ä»¹Ô­
-					returnRoute(2,top);//·¿¼ä²Áµô»¹Ô­ºó£¬»¹Ô­³ÉÔ­À´µÄÂ·Ïß					
+					returnRoom(2,i,j);//å°†é€€æ ˆå‰ä¸‹æ ‡å¯¹åº”æˆ¿é—´è¿˜åŸ
+					returnRoute(2,top);//æˆ¿é—´æ“¦æ‰è¿˜åŸåï¼Œè¿˜åŸæˆåŸæ¥çš„è·¯çº¿					
 				}
 			}
-			if(top>-1)//ÃÕ¹¬Ì½Ë÷ÒÑ¿ªÊ¼,ÇÒÓĞÂ·¾¶
+			if(top>-1)//è°œå®«æ¢ç´¢å·²å¼€å§‹,ä¸”æœ‰è·¯å¾„
 			{
-				if(pixel>=60&&isPictureExit)//Èç¹û·¿¼äÏñËØ²»Ğ¡ÓÚ60²¢ÇÒÍ¼Æ¬¶¼´æÔÚ£¬»­Í¼Æ¬ÔÚµ±Ç°Î»ÖÃ»­ÈËÎïÍ¼              
+				if(pixel>=60&&isPictureExit)//å¦‚æœæˆ¿é—´åƒç´ ä¸å°äº60å¹¶ä¸”å›¾ç‰‡éƒ½å­˜åœ¨ï¼Œç”»å›¾ç‰‡åœ¨å½“å‰ä½ç½®ç”»äººç‰©å›¾              
 					g1[2].drawImage(imageStart,(stack[top].j-1)*pixel+20+(int)((pixel-60)/2),(stack[top].i-1)*pixel+20+(int)((pixel-60)/2),this);
-				else//·ñÔò£¬½áÊøµã»­¿ªÊ¼µãÑÕÉ«µÄÕı·½ĞÎ
+				else//å¦åˆ™ï¼Œç»“æŸç‚¹ç”»å¼€å§‹ç‚¹é¢œè‰²çš„æ­£æ–¹å½¢
 				{
 					g1[2].setColor(startColor);
 					g1[2].fillRect(20+(stack[top].j-1)*pixel,20+(stack[top].i-1)*pixel,pixel,pixel);
@@ -1475,28 +1475,28 @@ class migong  extends JPanel implements Runnable
 			}		
 			if(finish)
 			{
-				str="°´¿Õ¸ñ¿ªÊ¼´´½¨ĞÂÃÕ¹¬";
+				str="æŒ‰ç©ºæ ¼å¼€å§‹åˆ›å»ºæ–°è°œå®«";
 			}
-			drawMessage(2);//»­ÃÕ¹¬ĞÅÏ¢
-            g.drawImage(image3,0,0,this);//½«Õû¸ö»º³å×éºÏÍ¼ÌùÔÚJFrameÉÏ
+			drawMessage(2);//ç”»è°œå®«ä¿¡æ¯
+            g.drawImage(image3,0,0,this);//å°†æ•´ä¸ªç¼“å†²ç»„åˆå›¾è´´åœ¨JFrameä¸Š
 		}
-		if(type==1)//ÃÕ¹¬ÈË¹¤Ì½Ë÷Ä£Ê½
+		if(type==1)//è°œå®«äººå·¥æ¢ç´¢æ¨¡å¼
 		{
-			if(pixel>=60&&isPictureExit)//Èç¹û·¿¼äÏñËØ²»Ğ¡ÓÚ60²¢ÇÒÍ¼Æ¬¶¼´æÔÚ£¬»­Í¼Æ¬
+			if(pixel>=60&&isPictureExit)//å¦‚æœæˆ¿é—´åƒç´ ä¸å°äº60å¹¶ä¸”å›¾ç‰‡éƒ½å­˜åœ¨ï¼Œç”»å›¾ç‰‡
 			{
-				g1[0].drawImage(imageStart,20+(int)((pixel-60)/2)+(currentY-1)*pixel,20+(int)((pixel-60)/2)+(currentX-1)*pixel,this);//»­ÈËÎïÍ¼±ê£¬·ÅÔÚ¿ªÊ¼×ø±ê
+				g1[0].drawImage(imageStart,20+(int)((pixel-60)/2)+(currentY-1)*pixel,20+(int)((pixel-60)/2)+(currentX-1)*pixel,this);//ç”»äººç‰©å›¾æ ‡ï¼Œæ”¾åœ¨å¼€å§‹åæ ‡
 			}
-			else//·ñÔò£¬½áÊøµã»­¿ªÊ¼µãÑÕÉ«Õı·½ĞÎ´ú±íµ±Ç°·¿¼äÎ»ÖÃ£¬ºìÉ«Õı·½ĞÎ´ú±í½áÊøÎ»ÖÃ
+			else//å¦åˆ™ï¼Œç»“æŸç‚¹ç”»å¼€å§‹ç‚¹é¢œè‰²æ­£æ–¹å½¢ä»£è¡¨å½“å‰æˆ¿é—´ä½ç½®ï¼Œçº¢è‰²æ­£æ–¹å½¢ä»£è¡¨ç»“æŸä½ç½®
 			{
 				g1[0].setColor(startColor);
 				g1[0].fillRect(20+(currentY-1)*pixel,20+(currentX-1)*pixel,pixel,pixel);
 			}
 			if(find1)
 			{
-				str="°´¿Õ¸ñ¿ªÊ¼ĞÂÓÎÏ·";
+				str="æŒ‰ç©ºæ ¼å¼€å§‹æ–°æ¸¸æˆ";
 			}
-			drawMessage(0);//»­ÃÕ¹¬ĞÅÏ¢
-			g.drawImage(image1,0,0,this);//½«Õû¸ö»º³å×éºÏÍ¼ÌùÔÚJFrameÉÏ
+			drawMessage(0);//ç”»è°œå®«ä¿¡æ¯
+			g.drawImage(image1,0,0,this);//å°†æ•´ä¸ªç¼“å†²ç»„åˆå›¾è´´åœ¨JFrameä¸Š
 		}
 	}
 }
